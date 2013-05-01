@@ -23,18 +23,25 @@ $(call inherit-product-if-exists, vendor/samsung/jf-common/jf-common-vendor.mk)
 DEVICE_PACKAGE_OVERLAYS += device/samsung/jf-common/overlay
 
 # Device uses high-density artwork where available
-PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
-PRODUCT_AAPT_PREF_CONFIG := xhdpi
+PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
+PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Boot animation
-TARGET_SCREEN_HEIGHT := 1280
-TARGET_SCREEN_WIDTH := 720
+TARGET_SCREEN_HEIGHT := 1920
+TARGET_SCREEN_WIDTH := 1080
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
         device/samsung/jf-common/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
         device/samsung/jf-common/audio/audio_policy.conf:system/etc/audio_policy.conf \
         device/samsung/jf-common/audio/audio_effects.conf:system/etc/audio_effects.conf
+
+# GPS
+PRODUCT_PACKAGES += \
+    gps.msm8960
+
+PRODUCT_COPY_FILES += \
+    device/samsung/msm8960-common/gps/gps.conf:system/etc/gps.conf
 
 # Ramdisk
 PRODUCT_PACKAGES += \
@@ -87,7 +94,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     com.qc.hardware=true \
     persist.radio.apm_sim_not_pwdn=1 \
     ro.telephony.call_ring.multiple=0 \
-    ro.sf.lcd_density=320 \
+    ro.sf.lcd_density=480 \
     ro.ril.transmitpower=true \
     ro.opengles.version=131072 \
     persist.audio.fluence.mode=endfire \
