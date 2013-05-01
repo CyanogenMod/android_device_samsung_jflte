@@ -21,12 +21,12 @@
     <bool name="useCameraInterface">false</bool>
 
     <!-- Full path to the sysfs toggle -->
-    <string name="flashDevice">/sys/devices/virtual/flash/flash/flash_power</string>
+    <string name="flashDevice">/sys/class/leds/torch-sec1/brightness</string>
 
     <!-- Lowest setting -->
-    <integer name="valueOn">1</integer>
+    <integer name="valueOn">5</integer>
     <!-- Middle setting -->
-    <integer name="valueHigh">-1</integer>
+    <integer name="valueHigh">15</integer>
     <!-- Highest setting, leave -1 if it doesn't exist -->
     <integer name="valueDeathRay">-1</integer>
 
