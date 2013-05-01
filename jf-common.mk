@@ -41,7 +41,7 @@ PRODUCT_PACKAGES += \
     gps.msm8960
 
 PRODUCT_COPY_FILES += \
-    device/samsung/msm8960-common/gps/gps.conf:system/etc/gps.conf
+    device/samsung/jf-common/gps/gps.conf:system/etc/gps.conf
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
