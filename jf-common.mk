@@ -48,6 +48,7 @@ PRODUCT_PACKAGES += \
     fstab.qcom \
     initlogo.rle \
     init.bt.rc \
+    init.carrier.rc \
     init.qcom.rc \
     init.qcom.usb.rc \
     init.target.rc \
