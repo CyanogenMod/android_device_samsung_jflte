@@ -1,0 +1,4 @@
+# put anything that cannot be in jf-common
+# Radio
+lib/libril-qc-qmi-1.so
+lib/libril.so
