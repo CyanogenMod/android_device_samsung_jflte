@@ -1,5 +1,6 @@
 # Bins
 bin/mpdecision
+bin/prepare_param.sh
 
 # Thermal
 bin/thermald
@@ -31,7 +32,7 @@ lib/egl/libGLESv1_CM_adreno200.so
 lib/egl/libGLESv2_adreno200.so
 lib/egl/libq3dtools_adreno200.so
 lib/egl/libGLESv2S3D_adreno200.so
-#lib/egl/libplayback_adreno200.so
+lib/egl/libplayback_adreno200.so
 lib/libc2d2_z180.so
 lib/libc2d2_a3xx.so
 lib/libgsl.so
@@ -54,32 +55,39 @@ etc/firmware/vidc_1080p.fw
 lib/libmm-color-convertor.so
 
 # Radio
+bin/ds_fmc_appd
+bin/efsks
+bin/ks
 bin/netmgrd
 bin/sec-ril
+bin/qcks
 bin/qmiproxy
 bin/qmuxd
-bin/rmt_storage
 bin/rild
-lib/libsecril-client.so
-lib/libqmi.so
-lib/libqdi.so
-lib/libqdp.so
-lib/libqmiservices.so
-lib/libreference-ril.so
-lib/libril-qcril-hook-oem.so
+bin/rmt_storage
+lib/libatparser.so
+lib/libcordon.so
+lib/libdiag.so
 lib/libdsutils.so
 lib/libdsi_netctrl.so
+lib/libfactoryutil.so
 lib/libidl.so
 lib/libnetmgr.so
+lib/libomission_avoidance.so
+lib/libqdi.so
+lib/libqdp.so
+lib/libqmi.so
+lib/libqmiservices.so
 lib/libqmi_cci.so
-lib/libqmi_csi.so
 lib/libqmi_common_so.so
+lib/libqmi_csi.so
 lib/libqmi_encdec.so
-lib/libatparser.so
 lib/libqcci_legacy.so
 lib/libqmi_client_qmux.so
-lib/libomission_avoidance.so
-lib/libfactoryutil.so
+lib/libreference-ril.so
+lib/libril-qcril-hook-oem.so
+lib/libsecril-client.so
+lib/libtime_genoff.so
 
 # GPS
 lib/libloc_api_v02.so
@@ -89,30 +97,23 @@ lib/hw/nfc_nci.MSM8960.so
 #vendor/firmware/libpn544_fw.so
 
 # Sensors
+lib/libsensirion_j1.so
+lib/libsam.so
 lib/hw/sensors.msm8960.so
 lib/hw/sensorhubs.msm8960.so
 
 # Camera
+
+# Camera firmware
 bin/mm-qcamera-daemon
+cameradata/M10MO_SFW.bin
+cameradata/RS_M10MO_OL.bin
+cameradata/RS_M10MO_OS.bin
+cameradata/RS_M10MO_SL.bin
+cameradata/RS_M10MO_SS.bin
+cameradata/datapattern_420sp.yuv
+cameradata/datapattern_front_420sp.yuv
 lib/hw/camera.msm8960.so
-lib/libmmjpeg.so
-lib/libmmstillomx.so
-lib/libimage-jpeg-enc-omx-comp.so
-lib/libvdis.so
-lib/libsecnativefeature.so
-lib/libgemini.so
-lib/liboemcamera.so
-lib/libmmmpod.so
-lib/libmmcamera_faceproc.so
-lib/libmmcamera_frameproc.so
-lib/libmmcamera_hdr_lib.so
-lib/libmmcamera_image_stab.so
-lib/libmmcamera_imx091.so
-lib/libmmcamera_interface.so
-lib/libmmcamera_interface2.so
-lib/libmmcamera_plugin.so
-lib/libmmcamera_statsproc31.so
-lib/libmmcamera_wavelet_lib.so
 lib/libchromatix_imx074_default_video.so
 lib/libchromatix_imx074_preview.so
 lib/libchromatix_imx074_video_hd.so
@@ -148,18 +149,28 @@ lib/libchromatix_s5k6b2yx_smartstay.so
 lib/libchromatix_s5k6b2yx_video.so
 lib/libchromatix_s5k6b2yx_vt.so
 lib/libchromatix_s5k6b2yx_vt_hd.so
+lib/libgemini.so
+lib/libimage-jpeg-enc-omx-comp.so
+lib/libimage-omx-common.so
+lib/libmercury.so
+lib/libmmcamera_faceproc.so
+lib/libmmcamera_frameproc.so
+lib/libmmcamera_hdr_lib.so
+lib/libmmcamera_image_stab.so
+lib/libmmcamera_imx091.so
+lib/libmmcamera_interface.so
+lib/libmmcamera_interface2.so
+lib/libmmcamera_plugin.so
+lib/libmmcamera_statsproc31.so
+lib/libmmcamera_wavelet_lib.so
+lib/libmmjpeg.so
+lib/libmmjpeg_interface.so
+lib/libmmmpod.so
+lib/libmmstillomx.so
+lib/liboemcamera.so
+lib/libsecnativefeature.so
+lib/libvdis.so
 
-# Camera firmware
-cameradata/M10MO_SFW.bin
-cameradata/RS_M10MO_OL.bin
-cameradata/RS_M10MO_OS.bin
-cameradata/RS_M10MO_SL.bin
-cameradata/RS_M10MO_SS.bin
-cameradata/datapattern_420sp.yuv
-cameradata/datapattern_front_420sp.yuv
-
-# General
-lib/libdiag.so
 
 # Wi-Fi
 bin/macloader
@@ -191,3 +202,13 @@ etc/wifi/wpa_supplicant.conf
 # Perf
 lib/libqc-opt.so
 
+# DRM
+bin/qseecomd
+bin/scranton_RD
+lib/libdrmdecrypt.so
+lib/libdrmfs.so
+lib/libdrmtime.so
+lib/libhdcp2.so
+lib/libQSEEComAPI.so
+lib/libWVStreamControlAPI_L1.so
+lib/libwvm.so
