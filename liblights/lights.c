@@ -186,7 +186,7 @@ static int write_leds(const struct led_config *led)
     if (led == NULL)
         led = &led_off;
 
-    if ((count = snprintf(blink, sizeof(blink)-1, "%#08x %d %d", led->color,
+    if ((count = snprintf(blink, sizeof(blink)-1, "0x%08x %d %d", led->color,
                           led->delay_on, led->delay_off)) < 0) {
         return -errno;
     } else if ((unsigned int)count >= sizeof(blink)-1) {
@@ -194,7 +194,7 @@ static int write_leds(const struct led_config *led)
         return -EINVAL;
     }
 
-    ALOGD("%s: color=%#08x, delay_on=%d, delay_off=%d, blink=\"%s\".",
+    ALOGD("%s: color=0x%08x, delay_on=%d, delay_off=%d, blink=\"%s\".",
           __func__, led->color, led->delay_on, led->delay_off, blink);
 
     /* Add '\n' here to make the above log message clean. */
@@ -213,7 +213,7 @@ static int set_light_leds(struct light_state_t const *state, int type)
     struct led_config *led;
     int err = 0;
 
-    ALOGD("%s: type=%d, color=%#010x, fM=%d, fOnMS=%d, fOffMs=%d.", __func__,
+    ALOGD("%s: type=%d, color=0x%010x, fM=%d, fOnMS=%d, fOffMs=%d.", __func__,
           type, state->color,state->flashMode, state->flashOnMS, state->flashOffMS);
 
     if (type < 0 || (unsigned int)type >= sizeof(g_leds)/sizeof(g_leds[0]))
