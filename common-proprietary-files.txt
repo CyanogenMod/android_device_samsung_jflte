@@ -19,6 +19,8 @@ vendor/firmware/bcm4335_semco.hcd
 # Audio
 lib/libacdbloader.so
 lib/libaudcal.so
+lib/libcsd-client.so
+
 
 # mmparser extended
 lib/libmmparser.so
@@ -103,8 +105,6 @@ lib/hw/sensors.msm8960.so
 lib/hw/sensorhubs.msm8960.so
 
 # Camera
-
-# Camera firmware
 bin/mm-qcamera-daemon
 cameradata/M10MO_SFW.bin
 cameradata/RS_M10MO_OL.bin
