@@ -63,10 +63,8 @@ BOARD_BLUETOOTH_USES_HCIATTACH_PROPERTY := false
 # Disable initlogo, Samsungs framebuffer is weird
 TARGET_NO_INITLOGO := true
 
-# HAX
-#BOARD_USE_SAMSUNG_SEPARATEDSTREAM := true
-#BOARD_USES_LIBMEDIA_WITH_AUDIOPARAMETER := true
-#TARGET_PROVIDES_LIBAUDIO := true
+# Use seperate speakerphone device
+BOARD_USES_SEPERATED_VOICE_SPEAKER := true
 
 # Use USB Dock Audio
 BOARD_HAVE_DOCK_USBAUDIO := true
