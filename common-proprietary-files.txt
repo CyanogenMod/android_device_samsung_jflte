@@ -94,10 +94,6 @@ lib/libtime_genoff.so
 # GPS
 lib/libloc_api_v02.so
 
-# NFC
-lib/hw/nfc_nci.MSM8960.so
-#vendor/firmware/libpn544_fw.so
-
 # Sensors
 lib/libsensirion_j1.so
 lib/libsam.so

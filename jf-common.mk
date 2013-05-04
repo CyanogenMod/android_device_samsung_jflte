@@ -79,6 +79,21 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libnetcmdiface
 
+# NFC packages
+PRODUCT_PACKAGES += \
+    libnfc-nci \
+    libnfc_nci_jni \
+    nfc_nci.msm8960 \
+    NfcNci \
+    Tag \
+    com.android.nfc_extras
+
+# NFCEE access control + configuration
+NFCEE_ACCESS_PATH := device/samsung/jf-common/nfc/nfcee_access.xml
+PRODUCT_COPY_FILES += \
+    $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml \
+    device/samsung/jf-common/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf
+
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
