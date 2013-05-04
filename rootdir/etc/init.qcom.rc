@@ -665,7 +665,7 @@ on property:persist.sys.ssr.restart_level=3
     write /sys/module/subsystem_restart/parameters/restart_level 3
 
 on property:service.bootanim.exit=1
-    write /sys/module/rmnet_usb/parameters/dump_ctrl_msg 2
+    #write /sys/module/rmnet_usb/parameters/dump_ctrl_msg 2
     write /proc/sys/net/ipv6/conf/rmnet_usb0/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet_usb1/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet_usb2/accept_ra 2
