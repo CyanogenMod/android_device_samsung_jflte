@@ -36,6 +36,10 @@ PRODUCT_COPY_FILES += \
     device/samsung/jf-common/audio/audio_policy.conf:system/etc/audio_policy.conf \
     device/samsung/jf-common/audio/audio_effects.conf:system/etc/audio_effects.conf
 
+# Media Profile
+PRODUCT_COPY_FILES += \
+    device/samsung/jf-common/media/media_profiles.xml:system/etc/media_profiles.xml
+
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm8960
