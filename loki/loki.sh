@@ -9,17 +9,18 @@
 #
 # Valid bootloaders found in valid_bootloaders file
 
-cat /proc/cmdline | egrep -q -f /system/etc/valid_bootloaders
-if [ $? = 0 ];
-    then
-       cd /tmp
-       chmod 777 loki_patch
-       dd if=/dev/block/platform/msm_sdcc.1/by-name/aboot of=aboot.img
-       ./loki_patch boot aboot.img boot.img boot.lok
-        dd if=/tmp/boot.lok of=/dev/block/platform/msm_sdcc.1/by-name/boot
+export C=/tmp/loki_tmpdir
 
-# cleanup
-       rm /system/bin/loki_patch
-       rm /system/etc/valid_bootloaders
-       rm /system/bin/loki.sh
+egrep -q -f /tmp/valid_bootloaders /proc/cmdline
+if [ $? -eq 0 ];then
+  mkdir -p $C
+  dd if=/dev/block/platform/msm_sdcc.1/by-name/aboot of=$C/aboot.img
+  /tmp/loki_patch boot $C/aboot.img /tmp/boot.img $C/boot.lok || exit 1
+  /tmp/loki_flash boot $C/boot.lok || exit 1
+  rm -rf $C
+else
+  echo '[*] Non-Loki bootloader version detected.'
+  dd if=/tmp/boot.img of=/dev/block/mmcblk0p20 || exit 1
 fi
+
+exit 0

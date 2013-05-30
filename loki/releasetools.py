@@ -25,6 +25,14 @@
 def FullOTA_InstallEnd(info):
   info.script.script = [cmd for cmd in info.script.script if not "boot.img" in cmd]
   info.script.script = [cmd for cmd in info.script.script if not "show_progress(0.100000, 0);" in cmd]
-  info.script.AppendExtra('set_perm(0, 0, 0777, "/system/bin/loki.sh");')
-  info.script.AppendExtra('set_perm(0, 0, 0777, "/system/bin//loki_patch");')
-  info.script.AppendExtra('run_program("/system/bin/loki.sh");')
+  info.script.AppendExtra('package_extract_file("system/bin/loki.sh", "/tmp/loki.sh");')
+  info.script.AppendExtra('package_extract_file("system/bin/loki_patch", "/tmp/loki_patch");')
+  info.script.AppendExtra('package_extract_file("system/bin/loki_flash", "/tmp/loki_flash");')
+  info.script.AppendExtra('package_extract_file("system/etc/valid_bootloaders", "/tmp/valid_bootloaders");')
+  info.script.AppendExtra('package_extract_file("boot.img", "/tmp/boot.img");')
+  info.script.AppendExtra('set_perm(0, 0, 0777, "/tmp/loki.sh");')
+  info.script.AppendExtra('set_perm(0, 0, 0777, "/tmp/loki_patch");')
+  info.script.AppendExtra('set_perm(0, 0, 0777, "/tmp/loki_flash");')
+  info.script.AppendExtra('assert(run_program("/tmp/loki.sh") == 0);')
+  info.script.AppendExtra('delete("/system/bin/loki.sh");')
+  info.script.AppendExtra('delete("/system/etc/valid_bootloaders");')
