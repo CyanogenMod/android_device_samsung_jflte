@@ -74,3 +74,9 @@ BOARD_USES_SEPERATED_VOICE_SPEAKER := true
 # Use USB Dock Audio
 BOARD_HAVE_DOCK_USBAUDIO := true
 
+# Use the ES325 dual mic feature
+BOARD_HAVE_AUDIENCE_ES325_2MIC := true
+
+# Samsung's nonstandard csd-client
+BOARD_HAVE_SAMSUNG_CSDCLIENT := true
+
