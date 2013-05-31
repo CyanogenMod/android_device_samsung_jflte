@@ -354,8 +354,8 @@ service qmiproxy /system/bin/qmiproxy
 #For EncryptionMode - remove disabled, Modify class main
 service qmuxd /system/bin/qmuxd
     class main
-    user root
-    group radio log audio bluetooth qcom_diag
+    user radio
+    group radio audio bluetooth gps qcom_diag log
     disabled
 
 service netmgrd /system/bin/netmgrd
