@@ -392,6 +392,10 @@ on post-fs-data
     chmod 0660 /sys/vibrator/pwm_val
     chown system system /sys/vibrator/pwm_val
 
+    # Panel color temperature
+    chmod 0660 /sys/class/lcd/panel/panel_colors
+    chown system system /sys/class/lcd/panel/panel_colors
+
 service prepare_param /system/bin/prepare_param.sh /dev/block/platform/msm_sdcc.1/by-name/param
     class main
     user root
