@@ -1970,7 +1970,7 @@ SectionDevice
 EndSection
 
 SectionDevice
-    Name "Earpiece Extra Gain"
+    Name "Voice Earpiece Extra Gain"
     Comment "Handset Extra Gain Rx device"
 
     EnableSequence
