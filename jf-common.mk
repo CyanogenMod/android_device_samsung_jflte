@@ -158,22 +158,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.rild.nitz_short_ons_3="" \
     ro.telephony.ril.v3=newDriverCall
 
-# increase hwui memory limits
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hwui.texture_cache_size=48 \
-    ro.hwui.layer_cache_size=32 \
-    ro.hwui.path_cache_size=8 \
-    ro.hwui.shape_cache_size=2 \
-    ro.hwui.gradient_cache_size=1 \
-    ro.hwui.drop_shadow_cache_size=4 \
-    ro.hwui.texture_cache_flush_rate=0.5 \
-    ro.hwui.text_small_cache_width=1024 \
-    ro.hwui.text_small_cache_height=512 \
-    ro.hwui.text_large_cache_width=2048 \
-    ro.hwui.text_large_cache_height=1024
-
-# common msm8960
+# call common msm8960
 $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
 
+# call dalvik heap config
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 
+# call hwui memory config
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
