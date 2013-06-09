@@ -77,7 +77,8 @@ PRODUCT_COPY_FILES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    libnetcmdiface
+    libnetcmdiface \
+    macloader
 
 # NFC packages
 PRODUCT_PACKAGES += \
