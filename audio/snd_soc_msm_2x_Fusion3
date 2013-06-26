@@ -2534,31 +2534,6 @@ SectionDevice
 EndSection
 
 SectionDevice
-    Name "HeadsetVM Tx"
-    Comment "Headset Tx device"
-
-    EnableSequence
-        'SLIM_0_TX Channels':0:One
-        'ES325-AP Tx Channels':0:One
-        'SLIM TX7 MUX':0:DEC5
-        'DEC5 MUX':0:ADC2
-        'DEC5 Volume':2:67.7%
-        'ADC2 Volume':1:100
-        'Internal Route Config':1:10
-    EndSequence
-
-    DisableSequence
-        'SLIM TX7 MUX':0:ZERO
-        'DEC5 MUX':0:ZERO
-        'ADC2 Volume':1:0
-        'Internal Route Config':1:6
-    EndSequence
-
-    ACDBID  8:2
-
-EndSection
-
-SectionDevice
 	Name "Handset"
 	Comment "Handset Tx device"
 
@@ -2581,31 +2556,6 @@ SectionDevice
     EndSequence
 
     ACDBID  54:2
-
-EndSection
-
-SectionDevice
-        Name "HandsetVM Tx"
-        Comment "Handset Tx device"
-
-        EnableSequence
-                'SLIM_0_TX Channels':0:One
-                'SLIM TX7 MUX':0:DEC7
-                'DEC7 MUX':0:ADC1
-                'DEC7 Volume':1:60
-                'ADC1 Volume':1:100
-                'MICBIAS1 CAPLESS Switch':1:0
-        EndSequence
-
-        DisableSequence
-                'SLIM TX7 MUX':0:ZERO
-                'DEC7 MUX':0:ZERO
-                'DEC7 Volume':1:60
-                'ADC1 Volume':1:0
-                'MICBIAS1 CAPLESS Switch':1:1
-        EndSequence
-
-        ACDBID        4:2
 
 EndSection
 
@@ -2667,24 +2617,47 @@ EndSection
 
 SectionDevice
     Name "Voice Recognition"
-    Comment "Voice Recognition Tx device"
+    Comment "VR Sec Sub Mic Tx device"
 
     EnableSequence
         'SLIM_0_TX Channels':0:One
-        'SLIM TX7 MUX':0:DEC4
-        'DEC4 MUX':0:ADC3
-        'ADC3 Volume':2:66.7%
-        'DEC4 Volume':2:67.7%
+        'SLIM TX7 MUX':0:DEC3
+        'DEC3 MUX':0:ADC4
+        'ADC4 Volume':1:100
+        'DEC3 Volume':2:67.7%
+        'MICBIAS3 CAPLESS Switch':1:1
     EndSequence
 
     DisableSequence
         'SLIM TX7 MUX':0:ZERO
-        'DEC4 MUX':0:ZERO
-        'ADC3 Volume':1:0
-        'DEC4 Volume':1:67
+        'DEC3 MUX':0:ZERO
+        'ADC4 Volume':1:0
+        'MICBIAS3 CAPLESS Switch':1:0
     EndSequence
 
-    ACDBID  53:2
+    ACDBID  108:2
+
+EndSection
+
+SectionDevice
+    Name "Voice Recognition Headset"
+    Comment "VR Sec Headset Mic Tx device"
+
+    EnableSequence
+        'SLIM_0_TX Channels':0:One
+        'SLIM TX7 MUX':0:DEC5
+        'DEC5 MUX':0:ADC2
+        'DEC5 Volume':2:67.7%
+        'ADC2 Volume':1:100
+    EndSequence
+
+    DisableSequence
+        'SLIM TX7 MUX':0:ZERO
+        'DEC5 MUX':0:ZERO
+        'ADC2 Volume':1:0
+    EndSequence
+
+    ACDBID  132:2
 
 EndSection
 
