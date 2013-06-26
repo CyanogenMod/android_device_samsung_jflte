@@ -2477,37 +2477,36 @@ SectionDevice
 EndSection
 
 SectionDevice
-      Name "Voice Headset"
-      Comment "Headset Tx device for Voice call"
+    Name "Voice Headset"
+    Comment "Call Main Mic(3-pole headset) Tx device"
 
     EnableSequence
         'SLIM_0_TX Channels':0:One
+        'SLIM TX7 MUX':0:DEC4
+        'DEC4 MUX':0:ADC3
+        'DEC4 Volume':2:67.7%
+        'ADC3 Volume':1:100
+        'TX3 HPF cut off':0:MIN_3DB_150Hz
+        'TX4 HPF cut off':0:MIN_3DB_150Hz
+        'TX5 HPF cut off':0:MIN_3DB_150Hz
         'ES325-AP Tx Channels':0:One
-        'SLIM TX7 MUX':0:DEC5
-        'DEC5 MUX':0:ADC2
-        'ADC2 Volume':1:100
-        'DEC5 Volume':2:67.7%
-        'IIR1 INP1 MUX':0:DEC5
-        'RX1 MIX2 INP1':0:IIR1
-        'RX2 MIX2 INP1':0:IIR1
-        'IIR1 INP1 Volume':2:47.5%
         'Internal Route Config':1:0
         'ES325 TX1 Enable':1:1
     EndSequence
 
     DisableSequence
         'SLIM TX7 MUX':0:ZERO
-        'DEC5 MUX':0:ZERO
-        'ADC2 Volume':1:0
-        'IIR1 INP1 MUX':0:ZERO
-        'RX1 MIX2 INP1':0:ZERO
-        'RX2 MIX2 INP1':0:ZERO
-        'IIR1 INP1 Volume':1:0
+        'DEC4 MUX':0:ZERO
+        'ADC3 Volume':1:0
+        'DEC4 Volume':1:0
+        'TX3 HPF cut off':0:MIN_3DB_4Hz
+        'TX4 HPF cut off':0:MIN_3DB_4Hz
+        'TX5 HPF cut off':0:MIN_3DB_4Hz
         'Internal Route Config':1:6
         'ES325 TX1 Enable':1:0
     EndSequence
 
-    ACDBID  8:2
+    ACDBID  4:2
 
 EndSection
 

@@ -83,3 +83,6 @@ BOARD_HAVE_SAMSUNG_CSDCLIENT := true
 # Use seperate devices for VOIP
 BOARD_USES_SEPERATED_VOIP := true
 
+# Use seperate devices for 3-pole headset
+BOARD_USES_SEPERATED_HEADSET_MIC := true
+
