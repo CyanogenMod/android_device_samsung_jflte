@@ -80,3 +80,6 @@ BOARD_HAVE_AUDIENCE_ES325_2MIC := true
 # Samsung's nonstandard csd-client
 BOARD_HAVE_SAMSUNG_CSDCLIENT := true
 
+# Use seperate devices for VOIP
+BOARD_USES_SEPERATED_VOIP := true
+
