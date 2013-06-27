@@ -1,6 +1,6 @@
 # Bins
 bin/mpdecision
-bin/prepare_param.sh
+#bin/prepare_param.sh
 
 # Thermal
 bin/thermald
@@ -34,12 +34,12 @@ lib/egl/libEGL_adreno200.so
 lib/egl/libGLESv1_CM_adreno200.so
 lib/egl/libGLESv2_adreno200.so
 lib/egl/libq3dtools_adreno200.so
-lib/egl/libplayback_adreno200.so
+#lib/egl/libplayback_adreno200.so
 lib/libc2d2_z180.so
 lib/libc2d2_a3xx.so
 lib/libgsl.so
 lib/libllvm-a3xx.so
-lib/libllvm-arm.so
+#lib/libllvm-arm.so
 lib/libC2D2.so
 lib/libOpenVG.so
 lib/libOpenCL.so
@@ -53,8 +53,8 @@ etc/firmware/a300_pm4.fw
 etc/firmware/leia_pfp_470.fw
 etc/firmware/leia_pm4_470.fw
 etc/firmware/vidc_1080p.fw
-etc/firmware/yamato_pfp.fw
-etc/firmware/yamato_pm4.fw
+#etc/firmware/yamato_pfp.fw
+#etc/firmware/yamato_pm4.fw
 
 # Graphics
 lib/libmm-color-convertor.so
@@ -76,19 +76,19 @@ lib/libdiag.so
 lib/libdsutils.so
 lib/libdsi_netctrl.so
 lib/libfactoryutil.so
-lib/libidl.so
+vendor/lib/libidl.so
 lib/libnetmgr.so
 lib/libomission_avoidance.so
 lib/libqdi.so
 lib/libqdp.so
-lib/libqmi.so
-lib/libqmiservices.so
-lib/libqmi_cci.so
-lib/libqmi_common_so.so
-lib/libqmi_csi.so
-lib/libqmi_encdec.so
-lib/libqcci_legacy.so
-lib/libqmi_client_qmux.so
+vendor/lib/libqmi.so
+vendor/lib/libqmiservices.so
+vendor/lib/libqmi_cci.so
+vendor/lib/libqmi_common_so.so
+vendor/lib/libqmi_csi.so
+vendor/lib/libqmi_encdec.so
+vendor/lib/libqcci_legacy.so
+vendor/lib/libqmi_client_qmux.so
 lib/libreference-ril.so
 lib/libril-qcril-hook-oem.so
 lib/libsecril-client.so
@@ -181,7 +181,7 @@ etc/wifi/bcmdhd_sta.bin_a0
 etc/wifi/cred.conf
 etc/wifi/nvram_mfg.txt
 etc/wifi/nvram_mfg.txt_a0
-etc/wifi/nvram_mfg.txt_murata
+#etc/wifi/nvram_mfg.txt_murata
 etc/wifi/nvram_mfg.txt_murata_a0
 etc/wifi/nvram_mfg.txt_muratafem1
 etc/wifi/nvram_mfg.txt_muratafem2
@@ -190,7 +190,7 @@ etc/wifi/nvram_mfg.txt_semco3rd_a0
 etc/wifi/nvram_mfg.txt_semcosh
 etc/wifi/nvram_net.txt
 etc/wifi/nvram_net.txt_a0
-etc/wifi/nvram_net.txt_murata
+#etc/wifi/nvram_net.txt_murata
 etc/wifi/nvram_net.txt_murata_a0
 etc/wifi/nvram_net.txt_muratafem1
 etc/wifi/nvram_net.txt_muratafem2
@@ -204,7 +204,7 @@ lib/libqc-opt.so
 
 # DRM
 bin/qseecomd
-bin/scranton_RD
+#bin/scranton_RD
 lib/libdrmdecrypt.so
 lib/libdrmfs.so
 lib/libdrmtime.so
