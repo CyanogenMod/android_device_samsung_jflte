@@ -18,14 +18,10 @@
 -->
 
 <resources>
-    <!-- Samsung Camcorder Mode -->
-    <bool name="needsSamsungCamMode">true</bool>
-    <!-- Samsung Camera Settings -->
-    <bool name="hasSamsungCamSettings">true</bool>
-    <bool name="needsEarlyVideoSize">true</bool>
-    <bool name="enableZSL">true</bool>
     <!-- The camera removes the focus modes by default when touch-to-focus exists. Use this option to change that behavior -->
     <bool name="wantsFocusModes">true</bool>
-    <bool name="ignorePreferredPreviewSizeForVideo">true</bool>
+    <!-- Use ZSL mode for Qualcomm cameras -->
+    <bool name="enableZSL">true</bool>
+    <!-- Magic for enabling ZSL on Samsung cameras -->
     <bool name="sendMagicSamsungZSLCommand">true</bool>
 </resources>
