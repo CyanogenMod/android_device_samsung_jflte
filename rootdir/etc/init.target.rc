@@ -409,9 +409,22 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     group system camera inet input graphics
 
 service thermald /system/bin/thermald
-    class main
-    user root
-    group root
+   class main
+   user root
+   group root
+   disabled
+
+service thermal-engine /system/bin/thermal-engine
+   class main
+   user root
+   group root
+   disabled 
+
+on property:qcom.thermal=thermald
+    start thermald
+    
+on property:qcom.thermal=thermal-engine
+    start thermal-engine
 
 service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
     user root

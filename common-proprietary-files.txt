@@ -4,6 +4,7 @@ bin/mpdecision
 
 # Thermal
 bin/thermald
+bin/thermal-engine
 
 # Bluetooth firmware
 vendor/firmware/bcm2079xB4_firmware.ncd
