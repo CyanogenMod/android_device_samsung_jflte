@@ -4,9 +4,6 @@ bin/mpdecision
 
 # Thermal
 bin/thermald
-etc/thermald-8064.conf
-etc/thermald-8930.conf
-etc/thermald-8960.conf
 
 # Bluetooth firmware
 vendor/firmware/bcm2079xB4_firmware.ncd
