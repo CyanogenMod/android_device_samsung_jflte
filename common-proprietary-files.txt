@@ -75,25 +75,24 @@ lib/libdiag.so
 lib/libdsutils.so
 lib/libdsi_netctrl.so
 lib/libfactoryutil.so
-vendor/lib/libidl.so
+lib/libidl.so
 lib/libnetmgr.so
 lib/libomission_avoidance.so
 lib/libqdi.so
 lib/libqdp.so
-vendor/lib/libqmi.so
-vendor/lib/libqmiservices.so
-vendor/lib/libqmi_cci.so
-vendor/lib/libqmi_common_so.so
-vendor/lib/libqmi_csi.so
-vendor/lib/libqmi_encdec.so
-vendor/lib/libqcci_legacy.so
-vendor/lib/libqmi_client_qmux.so
+lib/libqmi.so
+lib/libqmiservices.so
+lib/libqmi_cci.so
+lib/libqmi_common_so.so
+lib/libqmi_csi.so
+lib/libqmi_encdec.so
+lib/libqcci_legacy.so
+lib/libqmi_client_qmux.so
 lib/libreference-ril.so
 lib/libril-qcril-hook-oem.so
 lib/libsecril-client.so
 lib/libtime_genoff.so
-lib/libril-qc-qmi-1.so
-lib/libril.so
+
 
 # GPS
 lib/libloc_api_v02.so
