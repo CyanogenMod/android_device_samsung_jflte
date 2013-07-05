@@ -119,6 +119,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # QRNGD
 PRODUCT_PACKAGES += qrngd
 
+# Prepatch to fix BT/WiFi bus lockups
+PRODUCT_COPY_FILES += device/samsung/jf-common/bluetooth/bcm4335_prepatch.hcd:system/vendor/firmware/bcm4335_prepatch.hcd
+
 #common build.props
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.chipname=apq8064 \
