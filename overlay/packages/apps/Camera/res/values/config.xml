@@ -24,4 +24,6 @@
     <bool name="enableZSL">true</bool>
     <!-- Magic for enabling ZSL on Samsung cameras -->
     <bool name="sendMagicSamsungZSLCommand">true</bool>
+    <!-- Decode YV16 format on Samsung HDR hardware -->
+    <bool name="needsSamsungHDRFormat">true</bool>
 </resources>
