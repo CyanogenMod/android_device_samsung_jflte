@@ -621,6 +621,17 @@ service profiler_daemon /system/bin/profiler_daemon
 # virtual sdcard daemon running as media_rw (1023)
 service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
     class late_start
+    oneshot
+
+on property:ro.fuse_sdcard=true
+    start sdcard
+
+# This will make sure that sdcard service starts as late_start.
+on nonencrypted
+    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
+
+on property:vold.decrypt=trigger_restart_framework
+    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
 
 service ssr_diag /system/bin/ssr_diag
     class late_start
