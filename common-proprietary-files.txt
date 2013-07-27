@@ -210,5 +210,5 @@ lib/libdrmfs.so
 lib/libdrmtime.so
 lib/libhdcp2.so
 lib/libQSEEComAPI.so
-#lib/libWVStreamControlAPI_L1.so
+lib/libWVStreamControlAPI_L1.so
 lib/libwvm.so
