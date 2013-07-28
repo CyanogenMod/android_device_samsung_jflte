@@ -95,6 +95,7 @@ lib/libtime_genoff.so
 
 
 # GPS
+lib/libgeofence.so
 lib/libloc_api_v02.so
 
 # Sensors

@@ -103,6 +103,8 @@ typedef uint16_t GpsLocationFlags;
 #define GPS_CAPABILITY_SINGLE_SHOT      0x0000008
 /** GPS supports on demand time injection */
 #define GPS_CAPABILITY_ON_DEMAND_TIME   0x0000010
+/** GPS supports Geofencing  */
+#define GPS_CAPABILITY_GEOFENCING       0x0000020
 
 /** Flags used to specify which aiding data to delete
     when calling delete_aiding_data(). */
