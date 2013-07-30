@@ -34,7 +34,8 @@ TARGET_SCREEN_WIDTH := 1080
 PRODUCT_COPY_FILES += \
     device/samsung/jf-common/audio/snd_soc_msm_2x_Fusion3:system/etc/snd_soc_msm/snd_soc_msm_2x_Fusion3 \
     device/samsung/jf-common/audio/audio_policy.conf:system/etc/audio_policy.conf \
-    device/samsung/jf-common/audio/audio_effects.conf:system/etc/audio_effects.conf
+    device/samsung/jf-common/audio/audio_effects.conf:system/etc/audio_effects.conf \
+    frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml
 
 # Media Profile
 PRODUCT_COPY_FILES += \
