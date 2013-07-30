@@ -105,6 +105,9 @@ on boot
     # Allow QMUX daemon to assign port open wait time
     chown radio radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
 
+    # 4.3 requires this
+    chmod 0644 /proc/cmdline
+
     setprop wifi.interface wlan0
 
     setprop ro.telephony.call_ring.multiple false
