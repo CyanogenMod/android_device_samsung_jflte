@@ -40,8 +40,8 @@ lib/libgsl.so
 lib/libllvm-a3xx.so
 #lib/libllvm-arm.so
 lib/libC2D2.so
-#lib/libOpenVG.so
-#lib/libOpenCL.so
+lib/libOpenVG.so
+lib/libOpenCL.so
 #lib/libsc-a2xx.so
 lib/libsc-a3xx.so
 #etc/firmware/a225p5_pm4.fw
