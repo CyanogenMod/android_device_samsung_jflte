@@ -31,8 +31,8 @@ on init
     mkdir /persdata 0755 system system
     mkdir /persdata/absolute 0750 system system
 
-    wait /dev/block/mmcblk0p26
-    mount ext4 /dev/block/mmcblk0p26 /persdata/absolute nosuid nodev barrier=1
+    wait /dev/block/platform/msm_sdcc.1/by-name/persdata
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/persdata  /persdata/absolute nosuid nodev barrier=1
     chown system system /persdata
     chmod 0755 /persdata
     chown system system /persdata/absolute
