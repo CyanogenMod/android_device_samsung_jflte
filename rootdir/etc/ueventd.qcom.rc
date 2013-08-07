@@ -132,3 +132,7 @@
 /dev/block/mmcblk0p13     0660	system	    radio
 /dev/block/mmcblk0p14     0660	system	    radio
 /dev/block/mmcblk0p15     0660	system	    radio
+# Not sure if this will work properly
+/dev/block/platform/msm_sdcc.1/by-name/m9kefs1     0660	system	    radio
+/dev/block/platform/msm_sdcc.1/by-name/m9kefs2     0660	system	    radio
+/dev/block/platform/msm_sdcc.1/by-name/m9kefs3     0660	system	    radio
