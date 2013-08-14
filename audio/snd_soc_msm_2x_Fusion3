@@ -3300,6 +3300,40 @@ SectionDevice
     EC_REF_RXMixerCTL "SLIM_RX"
 EndSection
 
+SectionDevice
+    Name "USB PROXY Rx Speaker"
+    Comment "Speaker Lineout Rx combo device"
+
+    EnableSequence
+        'SLIM_0_RX Channels':0:Two
+        'RX5 MIX1 INP1':0:RX1
+        'RX5 MIX1 INP2':0:RX2
+        'RX7 MIX1 INP1':0:RX1
+        'RX3 MIX1 INP1':0:RX2
+        'RX6 DSM MUX':0:DSM_INV
+        'LINEOUT1 Volume':1:91
+        'LINEOUT5 Volume':1:91
+        'LINEOUT2 Volume':1:100
+        'LINEOUT4 Volume':1:100
+        'RX5 Digital Volume':1:65
+    EndSequence
+
+    DisableSequence
+        'RX5 MIX1 INP1':0:ZERO
+        'RX5 MIX1 INP2':0:ZERO
+        'RX7 MIX1 INP1':0:ZERO
+        'RX3 MIX1 INP1':0:ZERO
+        'LINEOUT1 Volume':1:0
+        'LINEOUT5 Volume':1:0
+        'LINEOUT2 Volume':1:0
+        'LINEOUT4 Volume':1:0
+        'RX5 Digital Volume':1:0
+    EndSequence
+
+    ACDBID  98:1
+
+EndSection
+
 SectionModifier
 	Name "Play Music"
 	Comment "Modifier for music playback"
