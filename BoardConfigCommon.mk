@@ -84,7 +84,7 @@ BOARD_USES_SEPERATED_HEADSET_MIC := true
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
-        device/samsung/jf/sepolicy
+        device/samsung/jf-common/sepolicy
 
 BOARD_SEPOLICY_UNION += \
 	file_contexts \
