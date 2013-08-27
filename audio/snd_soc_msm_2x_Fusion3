@@ -2505,24 +2505,23 @@ EndSection
 
 SectionDevice
     Name "VOIP Headset"
-    Comment "VoIP Comm Main Mic(3-pole headset) Tx device"
+    Comment "VoIP Comm Headset Tx device"
 
     EnableSequence
         'SLIM_0_TX Channels':0:One
-        'SLIM TX7 MUX':0:DEC4
-        'DEC4 MUX':0:ADC3
-        'DEC4 Volume':2:67.7%
-        'ADC3 Volume':1:100
+        'SLIM TX7 MUX':0:DEC5
+        'DEC5 MUX':0:ADC2
+        'ADC2 Volume':1:100
+        'DEC5 Volume':2:67.7%
     EndSequence
 
     DisableSequence
         'SLIM TX7 MUX':0:ZERO
-        'DEC4 MUX':0:ZERO
-        'DEC4 Volume':1:0
-        'ADC3 Volume':1:0
+        'DEC5 MUX':0:ZERO
+        'ADC2 Volume':1:0
     EndSequence
 
-    ACDBID  57:2
+    ACDBID  59:2
 
 EndSection
 
