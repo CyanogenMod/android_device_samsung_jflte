@@ -2588,7 +2588,6 @@ SectionDevice
         'DEC4 MUX':0:ADC3
         'ADC3 Volume':2:91.7%
         'DEC4 Volume':2:84%
-
         'MICBIAS3 CAPLESS Switch':1:1
     EndSequence
 
