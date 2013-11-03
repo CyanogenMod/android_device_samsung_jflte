@@ -91,6 +91,9 @@ lib/libqmi_client_qmux.so
 lib/libreference-ril.so
 lib/libril-qcril-hook-oem.so
 lib/libsecril-client.so
+
+# Time services
+bin/time_daemon
 lib/libtime_genoff.so
 
 
