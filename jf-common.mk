@@ -73,6 +73,7 @@ PRODUCT_PACKAGES += \
     initlogo.rle \
     init.bt.rc \
     init.carrier.rc \
+    init.crda.rc \
     init.qcom.rc \
     init.qcom.usb.rc \
     init.target.rc \
@@ -84,7 +85,10 @@ PRODUCT_PACKAGES += Torch
 # Wifi
 PRODUCT_PACKAGES += \
     libnetcmdiface \
-    macloader
+    macloader \
+    crda \
+    regulatory.bin \
+    linville.key.pub.pem
 
 # NFC packages
 PRODUCT_PACKAGES += \
