@@ -1,7 +1,3 @@
-allow mediaserver audio_data_file:dir w_dir_perms;
-allow mediaserver audio_data_file:file create_file_perms;
-allow mediaserver camera_data_file:sock_file w_file_perms;
-
 qmux_socket(mediaserver)
 
 unix_socket_send(mediaserver, camera, camera)
