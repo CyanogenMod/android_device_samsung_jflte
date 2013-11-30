@@ -67,6 +67,10 @@ COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 # Don't use qcom camera HAL
 USE_DEVICE_SPECIFIC_CAMERA := true
 
+# Adreno
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
+HAVE_ADRENO_SOURCE := false
+
 # Sensors
 SENSORS_NEED_SETRATE_ON_ENABLE := true
 
