@@ -36,7 +36,7 @@ vendor/lib/egl/libGLESv2S3D_adreno.so
 vendor/lib/egl/libq3dtools_adreno.so
 
 vendor/lib/libC2D2.so
-vendor/lib/libRSDriver_adreno
+vendor/lib/libRSDriver_adreno.so
 vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/libOpenCL.so
 vendor/lib/libOpenVG.so
@@ -115,7 +115,7 @@ cameradata/RS_M10MO_SL.bin
 cameradata/RS_M10MO_SS.bin
 cameradata/datapattern_420sp.yuv
 cameradata/datapattern_front_420sp.yuv
-lib/hw/camera.msm8960.so
+lib/hw/vendor-camera.msm8960.so:lib/hw/camera.msm8960.so
 lib/libchromatix_imx074_default_video.so
 lib/libchromatix_imx074_preview.so
 lib/libchromatix_imx074_video_hd.so
