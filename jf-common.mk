@@ -100,6 +100,12 @@ PRODUCT_PACKAGES += \
     Tag \
     com.android.nfc_extras
 
+# IR packages
+PRODUCT_PACKAGES += \
+    consumerir.msm8960
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.consumerir.xml:system/etc/permissions/android.hardware.consumerir.xml
+
 # NFCEE access control + configuration
 NFCEE_ACCESS_PATH := device/samsung/jf-common/nfc/nfcee_access.xml
 PRODUCT_COPY_FILES += \
