@@ -1,9 +1,10 @@
 # Bins
 bin/mpdecision
+lib/libqc-opt.so
 
 # Thermal
 bin/thermald
-bin/thermal-engine
+lib/libthermalclient.so
 
 # Bluetooth firmware
 vendor/firmware/bcm2079xB4_firmware.ncd
@@ -18,6 +19,11 @@ lib/libacdbloader.so
 lib/libaudcal.so
 lib/libcsd-client.so
 
+# Postprocessing
+bin/mm-pp-daemon
+lib/libmm-abl.so
+lib/libmm-abl-oem.so
+
 # mmparser extended
 lib/libExtendedExtractor.so
 lib/libmmparser.so
@@ -25,19 +31,15 @@ lib/libmmosal.so
 lib/libdivxdrm.so
 
 # Adreno GPU (Available on Nexus 4)
-lib/libadreno_utils.so
-lib/libCB.so
-
 vendor/lib/egl/eglsubAndroid.so
 vendor/lib/egl/libEGL_adreno.so
 vendor/lib/egl/libGLESv1_CM_adreno.so
 vendor/lib/egl/libGLESv2_adreno.so
 vendor/lib/egl/libGLESv2S3D_adreno.so
 vendor/lib/egl/libq3dtools_adreno.so
-
 vendor/lib/libC2D2.so
+vendor/lib/libCB.so
 vendor/lib/libRSDriver_adreno.so
-vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/libOpenCL.so
 vendor/lib/libOpenVG.so
 vendor/lib/libadreno_utils.so
@@ -45,31 +47,32 @@ vendor/lib/libc2d30-a3xx.so
 vendor/lib/libc2d30.so
 vendor/lib/libgsl.so
 vendor/lib/libllvm-a3xx.so
-vendor/lib/libqc-opt.so
 vendor/lib/librs_adreno.so
 vendor/lib/librs_adreno_sha1.so
 vendor/lib/libsc-a3xx.so
-vendor/lib/libwvm.so
 etc/firmware/a300_pfp.fw
 etc/firmware/a300_pm4.fw
+
+# Video firmware
 etc/firmware/vidc_1080p.fw
 
 # Graphics
 lib/libmm-color-convertor.so
+lib/libI420colorconvert.so
 
-# Radio
+# Radio / Network
 bin/ds_fmc_appd
 bin/efsks
 bin/ks
 bin/netmgrd
-bin/sec-ril
 bin/qcks
 bin/qmiproxy
 bin/qmuxd
+bin/radish
 bin/rild
 bin/rmt_storage
+bin/sec-ril
 lib/libatparser.so
-lib/libcordon.so
 lib/libdiag.so
 lib/libdsutils.so
 lib/libdsi_netctrl.so
@@ -101,7 +104,6 @@ lib/libtime_genoff.so
 
 
 # GPS
-lib/libgeofence.so
 lib/libloc_api_v02.so
 
 # Sensors
@@ -182,33 +184,14 @@ lib/libvdis.so
 # Wi-Fi
 etc/wifi/bcmdhd_apsta.bin
 etc/wifi/bcmdhd_apsta.bin_a0
+etc/wifi/bcmdhd_ibss.bin
 etc/wifi/bcmdhd_mfg.bin
 etc/wifi/bcmdhd_mfg.bin_a0
 etc/wifi/bcmdhd_sta.bin
 etc/wifi/bcmdhd_sta.bin_a0
 etc/wifi/cred.conf
 etc/wifi/nvram_mfg.txt
-etc/wifi/nvram_mfg.txt_a0
-etc/wifi/nvram_mfg.txt:etc/wifi/nvram_mfg.txt_murata
-etc/wifi/nvram_mfg.txt_murata_a0
-etc/wifi/nvram_mfg.txt_muratafem1
-etc/wifi/nvram_mfg.txt_muratafem2
-etc/wifi/nvram_mfg.txt_semco3rd
-etc/wifi/nvram_mfg.txt_semco3rd_a0
-etc/wifi/nvram_mfg.txt_semcosh
 etc/wifi/nvram_net.txt
-etc/wifi/nvram_net.txt_a0
-etc/wifi/nvram_net.txt:etc/wifi/nvram_net.txt_murata
-etc/wifi/nvram_net.txt_murata_a0
-etc/wifi/nvram_net.txt_muratafem1
-etc/wifi/nvram_net.txt_muratafem2
-etc/wifi/nvram_net.txt_semco3rd
-etc/wifi/nvram_net.txt_semco3rd_a0
-etc/wifi/nvram_net.txt_semcosh
-etc/wifi/wpa_supplicant.conf
-
-# Perf
-lib/libqc-opt.so
 
 # DRM
 bin/qseecomd
@@ -228,3 +211,20 @@ blobs/vzw/etc/firmware/q6.b04
 blobs/vzw/etc/firmware/q6.b05
 blobs/vzw/etc/firmware/q6.b06
 blobs/vzw/etc/firmware/q6.mdt
+
+# HDCP
+bin/insthk
+etc/srm.bin
+lib/libhdcp2.so
+lib/libstagefright_hdcp.so
+
+# Widevine
+lib/drm/libwmvdrmplugin.so
+lib/libwvm.so
+vendor/lib/libwvdrm_L1.so
+vendor/lib/libWVStreamControlAPI_L1.so
+vendor/lib/mediadrm/libwvdrmengine.so
+
+# IPC router security
+bin/irsc_util
+etc/sec_config
