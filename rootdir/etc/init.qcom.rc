@@ -82,6 +82,9 @@ on boot-pause
     exec system/bin/battery_charging
 
 on boot
+    # enable pulsing led on boot
+    write /sys/class/sec/led/led_pattern 6
+
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
@@ -755,6 +758,10 @@ on property:service.bootanim.exit=1
     write /proc/sys/net/ipv6/conf/rmnet_usb1/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet_usb2/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet_usb3/accept_ra 2
+
+on property:dev.bootcomplete=1
+    # disable pulsing led on boot complete
+    exec /system/bin/sh /system/etc/init.led.sh
 
 # CM Performance Profiles
 
