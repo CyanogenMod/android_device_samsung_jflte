@@ -20,4 +20,6 @@
 <resources>
     <!-- Use ZSL mode for Qualcomm cameras -->
     <bool name="enableZSL">true</bool>
+    <!-- Decode YV16 format on Samsung HDR hardware -->
+    <bool name="needsSamsungHDRFormat">true</bool>
 </resources>
