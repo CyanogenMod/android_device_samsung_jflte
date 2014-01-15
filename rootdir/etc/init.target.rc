@@ -32,10 +32,6 @@ on early-init
     symlink /data/tombstones /tombstones
     mkdir efs 0771 system system
 
-    # For Absolute Persistence Partition
-    mkdir /persdata 0755 system system
-    mkdir /persdata/absolute 0750 system system
-
 service ril-qmi /system/bin/sh /init.qcom.ril.sh
     class main
     user root
@@ -44,11 +40,6 @@ service ril-qmi /system/bin/sh /init.qcom.ril.sh
 on fs
     mount_all fstab.qcom
     setprop ro.crypto.fuse_sdcard true
-
-    chown system system /persdata
-    chmod 0755 /persdata
-    chown system system /persdata/absolute
-    chmod 0750 /persdata/absolute
 
     chown system radio /efs
     chmod 0771 /efs
