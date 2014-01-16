@@ -23,7 +23,7 @@
 # inherit from common msm8960
 -include device/samsung/msm8960-common/BoardConfigCommon.mk
 
-TARGET_SPECIFIC_HEADER_PATH := device/samsung/jf-common/include
+TARGET_SPECIFIC_HEADER_PATH := device/samsung/jflte/include
 
 # Kernel
 TARGET_KERNEL_SOURCE         := kernel/samsung/jf
@@ -46,17 +46,17 @@ TARGET_USES_QCOM_BSP := true
 COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP
 
 # Adreno configuration
-BOARD_EGL_CFG := device/samsung/jf-common/configs/egl.cfg
+BOARD_EGL_CFG := device/samsung/jflte/configs/egl.cfg
 
 # Recovery
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/jf-common/recovery/recovery_keys.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/jflte/recovery/recovery_keys.c
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
-TARGET_RECOVERY_FSTAB := device/samsung/jf-common/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB := device/samsung/jflte/rootdir/etc/fstab.qcom
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00A00000
@@ -66,8 +66,8 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 28651290624
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/jf-common/bluetooth
-BOARD_BLUEDROID_VENDOR_CONF := device/samsung/jf-common/bluetooth/vnd_jf.txt
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/jflte/bluetooth
+BOARD_BLUEDROID_VENDOR_CONF := device/samsung/jflte/bluetooth/vnd_jf.txt
 BOARD_BLUETOOTH_USES_HCIATTACH_PROPERTY := false
 
 # Needed for blobs
@@ -110,3 +110,11 @@ TARGET_NEED_SAMSUNG_MAGIC_ZSL_1508 := true
 TARGET_ADD_ISO_MODE_1600 := true
 TARGET_ADD_ISO_MODE_HJR := true
 
+# Assert
+TARGET_OTA_ASSERT_DEVICE := jflte,jfltexx,i9505,GT-I9505,jgedlte,i9505g,GT-I9505G,jfltevzw,jfltespr,jfltetmo,jfltecri,jflteatt,jfltecan,jflteusc
+
+# Kernel
+TARGET_KERNEL_CONFIG         := jf_eur_defconfig
+
+# Releasetools
+TARGET_RELEASETOOLS_EXTENSIONS := device/samsung/jflte/releasetools
