@@ -32,6 +32,8 @@ on early-init
     symlink /data/tombstones /tombstones
     mkdir efs 0771 system system
 
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
+
 service ril-qmi /system/bin/sh /init.qcom.ril.sh
     class main
     user root
