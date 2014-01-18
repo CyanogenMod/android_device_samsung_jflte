@@ -95,6 +95,8 @@ on boot
     chmod 0220 /proc/bluetooth/sleep/btwrite
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
+    chmod 0600 /dev/btlock
+    chown bluetooth bluetooth /dev/btlock
 
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio

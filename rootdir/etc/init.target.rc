@@ -73,37 +73,11 @@ on post-fs-data
     # permission for TZIC
     chown system system /dev/tzic
 
-    # sensor
-    chown system radio /sys/class/sensors/barometer_sensor/sea_level_pressure
-    chown system radio /sys/class/sensors/barometer_sensor/eeprom_check
-    chown system radio /sys/class/sensors/barometer_sensor/calibration
-    chown system radio /sys/class/sensors/accelerometer_sensor/calibration
-    chown system radio /sys/class/sensors/accelerometer_sensor/reactive_alert
-    chown system radio /sys/class/sensors/proximity_sensor/enable
-    chown system radio /sys/class/sensors/proximity_sensor/prox_avg
-    chown system radio /sys/class/sensors/proximity_sensor/prox_cal
-    chown system radio /sys/class/sensors/light_sensor/enable
-
-    # sensor
-    chown system radio /sys/class/sensors/barometer_sensor/sea_level_pressure
-    chown system radio /sys/class/sensors/barometer_sensor/eeprom_check
-    chown system radio /sys/class/sensors/barometer_sensor/calibration
-    chown system radio /sys/class/sensors/accelerometer_sensor/calibration
-    chown system radio /sys/class/sensors/accelerometer_sensor/reactive_alert
-    chown system radio /sys/class/sensors/proximity_sensor/enable
-    chown system radio /sys/class/sensors/proximity_sensor/prox_avg
-    chown system radio /sys/class/sensors/proximity_sensor/prox_cal
-    chown system radio /sys/class/sensors/light_sensor/enable
-
     #earjack
     chown system radio /sys/class/audio/earjack/select_jack
     chown media system /sys/class/audio/earjack/reselect_jack
     chown system radio /sys/class/audio/earjack/key_state
     chown system radio /sys/class/audio/earjack/state
-
-    #OTG Test
-    chown system radio /sys/class/host_notify/usb_otg/booster
-    chmod 0660 /sys/class/host_notify/usb_otg/booster
 
     #Essential node for usbservice
     mkdir /dev/bus/ 755 root root
@@ -254,11 +228,13 @@ on post-fs-data
     chown system radio /sys/class/sensors/proximity_sensor/thresh_high
     chown system radio /sys/class/sensors/proximity_sensor/thresh_low
     chown system radio /sys/class/sensors/proximity_sensor/barcode_emul_en
+    chown system radio /sys/class/sensors/proximity_sensor/enable
 # Light_sensor
     chown system radio /sys/class/sensors/light_sensor/lux
     chown system radio /sys/class/sensors/light_sensor/raw_data
     chown system radio /sys/class/sensors/light_sensor/vendor
     chown system radio /sys/class/sensors/light_sensor/name
+    chown system radio /sys/class/sensors/light_sensor/enable
 # Gyro_sensor
     chown system radio /sys/class/sensors/gyro_sensor/power_on
     chown system radio /sys/class/sensors/gyro_sensor/power_off
@@ -272,6 +248,7 @@ on post-fs-data
     chown system radio /sys/class/sensors/barometer_sensor/vendor
     chown system radio /sys/class/sensors/barometer_sensor/name
     chown system radio /sys/class/sensors/barometer_sensor/calibration
+    chown system radio /sys/class/sensors/barometer_sensor/eeprom_check
 # Magnetic_sensor
 #    chown system radio /dev/akm8963
     chown system radio /sys/class/sensors/magnetic_sensor/raw_data
