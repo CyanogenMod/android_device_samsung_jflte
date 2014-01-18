@@ -54,19 +54,3 @@ on boot
 	chown radio system /sys/class/sec/switch/usb_state
 	chown radio system /sys/class/sec/switch/uart_sel
 	chown radio system /sys/class/sec/switch/apo_factory
-
-# TVout
-service TvoutService_C /system/bin/bintvoutservice
-    class main
-    user system
-    group system
-
-# MM Property
-#on property:sys.qseecomd.enable=true
-#    exec /system/bin/scranton_RD
-
-# Runtime Compcache
-service rtccinit /system/bin/rtcc_init -a 400M
-    class core
-    user root
-    oneshot

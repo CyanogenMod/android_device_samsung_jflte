@@ -365,12 +365,6 @@ on post-fs-data
     chmod 0660 /sys/class/lcd/panel/panel_colors
     chown system system /sys/class/lcd/panel/panel_colors
 
-service prepare_param /system/bin/prepare_param.sh /dev/block/platform/msm_sdcc.1/by-name/param
-    class main
-    user root
-    group root
-    oneshot
-
 #start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
@@ -472,17 +466,6 @@ service time_daemon /system/bin/time_daemon
    class late_start
    user root
    group root
-
-# service for TZPR provisioning version check app
-service scranton_RD /system/bin/scranton_RD
-    class main
-    user root
-    disabled
-    oneshot
-
-# start for TZPR provisioning version check app
-on property:sys.qseecomd.enable=true
-    start scranton_RD
 
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -B \
