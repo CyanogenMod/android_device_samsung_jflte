@@ -30,8 +30,7 @@ on early-init
     mkdir /firmware 0771 system system
     mkdir /firmware-mdm 0771 system system
     symlink /data/tombstones /tombstones
-    mkdir efs 0771 system system
-
+    mkdir /efs 0771 system radio
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
 service ril-qmi /system/bin/sh /init.qcom.ril.sh
@@ -58,6 +57,7 @@ on boot
 
 on post-fs-data
     mkdir /data/tombstones 0771 system system
+    symlink /data/tombstones /tombstones
     mkdir /tombstones/modem 0771 system system
     mkdir /tombstones/lpass 0771 system system
     mkdir /tombstones/wcnss 0771 system system
