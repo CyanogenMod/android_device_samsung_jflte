@@ -33,11 +33,6 @@ on early-init
     mkdir /efs 0771 system radio
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
-service ril-qmi /system/bin/sh /init.qcom.ril.sh
-    class main
-    user root
-    oneshot
-
 on fs
     mount_all fstab.qcom
     setprop ro.crypto.fuse_sdcard true
