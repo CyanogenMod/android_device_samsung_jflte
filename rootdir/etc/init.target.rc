@@ -39,6 +39,8 @@ on fs
 
     chown system radio /efs
     chmod 0771 /efs
+    restorecon -R /efs
+
     exec /system/bin/sh /init.qcom.syspart_fixup.sh ${ro.board.platform} ${ro.serialno}
 
     chown system radio /dev/block/platform/msm_sdcc.1/by-name
@@ -409,13 +411,6 @@ service qseecomd /system/bin/qseecomd
    user system
    group system
 
-service efsrestorecon /system/bin/restorecon -R /efs
-    class late_start
-    user root
-    group root
-    disabled
-    oneshot
-
 # Start kickstart if mdm is detected
 on property:ro.baseband=mdm
     mkdir /data/qcks 0770 system system
@@ -425,9 +420,6 @@ on property:ro.baseband=mdm
 on property:ro.baseband=sglte
     mkdir /data/misc/mdmhelperdata 0700
     start mdm_helper
-
-on property:init.svc.bootanim=stopped
-    start efsrestorecon
 
 service time_daemon /system/bin/time_daemon
    class late_start
