@@ -23,6 +23,7 @@
         <item>CDMA/EvDo auto</item>
         <item>GSM/WCDMA auto</item>
         <item>GSM/WCDMA preferred</item>
+        <item>GSM only</item>
     </string-array>
     <string-array name="preferred_network_mode_values" translatable="false">
         <item>"10"</item>
@@ -31,5 +32,6 @@
         <item>"4"</item>
         <item>"3"</item>
         <item>"0"</item>
+        <item>"1"</item>
     </string-array>
 </resources>
