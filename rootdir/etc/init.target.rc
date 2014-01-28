@@ -39,7 +39,7 @@ on fs
 
     chown system radio /efs
     chmod 0771 /efs
-    restorecon -R /efs
+    restorecon_recursive /efs
 
     exec /system/bin/sh /init.qcom.syspart_fixup.sh ${ro.board.platform} ${ro.serialno}
 
