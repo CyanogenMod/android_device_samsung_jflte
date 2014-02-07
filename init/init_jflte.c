@@ -125,6 +125,12 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("ro.build.description", "jfltexx-user 4.2.2 JDQ39 I9505XXUAMDE release-keys");
         property_set("ro.product.model", "GT-I9505");
         property_set("ro.product.device", "jfltexx");
+    } else if (strstr(bootloader, "I9508")) {
+        /* jfltezm */
+        property_set("ro.build.fingerprint", "samsung/jfltezm/jflte:4.2.2/JDQ39/I9508ZMUAMG1:user/release-keys");
+        property_set("ro.build.description", "jfltezm-user 4.2.2 JDQ39 I9508ZMUAMG1 release-keys");
+        property_set("ro.product.model", "GT-I9508");
+        property_set("ro.product.device", "jfltezm");
     }
 
     property_get("ro.product.device", device);
