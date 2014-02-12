@@ -39,7 +39,7 @@ on fs
 
     chown system radio /efs
     chmod 0771 /efs
-    restorecon -R /efs
+    restorecon_recursive /efs
 
     chown system radio /dev/block/platform/msm_sdcc.1/by-name
     chmod 0775 /dev/block/platform/msm_sdcc.1/by-name
