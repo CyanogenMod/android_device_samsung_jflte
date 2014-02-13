@@ -66,6 +66,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("ro.product.model", "SGH-I337");
         property_set("ro.build.fingerprint", "samsung/jflteuc/jflteatt:4.2.2/JDQ39/I337UCUAMDL");
         property_set("ro.build.description", "jflteuc-user 4.2.2 JDQ39 I337UCUAMDL release-keys");
+        property_set("ro.loki_enabled", "1");
     } else if (strstr(bootloader, "R970C")) {
         /* jfltecri */
         property_set("ro.build.fingerprint", "samsung/jfltecri/jfltecri:4.2.2/JDQ39/R970CVVUAME4:user/release-keys");
@@ -109,6 +110,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("ro.build.description", "jfltevzw-user 4.3 JSS15J I545VRUEMK2 release-keys");
         property_set("ro.product.model", "SCH-I545");
         property_set("ro.product.device", "jfltevzw");
+        property_set("ro.loki_enabled", "1");
         property_set("ro.telephony.default_cdma_sub", "0");
         property_set("ro.telephony.ril.v3", "newDriverCallU");
         property_set("ro.cdma.home.operator.alpha", "Verizon");
