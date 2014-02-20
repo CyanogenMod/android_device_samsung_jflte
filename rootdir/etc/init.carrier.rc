@@ -29,15 +29,15 @@ on boot
 
 # permissions for bluetooth.
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
-    chown bluetooth net_bt_stack ro.bt.bdaddr_path
-    chown bluetooth net_bt_stack /dev/ttyHS0
-    chmod 0660 /dev/ttyHS0
-    chmod 0660 /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
+    chown -h bluetooth net_bt_stack ro.bt.bdaddr_path
+    chown -h bluetooth net_bt_stack /dev/ttyHS0
+    chmod -h 0660 /dev/ttyHS0
+    chmod -h 0660 /sys/class/rfkill/rfkill0/state
+    chown -h bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
+    chown -h bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
 
 
-	chown radio system /sys/class/sec/switch/usb_sel
-	chown radio system /sys/class/sec/switch/usb_state
-	chown radio system /sys/class/sec/switch/uart_sel
-	chown radio system /sys/class/sec/switch/apo_factory
+	chown -h radio system /sys/class/sec/switch/usb_sel
+	chown -h radio system /sys/class/sec/switch/usb_state
+	chown -h radio system /sys/class/sec/switch/uart_sel
+	chown -h radio system /sys/class/sec/switch/apo_factory
