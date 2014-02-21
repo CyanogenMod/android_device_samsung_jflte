@@ -161,3 +161,15 @@
 /dev/block/mmcblk0p13     0660	system	    radio
 /dev/block/mmcblk0p14     0660	system	    radio
 /dev/block/mmcblk0p15     0660	system	    radio
+
+# sysfs properties
+/sys/devices/virtual/input/input*   enable      0660  root   input
+/sys/devices/virtual/input/input*   poll_delay  0660  root   input
+/sys/devices/virtual/usb_composite/*   enable      0664  root   system
+
+# sensor sysfs properties
+/sys/devices/virtual/input/input*   poll_delay  0660    system  radio
+/sys/devices/virtual/input/input*   enable      0660    system  radio
+
+# sensorhub
+/dev/ssp_sensorhub        0660   system     system
