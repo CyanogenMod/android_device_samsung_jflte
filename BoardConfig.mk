@@ -120,3 +120,6 @@ TARGET_KERNEL_CONFIG         := jf_eur_defconfig
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := device/samsung/jflte/releasetools
+
+# This isn't a new GPS at all!
+BOARD_HAVE_NEW_QC_GPS :=
