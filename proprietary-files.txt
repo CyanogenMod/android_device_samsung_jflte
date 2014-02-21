@@ -1,10 +1,10 @@
 # Bins
 bin/mpdecision
-lib/libqc-opt.so
+lib/libqc-opt.so:vendor/lib/libqc-opt.so
 
 # Thermal
-bin/thermald
-lib/libthermalclient.so
+bin/thermal-engine
+lib/libthermalclient.so:vendor/lib/libthermalclient.so
 
 # Bluetooth firmware
 vendor/firmware/bcm2079xB4_firmware.ncd
@@ -15,22 +15,22 @@ vendor/firmware/bcm4335_murata.hcd
 vendor/firmware/bcm4335_semco.hcd
 
 # Audio
-lib/libacdbloader.so
-lib/libaudcal.so
-lib/libcsd-client.so
+lib/libacdbloader.so:vendor/lib/libacdbloader.so
+lib/libaudcal.so:vendor/lib/libaudcal.so
+lib/libcsd-client.so:vendor/lib/libcsd-client.so
 
 # Postprocessing
 bin/mm-pp-daemon
-lib/libmm-abl.so
-lib/libmm-abl-oem.so
+lib/libmm-abl.so:vendor/lib/libmm-abl.so
+lib/libmm-abl-oem.so:vendor/lib/libmm-abl-oem.so
 
 # mmparser extended
-lib/libExtendedExtractor.so
-lib/libmmparser.so
-lib/libmmosal.so
-lib/libdivxdrm.so
+lib/libExtendedExtractor.so:vendor/lib/libExtendedExtractor.so
+lib/libmmparser.so:vendor/lib/libmmparser.so
+lib/libmmosal.so:vendor/lib/libmmosal.so
+lib/libDivxDrm.so:vendor/lib/libDivxDrm.so
 
-# Adreno GPU (Available on Nexus 4)
+# Adreno GPU
 vendor/lib/egl/eglsubAndroid.so
 vendor/lib/egl/libEGL_adreno.so
 vendor/lib/egl/libGLESv1_CM_adreno.so
@@ -50,15 +50,15 @@ vendor/lib/libllvm-a3xx.so
 vendor/lib/librs_adreno.so
 vendor/lib/librs_adreno_sha1.so
 vendor/lib/libsc-a3xx.so
-etc/firmware/a300_pfp.fw
-etc/firmware/a300_pm4.fw
 
-# Video firmware
-etc/firmware/vidc_1080p.fw
+# Firmware
+etc/firmware/a300_pfp.fw:vendor/firmware/a300_pfp.fw
+etc/firmware/a300_pm4.fw:vendor/firmware/a300_pm4.fw
+etc/firmware/vidc_1080p.fw:vendor/firmware/vidc_1080p.fw
 
 # Graphics
-lib/libmm-color-convertor.so
-lib/libI420colorconvert.so
+lib/libmm-color-convertor.so:vendor/lib/libmm-color-convertor.so
+lib/libI420colorconvert.so:vendor/lib/libI420colorconvert.so
 
 # Radio / Network
 bin/ds_fmc_appd
@@ -73,7 +73,6 @@ bin/rild
 bin/rmt_storage
 bin/sec-ril
 lib/libatparser.so
-lib/libdiag.so
 lib/libdsutils.so
 lib/libdsi_netctrl.so
 lib/libfactoryutil.so
@@ -84,10 +83,6 @@ lib/libqdi.so
 lib/libqdp.so
 lib/libqmi.so
 lib/libqmiservices.so
-lib/libqmi_cci.so
-lib/libqmi_common_so.so
-lib/libqmi_csi.so
-lib/libqmi_encdec.so
 lib/libqcci_legacy.so
 lib/libqmi_client_qmux.so
 lib/libreference-ril.so
@@ -97,11 +92,15 @@ blobs/cdma/lib/libril-qc-qmi-1.so
 blobs/cdma/lib/libril.so
 blobs/gsm/lib/libril-qc-qmi-1.so
 blobs/gsm/lib/libril.so
+vendor/lib/libdiag.so
+vendor/lib/libqmi_cci.so
+vendor/lib/libqmi_common_so.so
+vendor/lib/libqmi_csi.so
+vendor/lib/libqmi_encdec.so
 
 # Time services
 bin/time_daemon
 lib/libtime_genoff.so
-
 
 # GPS
 lib/libloc_api_v02.so
@@ -195,13 +194,10 @@ etc/wifi/nvram_net.txt
 
 # DRM
 bin/qseecomd
-lib/libdrmdecrypt.so
-lib/libdrmfs.so
-lib/libdrmtime.so
-lib/libhdcp2.so
-lib/libQSEEComAPI.so
-lib/libWVStreamControlAPI_L1.so
-lib/libwvm.so
+lib/libdrmdecrypt.so:vendor/lib/libdrmdecrypt.so
+lib/libdrmfs.so:vendor/lib/libdrmfs.so
+lib/libdrmtime.so:vendor/lib/libdrmtime.so
+lib/libQSEEComAPI.so:vendor/lib/libQSEEComAPI.so
 
 # Verizon q6 firmware
 blobs/vzw/etc/firmware/q6.b00
@@ -219,8 +215,8 @@ lib/libhdcp2.so
 lib/libstagefright_hdcp.so
 
 # Widevine
-lib/drm/libwmvdrmplugin.so
-lib/libwvm.so
+lib/drm/libdrmwvmplugin.so:vendor/lib/drm/libdrmwvmplugin.so
+lib/libwvm.so:vendor/lib/libwvm.so
 vendor/lib/libwvdrm_L1.so
 vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/mediadrm/libwvdrmengine.so
