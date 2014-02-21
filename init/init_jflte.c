@@ -71,6 +71,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("telephony.lteOnGsmDevice", "1");
         property_set("ro.telephony.default_network", "9");
         property_set("ro.loki_enabled", "1");
+        property_set("ro.preferred_apn", "pta,310,410");
     } else if (strstr(bootloader, "R970C")) {
         /* jfltecri */
         property_set("ro.build.fingerprint", "samsung/jfltecri/jfltecri:4.2.2/JDQ39/R970CVVUAME4:user/release-keys");
@@ -108,6 +109,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("ro.product.device", "jfltetmo");
         property_set("telephony.lteOnGsmDevice", "1");
         property_set("ro.telephony.default_network", "9");
+        property_set("ro.preferred_apn", "fast.t-mobile.com,310,260");
     } else if (strstr(bootloader, "R970")) {
         /* jflteusc */
         property_set("ro.build.fingerprint", "samsung/jflteusc/jflteusc:4.2.2/JDQ39/R970VXUAMD9:user/release-keys");
