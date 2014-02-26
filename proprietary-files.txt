@@ -90,7 +90,10 @@ lib/libqmi_client_qmux.so
 lib/libreference-ril.so
 lib/libril-qcril-hook-oem.so
 lib/libsecril-client.so
-
+blobs/cdma/lib/libril-qc-qmi-1.so
+blobs/cdma/lib/libril.so
+blobs/gsm/lib/libril-qc-qmi-1.so
+blobs/gsm/lib/libril.so
 
 # Time services
 bin/time_daemon
@@ -116,7 +119,7 @@ cameradata/RS_M10MO_SL.bin
 cameradata/RS_M10MO_SS.bin
 cameradata/datapattern_420sp.yuv
 cameradata/datapattern_front_420sp.yuv
-lib/hw/camera.msm8960.so:lib/hw/camera.vendor.msm8960.so
+lib/hw/camera.vendor.msm8960.so
 lib/libadsprpc.so
 lib/libchromatix_imx074_default_video.so
 lib/libchromatix_imx074_preview.so
@@ -216,3 +219,12 @@ lib/libhdcp2.so
 lib/libQSEEComAPI.so
 lib/libWVStreamControlAPI_L1.so
 lib/libwvm.so
+
+# Verizon q6 firmware
+blobs/vzw/etc/firmware/q6.b00
+blobs/vzw/etc/firmware/q6.b01
+blobs/vzw/etc/firmware/q6.b03
+blobs/vzw/etc/firmware/q6.b04
+blobs/vzw/etc/firmware/q6.b05
+blobs/vzw/etc/firmware/q6.b06
+blobs/vzw/etc/firmware/q6.mdt

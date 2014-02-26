@@ -1,10 +1,9 @@
 #!/bin/bash
 
+set -e
 
 export DEVICE=jflte
 export VENDOR=samsung
-
-CMDLINE=`cat /proc/cmdline`
 
 if [ $# -eq 0 ]; then
   SRC=adb
@@ -24,15 +23,9 @@ fi
 
 BASE=../../../vendor/$VENDOR/$DEVICE/proprietary
 
-if [[ "$CMDLINE" != "${CMDLINE/SGH}" ]] || [[ "$CMDLINE" != "${CMDLINE/GT}" ]]; then
-  RADIOBASE=$BASE/blobs/gsm
-else
-  RADIOBASE=$BASE/blobs/cdma
-fi
-
 rm -rf $BASE/*
 
-for FILE in `egrep -v '(^#|^$)' proprietary-files.txt`; do
+for FILE in `egrep -v '(^#|^$)' ../$DEVICE/proprietary-files.txt`; do
   echo "Extracting /system/$FILE ..."
   OLDIFS=$IFS IFS=":" PARSING_ARRAY=($FILE) IFS=$OLDIFS
   FILE=${PARSING_ARRAY[0]}
@@ -61,69 +54,5 @@ for FILE in `egrep -v '(^#|^$)' proprietary-files.txt`; do
     fi
   fi
 done
-
-for FILE in `egrep -v '(^#|^$)' proprietary-files-ril.txt`; do
-  echo "Extracting /system/$FILE ..."
-  OLDIFS=$IFS IFS=":" PARSING_ARRAY=($FILE) IFS=$OLDIFS
-  FILE=${PARSING_ARRAY[0]}
-  DEST=${PARSING_ARRAY[1]}
-  if [ -z $DEST ]
-  then
-    DEST=$FILE
-  fi
-  DIR=`dirname $FILE`
-  if [ ! -d $RADIOBASE/$DIR ]; then
-    mkdir -p $RADIOBASE/$DIR
-  fi
-  if [ "$SRC" = "adb" ]; then
-    adb pull /system/$FILE $RADIOBASE/$DEST
-  # if file dot not exist try destination
-    if [ "$?" != "0" ]
-        then
-        adb pull /system/$DEST $RADIOBASE/$DEST
-    fi
-  else
-    cp $SRC/system/$FILE $RADIOBASE/$DEST
-    # if file dot not exist try destination
-    if [ "$?" != "0" ]
-        then
-        cp $SRC/system/$DEST $RADIOBASE/$DEST
-    fi
-  fi
-done
-
-if [[ "$CMDLINE" != "${CMDLINE/SCH-I545}" ]]; then
-  BASE=$BASE/blobs/vzw
-
-  for FILE in `egrep -v '(^#|^$)' proprietary-files-vzw.txt`; do
-    echo "Extracting /system/$FILE ..."
-    OLDIFS=$IFS IFS=":" PARSING_ARRAY=($FILE) IFS=$OLDIFS
-    FILE=${PARSING_ARRAY[0]}
-    DEST=${PARSING_ARRAY[1]}
-    if [ -z $DEST ]
-    then
-      DEST=$FILE
-    fi
-    DIR=`dirname $FILE`
-    if [ ! -d $BASE/$DIR ]; then
-      mkdir -p $BASE/$DIR
-    fi
-    if [ "$SRC" = "adb" ]; then
-      adb pull /system/$FILE $BASE/$DEST
-    # if file dot not exist try destination
-      if [ "$?" != "0" ]
-          then
-          adb pull /system/$DEST $BASE/$DEST
-      fi
-    else
-      cp $SRC/system/$FILE $BASE/$DEST
-      # if file dot not exist try destination
-      if [ "$?" != "0" ]
-          then
-          cp $SRC/system/$DEST $BASE/$DEST
-      fi
-    fi
-  done
-fi
 
 ./setup-makefiles.sh
