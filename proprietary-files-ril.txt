@@ -1,3 +1,0 @@
-# variant-specific rilblobs
-lib/libril-qc-qmi-1.so
-lib/libril.so

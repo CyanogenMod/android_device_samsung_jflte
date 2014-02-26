@@ -38,4 +38,3 @@ def FullOTA_InstallEnd(info):
   info.script.AppendExtra('ifelse(is_substring("R970", getprop("ro.bootloader")), run_program("/sbin/sh", "-c", "busybox cp -R /system/blobs/cdma/* /system/"));')
   info.script.AppendExtra('ifelse(is_substring("I9505", getprop("ro.bootloader")), run_program("/sbin/sh", "-c", "busybox cp -R /system/blobs/gsm/* /system/"));')
   info.script.AppendExtra('ifelse(is_substring("I9508", getprop("ro.bootloader")), run_program("/sbin/sh", "-c", "busybox cp -R /system/blobs/gsm/* /system/"));')
-  info.script.AppendExtra('delete_recursive("/system/blobs");')
