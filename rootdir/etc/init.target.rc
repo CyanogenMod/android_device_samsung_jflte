@@ -1,4 +1,4 @@
-# Copyright (c) 2011, Code Aurora Forum. All rights reserved.
+# Copyright (c) 2012, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -9,7 +9,7 @@
 #       copyright notice, this list of conditions and the following
 #       disclaimer in the documentation and/or other materials provided
 #       with the distribution.
-#     * Neither the name of Code Aurora Forum, Inc. nor the names of its
+#     * Neither the name of The Linux Foundation nor the names of its
 #       contributors may be used to endorse or promote products derived
 #       from this software without specific prior written permission.
 #
@@ -26,6 +26,7 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 #
+
 on early-init
     mkdir /firmware 0771 system system
     mkdir /firmware-mdm 0771 system system
@@ -45,18 +46,20 @@ on fs
     chmod 0775 /dev/block/platform/msm_sdcc.1/by-name
 
 on boot
-    write /sys/devices/i2c-3/3-0024/cyttsp_update_fw 1
-    write /sys/devices/i2c-3/3-005b/update_fw 1
-    start qcamerasvr
+   write /sys/devices/i2c-3/3-0024/cyttsp_update_fw 1
+   write /sys/devices/i2c-3/3-005b/update_fw 1
+   start qcamerasvr
 
 on post-fs-data
-    mkdir /data/tombstones 0771 system system
-    symlink /data/tombstones /tombstones
-    mkdir /tombstones/modem 0771 system system
-    mkdir /tombstones/lpass 0771 system system
-    mkdir /tombstones/wcnss 0771 system system
-    mkdir /tombstones/dsps 0771 system system
-    mkdir /tombstones/mdm 0771 system system
+   mkdir /data/tombstones 0771 system system
+   symlink /data/tombstones /tombstones
+   mkdir /tombstones/modem 0771 system system
+   mkdir /tombstones/lpass 0771 system system
+   mkdir /tombstones/wcnss 0771 system system
+   mkdir /tombstones/dsps 0771 system system
+   mkdir /tombstones/mdm 0771 system system
+   mkdir /tombstones/mdm2 0771 system system
+
 
     # create directory for ril data
     mkdir /data/misc/radio 0775 radio radio
@@ -363,7 +366,13 @@ on post-fs-data
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user media
-    group system camera inet input graphics
+    group camera system inet input graphics
+
+#start GNSS/Sensor interface daemon
+service gsiff_daemon /system/bin/gsiff_daemon
+    class late_start
+    user system
+    group gps qcom_oncrpc net_raw
 
 service thermald /system/bin/thermald
    class main
@@ -375,21 +384,15 @@ service thermal-engine /system/bin/thermal-engine
    class main
    user root
    group root
-   disabled 
-
-on property:qcom.thermal=thermald
-    start thermald
-    
-on property:qcom.thermal=thermal-engine
-    start thermal-engine
+   disabled
 
 service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
-    user root
-    disabled
+   user root
+   disabled
 
 service kickstart /system/bin/qcks -i /firmware-mdm/image/
     user root
-    group radio cache inet misc audio sdcard_rw log
+    group radio cache inet misc audio sdcard_rw log system
     oneshot
     disabled
 
@@ -399,9 +402,9 @@ service mdm_helper /system/bin/mdm_helper
     disabled
 
 service qrngd /system/bin/qrngd -f
-    class main
-    user root
-    group root
+   class main
+   user root
+   group root
 
 service qseecomd /system/bin/qseecomd
    class late_start
@@ -418,10 +421,62 @@ on property:ro.baseband=sglte
     mkdir /data/misc/mdmhelperdata 0700
     start mdm_helper
 
+# Start up mdm_helper if dsda2 detected
+on property:ro.baseband=dsda2
+    mkdir /data/misc/mdmhelperdata 0700
+    start mdm_helper
+
+on property:ro.baseband=sglte2
+    mkdir /data/misc/mdmhelperdata 0700
+    start mdm_helper
 service time_daemon /system/bin/time_daemon
    class late_start
    user root
    group root
+
+service imsqmidaemon /system/bin/imsqmidaemon
+    class main
+    user system
+    group radio net_raw log qcom_diag
+    disabled
+
+on boot
+    start imsqmidaemon
+
+# imsdatadaemon starts with root and UID will be downgraded to SYSTEM.
+service imsdatadaemon /system/bin/imsdatadaemon
+    class main
+    user root
+    group system wifi radio net_raw log qcom_diag net_admin
+    disabled
+
+service wcnss-service /system/bin/wcnss_service
+    class late_start
+    user root
+    group system wifi
+    oneshot
+
+on property:sys.ims.QMI_DAEMON_STATUS=1
+    start imsdatadaemon
+
+service ims_rtp_daemon /system/bin/ims_rtp_daemon
+   class main
+   user system
+   group radio net_raw diag qcom_diag log
+   disabled
+
+on property:sys.ims.DATA_DAEMON_STATUS=1
+    start ims_rtp_daemon
+
+service orientationd /system/bin/orientationd
+    class main
+    user compass
+    group input
+
+service geomagneticd /system/bin/geomagneticd
+    class main
+    user compass
+    group system input
 
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -B \
