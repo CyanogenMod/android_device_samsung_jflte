@@ -64,7 +64,7 @@
 /dev/hsicctl1             0640   radio      radio
 /dev/hsicctl2             0640   radio      radio
 /dev/hsicctl3             0640   radio      radio
-/dev/ks_bridge		  0660   system     system
+/dev/ks_bridge            0660   system     system
 /dev/efs_bridge           0660   system     system
 /dev/video*               0660   system     camera
 /dev/media*               0660   system     camera
@@ -112,7 +112,6 @@
 /dev/smd2                 0660   bluetooth  bluetooth
 /dev/ttyHSL1              0660   system     system
 /dev/mdm                  0660   system     radio
-/sys/devices/virtual/smdpkt/smdcntl*       open_timeout   0664 radio radio
 /dev/sdio_tty_ciq_00      0660   system     system
 /dev/tty_sdio_00          0660   system     system
 /dev/ttyGS0               0660   system     system
@@ -132,7 +131,3 @@
 /dev/block/mmcblk0p13     0660	system	    radio
 /dev/block/mmcblk0p14     0660	system	    radio
 /dev/block/mmcblk0p15     0660	system	    radio
-# Not sure if this will work properly
-/dev/block/platform/msm_sdcc.1/by-name/m9kefs1     0660	system	    radio
-/dev/block/platform/msm_sdcc.1/by-name/m9kefs2     0660	system	    radio
-/dev/block/platform/msm_sdcc.1/by-name/m9kefs3     0660	system	    radio
