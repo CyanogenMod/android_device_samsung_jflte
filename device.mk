@@ -52,15 +52,6 @@ PRODUCT_PACKAGES += \
     loki.sh \
     loki_bootloaders
 
-# GPS
-PRODUCT_PACKAGES += \
-    gps.msm8960
-
-GPS_CONF := device/samsung/jflte/gps/gps.conf
-
-PRODUCT_COPY_FILES += \
-    $(GPS_CONF):/system/etc/gps.conf
-
 # Keylayouts
 PRODUCT_COPY_FILES += \
     device/samsung/jflte/keylayout/atmel_mxt_ts.kl:system/usr/keylayout/atmel_mxt_ts.kl \
