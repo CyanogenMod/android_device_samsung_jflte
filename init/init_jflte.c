@@ -76,6 +76,8 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("ro.build.description", "jfltecri-user 4.2.2 JDQ39 R970CVVUAME4 release-keys");
         property_set("ro.product.model", "SCH-R970C");
         property_set("ro.product.device", "jfltecri");
+        property_set("ro.cdma.home.operator.alpha", "Cricket");
+        property_set("ro.cdma.home.operator.numeric", "310090");
         property_set("ro.telephony.default_cdma_sub", "0");
         property_set("ro.telephony.ril.v3", "newDriverCallU");
         property_set("telephony.lteOnCdmaDevice", "1");
@@ -97,6 +99,8 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("ro.build.description", "jfltespr-user 4.2.2 JDQ39 L720VPUAMDL release-keys");
         property_set("ro.product.model", "SPH-L720");
         property_set("ro.product.device", "jfltespr");
+        property_set("ro.cdma.home.operator.alpha", "Sprint");
+        property_set("ro.cdma.home.operator.numeric", "310120");
         property_set("ro.telephony.ril.v3", "newDriverCallU");
         property_set("telephony.lteOnCdmaDevice", "1");
         property_set("ro.telephony.default_network", "8");
