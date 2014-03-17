@@ -99,7 +99,7 @@ void vendor_load_properties()
         property_set("ro.telephony.ril.v3", "newDriverCallU");
         property_set("telephony.lteOnCdmaDevice", "1");
         property_set("ro.telephony.default_network", "8");
-        property_set("telephony.sms.pseudo_multipart", "1");
+        property_set("ro.gps.set_privacy", "1");
     } else if (strstr(bootloader, "M919")) {
         /* jfltetmo */
         property_set("ro.build.fingerprint", "samsung/jfltetmo/jfltetmo:4.3/JSS15J/M919UVUEMK2:user/release-keys");
