@@ -105,10 +105,11 @@ void vendor_load_properties()
         property_set("ro.gps.set_privacy", "1");
     } else if (strstr(bootloader, "M919")) {
         /* jfltetmo */
-        property_set("ro.build.fingerprint", "samsung/jfltetmo/jfltetmo:4.3/JSS15J/M919UVUEMK2:user/release-keys");
+        property_set("ro.build.fingerprint", "samsung/jfltetmo/jfltetmo:4.4.2/KOT49H/M919UVUFNB4:user/release-keys");
         property_set("ro.build.description", "jfltetmo-user 4.3 JSS15J M919UVUEMK2 release-keys");
         property_set("ro.product.model", "SGH-M919");
         property_set("ro.product.device", "jfltetmo");
+        property_set("ro.telephony.ril.v3", "newDriverCallU,newDialCode");
         property_set("telephony.lteOnGsmDevice", "1");
         property_set("ro.telephony.default_network", "9");
     } else if (strstr(bootloader, "R970")) {
