@@ -56,10 +56,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gps.msm8960
 
-GPS_CONF := device/samsung/jflte/gps/gps.conf
+GPS_CONF := device/samsung/jflte/gps/etc/gps.conf
 
 PRODUCT_COPY_FILES += \
-    $(GPS_CONF):/system/etc/gps.conf
+    $(GPS_CONF):/system/etc/gps.conf \
+    device/samsung/jflte/gps/etc/sap.conf:/system/etc/sap.conf
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -188,6 +189,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.rild.nitz_short_ons_3="" \
     ro.telephony.ril.v3=newDriverCall \
     dalvik.vm.dexopt-data-only=0
+
+# GPS
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.gps.qc_nlp_in_use=0 \
+    ro.gps.agps_provider=1 \
+    ro.qc.sdk.izat.premium_enabled=1 \
+    ro.qc.sdk.izat.service_mask=0x0
 
 # call common msm8960
 $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)

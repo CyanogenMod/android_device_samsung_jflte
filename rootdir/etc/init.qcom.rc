@@ -251,7 +251,7 @@ on post-fs-data
     mkdir /data/wiper 0755 location qcom_oncrpc
 
     #Create directories for gpsone_daemon services
-    mkdir /data/misc/gpsone_d 0770 system system
+    mkdir /data/misc/gpsone_d 0770 system gps
 
     #Create directories for QuIPS
     mkdir /data/misc/quipc 0770 gps system
