@@ -82,6 +82,9 @@ COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 HAVE_ADRENO_SOURCE := false
 
+# The "new" GPS is really the old GPS, override it.
+BOARD_HAVE_NEW_QC_GPS :=
+
 # NFC
 BOARD_NFC_HAL_SUFFIX := msm8960
 

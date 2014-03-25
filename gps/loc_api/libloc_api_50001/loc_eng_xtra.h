@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2009,2011 The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -9,7 +9,7 @@
  *       copyright notice, this list of conditions and the following
  *       disclaimer in the documentation and/or other materials provided
  *       with the distribution.
- *     * Neither the name of The Linux Foundation, nor the names of its
+ *     * Neither the name of The Linux Foundation nor the names of its
  *       contributors may be used to endorse or promote products derived
  *       from this software without specific prior written permission.
  *
@@ -27,42 +27,21 @@
  *
  */
 
-#ifndef LOC_LOG_H
-#define LOC_LOG_H
+#ifndef LOC_ENG_XTRA_H
+#define LOC_ENG_XTRA_H
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
+#include "hardware/gps.h"
 
-#include <ctype.h>
-#include "loc_target.h"
-
+// Module data
 typedef struct
 {
-   char                 name[128];
-   long                 val;
-} loc_name_val_s_type;
+   // loc_eng_ioctl_cb_data_s_type   ioctl_cb_data;
+   gps_xtra_download_request      download_request_cb;
+   report_xtra_server             report_xtra_server_cb;
 
-#define NAME_VAL(x) {"" #x "", x }
+   // XTRA data buffer
+   char                          *xtra_data_for_injection;  // NULL if no pending data
+   int                            xtra_data_len;
+} loc_eng_xtra_data_s_type;
 
-#define UNKNOWN_STR "UNKNOWN"
-
-#define CHECK_MASK(type, value, mask_var, mask) \
-   ((mask_var & mask) ? (type) value : (type) (-1))
-
-/* Get names from value */
-const char* loc_get_name_from_mask(loc_name_val_s_type table[], int table_size, long mask);
-const char* loc_get_name_from_val(loc_name_val_s_type table[], int table_size, long value);
-const char* loc_get_msg_q_status(int status);
-const char* loc_get_target_name(unsigned int target);
-
-extern const char* log_succ_fail_string(int is_succ);
-
-extern char *loc_get_time(char *time_string, unsigned long buf_size);
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* LOC_LOG_H */
+#endif // LOC_ENG_XTRA_H
