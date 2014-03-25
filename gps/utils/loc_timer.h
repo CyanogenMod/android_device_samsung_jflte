@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2013, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -27,42 +27,37 @@
  *
  */
 
-#ifndef LOC_LOG_H
-#define LOC_LOG_H
+#ifndef __LOC_DELAY_H__
+#define __LOC_DELAY_H__
 
 #ifdef __cplusplus
-extern "C"
-{
-#endif
+extern "C" {
+#endif /* __cplusplus */
+#include<pthread.h>
+#include "log_util.h"
 
-#include <ctype.h>
-#include "loc_target.h"
+/*
+  Return values:
+  Success = 0
+  Failure = Non zero
+*/
+typedef void(*loc_timer_callback)(void *user_data, int result);
 
-typedef struct
-{
-   char                 name[128];
-   long                 val;
-} loc_name_val_s_type;
 
-#define NAME_VAL(x) {"" #x "", x }
+/*
+  Returns the handle, which can be used to stop the timer
+*/
+void* loc_timer_start(unsigned int delay_msec,
+                      loc_timer_callback,
+                      void* user_data);
 
-#define UNKNOWN_STR "UNKNOWN"
-
-#define CHECK_MASK(type, value, mask_var, mask) \
-   ((mask_var & mask) ? (type) value : (type) (-1))
-
-/* Get names from value */
-const char* loc_get_name_from_mask(loc_name_val_s_type table[], int table_size, long mask);
-const char* loc_get_name_from_val(loc_name_val_s_type table[], int table_size, long value);
-const char* loc_get_msg_q_status(int status);
-const char* loc_get_target_name(unsigned int target);
-
-extern const char* log_succ_fail_string(int is_succ);
-
-extern char *loc_get_time(char *time_string, unsigned long buf_size);
+/*
+  handle becomes invalid upon the return of the callback
+*/
+void loc_timer_stop(void* handle);
 
 #ifdef __cplusplus
 }
-#endif
+#endif /* __cplusplus */
 
-#endif /* LOC_LOG_H */
+#endif //__LOC_DELAY_H__
