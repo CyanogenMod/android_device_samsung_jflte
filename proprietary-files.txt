@@ -90,8 +90,12 @@ lib/libqmi_client_qmux.so
 lib/libreference-ril.so
 lib/libril-qcril-hook-oem.so
 lib/libsecril-client.so
-blobs/cdma/lib/libril-qc-qmi-1.so
-blobs/cdma/lib/libril.so
+blobs/r970/lib/libril-qc-qmi-1.so
+blobs/r970/lib/libril.so
+blobs/spr/lib/libril-qc-qmi-1.so
+blobs/spr/lib/libril.so
+blobs/vzw/lib/libril-qc-qmi-1.so
+blobs/vzw/lib/libril.so
 blobs/gsm/lib/libril-qc-qmi-1.so
 blobs/gsm/lib/libril.so
 
