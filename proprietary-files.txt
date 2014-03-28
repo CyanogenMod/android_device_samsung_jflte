@@ -28,7 +28,7 @@ lib/libmm-abl-oem.so:vendor/lib/libmm-abl-oem.so
 lib/libExtendedExtractor.so:vendor/lib/libExtendedExtractor.so
 lib/libmmparser.so:vendor/lib/libmmparser.so
 lib/libmmosal.so:vendor/lib/libmmosal.so
-lib/libDivxDrm.so:vendor/lib/libDivxDrm.so
+lib/libdivxdrm.so:vendor/lib/libdivxdrm.so
 
 # Adreno GPU
 vendor/lib/egl/eglsubAndroid.so
@@ -64,39 +64,34 @@ lib/libI420colorconvert.so:vendor/lib/libI420colorconvert.so
 bin/ds_fmc_appd
 bin/efsks
 bin/ks
-bin/netmgrd
 bin/qcks
 bin/qmiproxy
 bin/qmuxd
 bin/radish
 bin/rild
 bin/rmt_storage
-bin/sec-ril
 lib/libatparser.so
-lib/libdsutils.so
-lib/libdsi_netctrl.so
 lib/libfactoryutil.so
-lib/libidl.so
-lib/libnetmgr.so
 lib/libomission_avoidance.so
-lib/libqdi.so
-lib/libqdp.so
-lib/libqmi.so
-lib/libqmiservices.so
-lib/libqcci_legacy.so
-lib/libqmi_client_qmux.so
 lib/libreference-ril.so
-lib/libril-qcril-hook-oem.so
 lib/libsecril-client.so
-blobs/cdma/lib/libril-qc-qmi-1.so
+blobs/cdma/lib/libsec-ril.so
 blobs/cdma/lib/libril.so
-blobs/gsm/lib/libril-qc-qmi-1.so
+blobs/gsm/lib/libsec-ril.so
 blobs/gsm/lib/libril.so
 vendor/lib/libdiag.so
+vendor/lib/libdsutils.so
+vendor/lib/libidl.so
+vendor/lib/libnetmgr.so
+vendor/lib/libqmi.so
+vendor/lib/libqmiservices.so
+vendor/lib/libqcci_legacy.so
 vendor/lib/libqmi_cci.so
+vendor/lib/libqmi_client_qmux.so
 vendor/lib/libqmi_common_so.so
 vendor/lib/libqmi_csi.so
 vendor/lib/libqmi_encdec.so
+vendor/lib/libril-qcril-hook-oem.so
 
 # Time services
 bin/time_daemon
@@ -120,7 +115,7 @@ cameradata/RS_M10MO_SL.bin
 cameradata/RS_M10MO_SS.bin
 cameradata/datapattern_420sp.yuv
 cameradata/datapattern_front_420sp.yuv
-lib/hw/camera.vendor.msm8960.so
+lib/hw/camera.msm8960.so:lib/hw/camera.vendor.msm8960.so
 lib/libadsprpc.so
 lib/libchromatix_imx074_default_video.so
 lib/libchromatix_imx074_preview.so
@@ -212,13 +207,12 @@ blobs/vzw/etc/firmware/q6.mdt
 bin/insthk
 etc/srm.bin
 lib/libhdcp2.so
-lib/libstagefright_hdcp.so
 
 # Widevine
 lib/drm/libdrmwvmplugin.so:vendor/lib/drm/libdrmwvmplugin.so
 lib/libwvm.so:vendor/lib/libwvm.so
-vendor/lib/libwvdrm_L1.so
-vendor/lib/libWVStreamControlAPI_L1.so
+lib/libwvdrm_L1.so:vendor/lib/libwvdrm_L1.so
+lib/libWVStreamControlAPI_L1.so:vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
 # IPC router security
