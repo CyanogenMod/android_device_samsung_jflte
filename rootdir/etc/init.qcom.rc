@@ -254,6 +254,10 @@ on post-fs-data
 
     # torch
     chmod 0666 /sys/class/leds/torch-sec1/brightness
+
+    chown system system /sys/class/sec/sec_touchkey/keypad_enable
+    chmod 0660 /sys/class/sec/sec_touchkey/keypad_enable
+
     chown system camera /sys/class/leds/torch-sec1/brightness
 
     #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
