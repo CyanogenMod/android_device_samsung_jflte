@@ -186,6 +186,17 @@ etc/wifi/bcmdhd_sta.bin_a0
 etc/wifi/cred.conf
 etc/wifi/nvram_mfg.txt
 etc/wifi/nvram_net.txt
+etc/wifi/nvram_net.txt_a0
+etc/wifi/nvram_net.txt:etc/wifi/nvram_net.txt_murata
+etc/wifi/nvram_net.txt_murata_a0
+etc/wifi/nvram_net.txt_muratafem1
+etc/wifi/nvram_net.txt_muratafem2
+etc/wifi/nvram_net.txt_semco3rd
+etc/wifi/nvram_net.txt_semco3rd_a0
+etc/wifi/nvram_net.txt_semcosh
+
+# Perf
+lib/libqc-opt.so
 
 # DRM
 bin/qseecomd
