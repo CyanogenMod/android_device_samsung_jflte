@@ -36,10 +36,6 @@ TARGET_KERNEL_SELINUX_CONFIG := jfselinux_defconfig
 
 TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 
-# WiFi module
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
-WIFI_DRIVER_MODULE_NAME := "dhd"
-
 # QCOM
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_USES_QCOM_BSP := true
