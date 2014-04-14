@@ -196,3 +196,6 @@ WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 BOARD_VOLD_MAX_PARTITIONS := 28
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
+
+# cmhw
+BOARD_HARDWARE_CLASS += device/samsung/jflte/cmhw/ 
