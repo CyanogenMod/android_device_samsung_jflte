@@ -117,3 +117,6 @@ TARGET_KERNEL_CONFIG         := jf_eur_defconfig
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := device/samsung/jflte/releasetools
+
+# cmhw
+BOARD_HARDWARE_CLASS += device/samsung/jflte/cmhw/
