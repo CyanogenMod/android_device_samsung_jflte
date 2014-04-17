@@ -83,7 +83,7 @@ on post-fs-data
     mkdir /efs/wifi 0775 system system
 
     # Permission for fast dormacy for RIL
-    chown system radio /sys/devices/virtual/sec/bamdmux/waketime
+    chown system radio /sys/devices/virtual/sec/mdm_hsic_pm/waketime
 
     # for TRP/TIS
     write /data/.psm.info 1
@@ -127,9 +127,6 @@ on post-fs-data
 
     chown radio system /sys/class/sec/sec_touchkey/touch_sensitivity
     chown radio system /sys/class/sec/sec_touchkey/touchkey_firm_update
-    chown radio system /sys/class/sec/sec_touchscreen/set_tsp_for_inputmethod
-    chown system radio /sys/class/sec/tsp_noise_test/disp_all_deltadata
-    chown system radio /sys/class/sec/tsp_noise_test/disp_all_refdata
     chown system radio /sys/class/sec/tsp/cmd
     chown radio system /sys/class/lcd/panel/power_reduce
     chown radio system /sys/class/lcd/panel/gamma_mode
@@ -393,11 +390,6 @@ service kickstart /system/bin/qcks -i /firmware-mdm/image/
     oneshot
     disabled
 
-service mdm_helper /system/bin/mdm_helper
-    class main
-    onrestart setprop ro.service.mdm_helper_restarted "true"
-    disabled
-
 service qrngd /system/bin/qrngd -f
     class main
     user root
@@ -412,11 +404,6 @@ service qseecomd /system/bin/qseecomd
 on property:ro.baseband=mdm
     mkdir /data/qcks 0770 system system
     start kickstart
-
-# Start up mdm_helper if sglte detected
-on property:ro.baseband=sglte
-    mkdir /data/misc/mdmhelperdata 0700
-    start mdm_helper
 
 service time_daemon /system/bin/time_daemon
    class late_start
