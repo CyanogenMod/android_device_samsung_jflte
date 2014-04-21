@@ -97,6 +97,8 @@ void vendor_load_properties()
         property_set("ro.build.description", "jflteusc-user 4.2.2 JDQ39 R970VXUAMD9 release-keys");
         property_set("ro.product.model", "SCH-R970");
         property_set("ro.product.device", "jflteusc");
+        property_set("ro.cdma.home.operator.alpha", "U.S.Cellular");
+        property_set("ro.cdma.home.operator.numeric", "311580");
     } else if (strstr(bootloader, "I545")) {
         /* jfltevzw */
         cdma_properties("0");
