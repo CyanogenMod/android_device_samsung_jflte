@@ -78,6 +78,7 @@ void vendor_load_properties()
         property_set("ro.build.description", "jfltecsp-user 4.2.2 JDQ39 R970XWWUAMFA release-keys");
         property_set("ro.product.model", "SCH-R970X");
         property_set("ro.product.device", "jfltecsp");
+        property_set("telephony.sms.pseudo_multipart", "1");
     } else if (strstr(bootloader, "L720")) {
         /* jfltespr */
         cdma_properties("1");
@@ -85,6 +86,7 @@ void vendor_load_properties()
         property_set("ro.build.description", "jfltespr-user 4.2.2 JDQ39 L720VPUAMDL release-keys");
         property_set("ro.product.model", "SPH-L720");
         property_set("ro.product.device", "jfltespr");
+        property_set("telephony.sms.pseudo_multipart", "1");
     } else if (strstr(bootloader, "M919")) {
         /* jfltetmo */
         property_set("ro.build.fingerprint", "samsung/jfltetmo/jfltetmo:4.3/JSS15J/M919UVUEMK2:user/release-keys");
@@ -100,6 +102,7 @@ void vendor_load_properties()
         property_set("ro.product.device", "jflteusc");
         property_set("ro.cdma.home.operator.alpha", "U.S.Cellular");
         property_set("ro.cdma.home.operator.numeric", "311580");
+        property_set("telephony.sms.pseudo_multipart", "1");
     } else if (strstr(bootloader, "I545")) {
         /* jfltevzw */
         cdma_properties("0");
