@@ -138,4 +138,5 @@ void cdma_properties(char cdma_sub[])
     property_set("ro.telephony.default_cdma_sub", cdma_sub); // 0: RUIM/SIM  1: NV
     property_set("ro.gps.set_privacy", "1");
     property_set("ro.telephony.ril.v3", "newDriverCallU");
+    property_set("telephony.lteOnCdmaDevice", "1");
 }
