@@ -47,10 +47,11 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>15</item>
-        <item>150</item>
-        <item>1000</item>
-        <item>5000</item>
+        <item>40</item>
+        <item>200</item>
+        <item>450</item>
+        <item>1400</item>
+        <item>2000</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -58,10 +59,11 @@
          than the size of the config_autoBrightnessLevels array.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>20</item>
-        <item>80</item>
-        <item>130</item>
-        <item>190</item>
+        <item>15</item>
+        <item>30</item>
+        <item>55</item>
+        <item>90</item>
+        <item>255</item>
         <item>255</item>
     </integer-array>
 
@@ -72,9 +74,10 @@
     <integer-array name="config_autoBrightnessButtonBacklightValues">
         <item>1</item>
         <item>1</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
     </integer-array>
 
     <!-- An Array of "[ConnectivityManager connectionType],
