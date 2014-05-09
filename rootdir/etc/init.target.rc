@@ -260,6 +260,7 @@ service thermal-engine /system/bin/thermal-engine
 
 service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
     user root
+    group root system
     disabled
 
 service kickstart /system/bin/qcks -i /firmware-mdm/image/
