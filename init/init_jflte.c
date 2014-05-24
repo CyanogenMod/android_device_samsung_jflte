@@ -130,6 +130,13 @@ void vendor_load_properties()
         property_set("ro.build.description", "jfltexx-user 4.2.2 JDQ39 I9505XXUAMDE release-keys");
         property_set("ro.product.model", "GT-I9505");
         property_set("ro.product.device", "jfltexx");
+    } else if (strstr(bootloader, "I9507")) {
+        /* jftddxx */
+        gsm_properties();
+        property_set("ro.build.fingerprint", "samsung/jftddxx/jftdd:4.3/JSS15J/I9507XXUENB5:user/release-keys");
+        property_set("ro.build.description", "jftddxx-user 4.3 JSS15J I9507XXUENB5 release-keys");
+        property_set("ro.product.model", "GT-I9507");
+        property_set("ro.product.device", "jftddxx");
     } else if (strstr(bootloader, "I9508")) {
         /* jfltezm */
         gsm_properties();
