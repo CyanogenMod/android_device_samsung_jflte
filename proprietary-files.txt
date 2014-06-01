@@ -26,13 +26,14 @@ lib/libdivxdrm.so
 
 # Adreno GPU (Available on Nexus 4)
 lib/libadreno_utils.so
-lib/libCB.so
+vendor/lib/libCB.so
 
 vendor/lib/egl/eglsubAndroid.so
 vendor/lib/egl/libEGL_adreno.so
 vendor/lib/egl/libGLESv1_CM_adreno.so
 vendor/lib/egl/libGLESv2_adreno.so
 vendor/lib/egl/libGLESv2S3D_adreno.so
+vendor/lib/egl/libplayback_adreno.so
 vendor/lib/egl/libq3dtools_adreno.so
 
 vendor/lib/libC2D2.so
@@ -44,7 +45,7 @@ vendor/lib/libadreno_utils.so
 vendor/lib/libc2d30-a3xx.so
 vendor/lib/libc2d30.so
 vendor/lib/libgsl.so
-vendor/lib/libllvm-a3xx.so
+vendor/lib/libllvm-qcom.so
 vendor/lib/libqc-opt.so
 vendor/lib/librs_adreno.so
 vendor/lib/librs_adreno_sha1.so
