@@ -65,6 +65,7 @@ void vendor_load_properties()
         property_set("ro.product.model", "SAMSUNG-SGH-I337");
         property_set("ro.build.fingerprint", "samsung/jflteuc/jflteatt:4.4.2/KOT49H/I337UCUFNB1:user/release-keys");
         property_set("ro.build.description", "jflteuc-user 4.4.2 KOT49H I337UCUFNB1 release-keys");
+        property_set("ro.disable.recovery.updater", "1");
     } else if (strstr(bootloader, "R970C")) {
         /* jfltecri */
         cdma_properties("0");
@@ -116,6 +117,7 @@ void vendor_load_properties()
         property_set("ro.product.device", "jfltevzw");
         property_set("ro.cdma.home.operator.alpha", "Verizon");
         property_set("ro.cdma.home.operator.numeric", "311480");
+        property_set("ro.disable.recovery.updater", "1");
     } else if (strstr(bootloader, "I9505G")) {
         /* jgedlte */
         gsm_properties();
