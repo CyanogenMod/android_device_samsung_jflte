@@ -122,3 +122,4 @@ TARGET_KERNEL_CONFIG         := jf_eur_defconfig
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := device/samsung/jflte/releasetools
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/samsung/jflte/releasetools/jflte_ota_from_target_files
