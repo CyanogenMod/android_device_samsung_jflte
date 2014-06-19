@@ -49,6 +49,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     loki_tool \
     loki.sh \
+    recovery-transform.sh \
     loki_bootloaders
 
 # GPS
