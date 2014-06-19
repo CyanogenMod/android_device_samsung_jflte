@@ -2,12 +2,13 @@
  * loki_patch
  *
  * A utility to patch unsigned boot and recovery images to make
- * them suitable for booting on the AT&T and Verizon Samsung
- * Galaxy S4
+ * them suitable for booting on the AT&T/Verizon Samsung
+ * Galaxy S4, Galaxy Stellar, and various locked LG devices
  *
  * by Dan Rosenberg (@djrbliss)
  *
  */
+
 #include <stdio.h>
 #include <fcntl.h>
 #include <sys/mman.h>
@@ -15,133 +16,424 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-#define VERSION "1.3"
-
-#define BOOT_MAGIC_SIZE 8
-#define BOOT_NAME_SIZE 16
-#define BOOT_ARGS_SIZE 512
-
-struct boot_img_hdr
-{
-	unsigned char magic[BOOT_MAGIC_SIZE];
-	unsigned kernel_size;	/* size in bytes */
-	unsigned kernel_addr;	/* physical load addr */
-	unsigned ramdisk_size;	/* size in bytes */
-	unsigned ramdisk_addr;	/* physical load addr */
-	unsigned second_size;	/* size in bytes */
-	unsigned second_addr;	/* physical load addr */
-	unsigned tags_addr;		/* physical addr for kernel tags */
-	unsigned page_size;		/* flash page size we assume */
-	unsigned dt_size;		/* device_tree in bytes */
-	unsigned unused;		/* future expansion: should be 0 */
-	unsigned char name[BOOT_NAME_SIZE];	/* asciiz product name */
-	unsigned char cmdline[BOOT_ARGS_SIZE];
-	unsigned id[8];			/* timestamp / checksum / sha1 / etc */
-};
-
-struct loki_hdr
-{
-	unsigned char magic[4];		/* 0x494b4f4c */
-	unsigned int recovery;		/* 0 = boot.img, 1 = recovery.img */
-	unsigned char build[128];	/* Build number */
-};
+#include "loki.h"
 
 struct target {
 	char *vendor;
+	char *device;
 	char *build;
 	unsigned long check_sigs;
 	unsigned long hdr;
+	int lg;
 };
 
 struct target targets[] = {
 	{
 		.vendor = "AT&T",
+		.device = "Samsung Galaxy S4",
 		.build = "JDQ39.I337UCUAMDB or JDQ39.I337UCUAMDL",
 		.check_sigs = 0x88e0ff98,
 		.hdr = 0x88f3bafc,
+		.lg = 0,
 	},
 	{
 		.vendor = "Verizon",
+		.device = "Samsung Galaxy S4",
 		.build = "JDQ39.I545VRUAMDK",
 		.check_sigs = 0x88e0fe98,
 		.hdr = 0x88f372fc,
+		.lg = 0,
 	},
 	{
 		.vendor = "DoCoMo",
+		.device = "Samsung Galaxy S4",
 		.build = "JDQ39.SC04EOMUAMDI",
 		.check_sigs = 0x88e0fcd8,
 		.hdr = 0x88f0b2fc,
+		.lg = 0,
 	},
 	{
 		.vendor = "Verizon",
+		.device = "Samsung Galaxy Stellar",
 		.build = "IMM76D.I200VRALH2",
 		.check_sigs = 0x88e0f5c0,
 		.hdr = 0x88ed32e0,
+		.lg = 0,
 	},
 	{
 		.vendor = "Verizon",
+		.device = "Samsung Galaxy Stellar",
 		.build = "JZO54K.I200VRBMA1",
 		.check_sigs = 0x88e101ac,
 		.hdr = 0x88ed72e0,
-	}
+		.lg = 0,
+	},
+	{
+		.vendor = "DoCoMo",
+		.device = "LG Optimus G",
+		.build = "L01E20b",
+		.check_sigs = 0x88F10E48,
+		.hdr = 0x88F54418,
+		.lg = 1,
+	},
+	{
+		.vendor = "DoCoMo",
+		.device = "LG Optimus G Pro",
+		.build = "L04E10f",
+		.check_sigs = 0x88f1102c,
+		.hdr = 0x88f54418,
+		.lg = 1,
+	},
+	{
+		.vendor = "AT&T or HK",
+		.device = "LG Optimus G Pro",
+		.build = "E98010g or E98810b",
+		.check_sigs = 0x88f11084,
+		.hdr = 0x88f54418,
+		.lg = 1,
+	},
+	{
+		.vendor = "KT, LGU, or SKT",
+		.device = "LG Optimus G Pro",
+		.build = "F240K10o, F240L10v, or F240S10w",
+		.check_sigs = 0x88f110b8,
+		.hdr = 0x88f54418,
+		.lg = 1,
+	},
+	{
+		.vendor = "KT, LGU, or SKT",
+		.device = "LG Optimus LTE 2",
+		.build = "F160K20g, F160L20f, F160LV20d, or F160S20f",
+		.check_sigs = 0x88f10864,
+		.hdr = 0x88f802b8,
+		.lg = 1,
+	},
+	{
+		.vendor = "MetroPCS",
+		.device = "LG Spirit",
+		.build = "MS87010a_05",
+		.check_sigs = 0x88f0e634,
+		.hdr = 0x88f68194,
+		.lg = 1,
+	},
+	{
+		.vendor = "MetroPCS",
+		.device = "LG Motion",
+		.build = "MS77010f_01",
+		.check_sigs = 0x88f1015c,
+		.hdr = 0x88f58194,
+		.lg = 1,
+	},
+	{
+		.vendor = "Verizon",
+		.device = "LG Lucid 2",
+		.build = "VS87010B_12",
+		.check_sigs = 0x88f10adc,
+		.hdr = 0x88f702bc,
+		.lg = 1,
+	},
+	{
+		.vendor = "Verizon",
+		.device = "LG Spectrum 2",
+		.build = "VS93021B_05",
+		.check_sigs = 0x88f10c10,
+		.hdr = 0x88f84514,
+		.lg = 1,
+	},
+	{
+		.vendor = "Boost Mobile",
+		.device = "LG Optimus F7",
+		.build = "LG870ZV4_06",
+		.check_sigs = 0x88f11714,
+		.hdr = 0x88f842ac,
+		.lg = 1,
+	},
+	{
+		.vendor = "US Cellular",
+		.device = "LG Optimus F7",
+		.build = "US78011a",
+		.check_sigs = 0x88f112c8,
+		.hdr = 0x88f84518,
+		.lg = 1,
+	},
+	{
+		.vendor = "Sprint",
+		.device = "LG Optimus F7",
+		.build = "LG870ZV5_02",
+		.check_sigs = 0x88f11710,
+		.hdr = 0x88f842a8,
+		.lg = 1,
+	},
+	{
+		.vendor = "Virgin Mobile",
+		.device = "LG Optimus F3",
+		.build = "LS720ZV5",
+		.check_sigs = 0x88f108f0,
+		.hdr = 0x88f854f4,
+		.lg = 1,
+	},
+	{
+		.vendor = "T-Mobile and MetroPCS",
+		.device = "LG Optimus F3",
+		.build = "LS720ZV5",
+		.check_sigs = 0x88f10264,
+		.hdr = 0x88f64508,
+		.lg = 1,
+	},
+	{
+		.vendor = "AT&T",
+		.device = "LG G2",
+		.build = "D80010d",
+		.check_sigs = 0xf8132ac,
+		.hdr = 0xf906440,
+		.lg = 1,
+	},
+	{
+		.vendor = "Verizon",
+		.device = "LG G2",
+		.build = "VS98010b",
+		.check_sigs = 0xf8131f0,
+		.hdr = 0xf906440,
+		.lg = 1,
+	},
+	{
+		.vendor = "AT&T",
+		.device = "LG G2",
+		.build = "D80010o",
+		.check_sigs = 0xf813428,
+		.hdr = 0xf904400,
+		.lg = 1,
+	},
+	{
+		.vendor = "Verizon",
+		.device = "LG G2",
+		.build = "VS98012b",
+		.check_sigs = 0xf813210,
+		.hdr = 0xf906440,
+		.lg = 1,
+	},
+	{
+		.vendor = "T-Mobile or Canada",
+		.device = "LG G2",
+		.build = "D80110c or D803",
+		.check_sigs = 0xf813294,
+		.hdr = 0xf906440,
+		.lg = 1,
+	},
+	{
+		.vendor = "International",
+		.device = "LG G2",
+		.build = "D802b",
+		.check_sigs = 0xf813a70,
+		.hdr = 0xf9041c0,
+		.lg = 1,
+	},
+	{
+		.vendor = "Sprint",
+		.device = "LG G2",
+		.build = "LS980ZV7",
+		.check_sigs = 0xf813460,
+		.hdr = 0xf9041c0,
+		.lg = 1,
+	},
+	{
+		.vendor = "KT or LGU",
+		.device = "LG G2",
+		.build = "F320K, F320L",
+		.check_sigs = 0xf81346c,
+		.hdr = 0xf8de440,
+		.lg = 1,
+	},
+	{
+		.vendor = "SKT",
+		.device = "LG G2",
+		.build = "F320S",
+		.check_sigs = 0xf8132e4,
+		.hdr = 0xf8ee440,
+		.lg = 1,
+	},
+	{
+		.vendor = "SKT",
+		.device = "LG G2",
+		.build = "F320S11c",
+		.check_sigs = 0xf813470,
+		.hdr = 0xf8de440,
+		.lg = 1,
+	},
+	{
+		.vendor = "DoCoMo",
+		.device = "LG G2",
+		.build = "L-01F",
+		.check_sigs = 0xf813538,
+		.hdr = 0xf8d41c0,
+		.lg = 1,
+	},
+	{
+		.vendor = "KT",
+		.device = "LG G Flex",
+		.build = "F340K",
+		.check_sigs = 0xf8124a4,
+		.hdr = 0xf8b6440,
+		.lg = 1,
+	},
+	{
+		.vendor = "KDDI",
+		.device = "LG G Flex",
+		.build = "LGL2310d",
+		.check_sigs = 0xf81261c,
+		.hdr = 0xf8b41c0,
+		.lg = 1,
+	},
+	{
+		.vendor = "International",
+		.device = "LG Optimus F5",
+		.build = "P87510e",
+		.check_sigs = 0x88f10a9c,
+		.hdr = 0x88f702b8,
+		.lg = 1,
+	},
+	{
+		.vendor = "SKT",
+		.device = "LG Optimus LTE 3",
+		.build = "F260S10l",
+		.check_sigs = 0x88f11398,
+		.hdr = 0x88f8451c,
+		.lg = 1,
+	},
+	{
+		.vendor = "International",
+		.device = "LG G Pad 8.3",
+		.build = "V50010a",
+		.check_sigs = 0x88f10814,
+		.hdr = 0x88f801b8,
+		.lg = 1,
+	},
+	{
+		.vendor = "International",
+		.device = "LG G Pad 8.3",
+		.build = "V50010c or V50010e",
+		.check_sigs = 0x88f108bc,
+		.hdr = 0x88f801b8,
+		.lg = 1,
+	},
+	{
+                .vendor = "Verizon",
+                .device = "LG G Pad 8.3",
+                .build = "VK81010c",
+                .check_sigs = 0x88f11080,
+                .hdr = 0x88fd81b8,
+                .lg = 1,
+        },
+	{
+		.vendor = "International",
+		.device = "LG Optimus L9 II",
+		.build = "D60510a",
+		.check_sigs = 0x88f10d98,
+		.hdr = 0x88f84aa4,
+		.lg = 1,
+	},
+	{
+		.vendor = "MetroPCS",
+		.device = "LG Optimus F6",
+		.build = "MS50010e",
+		.check_sigs = 0x88f10260,
+		.hdr = 0x88f70508,
+		.lg = 1,
+	},
+	{
+		.vendor = "Open EU",
+		.device = "LG Optimus F6",
+		.build = "D50510a",
+		.check_sigs = 0x88f10284,
+		.hdr = 0x88f70aa4,
+		.lg = 1,
+	},
+	{
+		.vendor = "KDDI",
+		.device = "LG Isai",
+		.build = "LGL22",
+		.check_sigs = 0xf813458,
+		.hdr = 0xf8d41c0,
+		.lg = 1,
+	},
+	{
+		.vendor = "KDDI",
+		.device = "LG",
+		.build = "LGL21",
+		.check_sigs = 0x88f10218,
+		.hdr = 0x88f50198,
+		.lg = 1,
+	},
+	{
+		.vendor = "KT",
+		.device = "LG Optimus GK",
+		.build = "F220K",
+		.check_sigs = 0x88f11034,
+		.hdr = 0x88f54418,
+		.lg = 1,
+	},
+	{
+		.vendor = "International",
+		.device = "LG Vu 3",
+		.build = "F300L",
+		.check_sigs = 0xf813170,
+		.hdr = 0xf8d2440,
+		.lg = 1,
+	},
+	{
+		.vendor = "Sprint",
+		.device = "LG Viper",
+		.build = "LS840ZVK",
+		.check_sigs = 0x4010fe18,
+		.hdr = 0x40194198,
+		.lg = 1,
+	},
+	{
+		.vendor = "International",
+		.device = "LG G Flex",
+		.build = "D95510a",
+		.check_sigs = 0xf812490,
+		.hdr = 0xf8c2440,
+		.lg = 1,
+	},
 };
 
-#define PATTERN1 "\xf0\xb5\x8f\xb0\x06\x46\xf0\xf7"
-#define PATTERN2 "\xf0\xb5\x8f\xb0\x07\x46\xf0\xf7"
-#define PATTERN3 "\x2d\xe9\xf0\x41\x86\xb0\xf1\xf7"
-#define ABOOT_BASE 0x88dfffd8
+static unsigned char patch[] = PATCH;
 
-unsigned char patch[] =
-"\xfe\xb5"
-"\x0b\x4d"
-"\xa8\x6a"
-"\xab\x68"
-"\x98\x42"
-"\x0e\xd0"
-"\xee\x69"
-"\x09\x4c"
-"\xef\x6a"
-"\x07\xf5\x80\x57"
-"\x0f\xce"
-"\x0f\xc4"
-"\x10\x3f"
-"\xfb\xdc"
-"\xa8\x6a"
-"\x04\x49"
-"\xea\x6a"
-"\xa8\x60"
-"\x69\x61"
-"\x2a\x61"
-"\x00\x20"
-"\xfe\xbd"
-"\x00\x00"
-"\xff\xff\xff\xff"		/* Replace with header address */
-"\x00\x00\x20\x82";
-
-int patch_shellcode(unsigned int addr)
+int patch_shellcode(unsigned int header, unsigned int ramdisk)
 {
 
-	int i;
+	unsigned int i;
+	int found_header, found_ramdisk;
 	unsigned int *ptr;
+
+	found_header = 0;
+	found_ramdisk = 0;
 
 	for (i = 0; i < sizeof(patch); i++) {
 		ptr = (unsigned int *)&patch[i];
 		if (*ptr == 0xffffffff) {
-			*ptr = addr;
-			return 0;
+			*ptr = header;
+			found_header = 1;
+		}
+
+		if (*ptr == 0xeeeeeeee) {
+			*ptr = ramdisk;
+			found_ramdisk = 1;
 		}
 	}
+
+	if (found_header && found_ramdisk)
+		return 0;
 
 	return -1;
 }
 
-int main(int argc, char **argv)
+int loki_patch(const char* partition_label, const char* aboot_image, const char* in_image, const char* out_image)
 {
-
-	int ifd, ofd, aboot_fd, pos, i, recovery, offset;
+	int ifd, ofd, aboot_fd, pos, i, recovery, offset, fake_size;
 	unsigned int orig_ramdisk_size, orig_kernel_size, page_kernel_size, page_ramdisk_size, page_size, page_mask;
-	unsigned long target;
+	unsigned long target, aboot_base;
 	void *orig, *aboot, *ptr;
 	struct target *tgt;
 	struct stat st;
@@ -149,16 +441,9 @@ int main(int argc, char **argv)
 	struct loki_hdr *loki_hdr;
 	char *buf;
 
-	if (argc != 5) {
-		printf("Usage: %s [boot|recovery] [aboot.img] [in.img] [out.lok]\n", argv[0]);
-		return 1;
-	}
-
-	printf("[+] loki_patch v%s\n", VERSION);
-
-	if (!strcmp(argv[1], "boot")) {
+	if (!strcmp(partition_label, "boot")) {
 		recovery = 0;
-	} else if (!strcmp(argv[1], "recovery")) {
+	} else if (!strcmp(partition_label, "recovery")) {
 		recovery = 1;
 	} else {
 		printf("[+] First argument must be \"boot\" or \"recovery\".\n");
@@ -166,21 +451,21 @@ int main(int argc, char **argv)
 	}
 
 	/* Open input files */
-	aboot_fd = open(argv[2], O_RDONLY);
+	aboot_fd = open(aboot_image, O_RDONLY);
 	if (aboot_fd < 0) {
-		printf("[-] Failed to open %s for reading.\n", argv[2]);
+		printf("[-] Failed to open %s for reading.\n", aboot_image);
 		return 1;
 	}
 
-	ifd = open(argv[3], O_RDONLY);
+	ifd = open(in_image, O_RDONLY);
 	if (ifd < 0) {
-		printf("[-] Failed to open %s for reading.\n", argv[3]);
+		printf("[-] Failed to open %s for reading.\n", in_image);
 		return 1;
 	}
 
-	ofd = open(argv[4], O_WRONLY|O_CREAT|O_TRUNC, 0644);
+	ofd = open(out_image, O_WRONLY|O_CREAT|O_TRUNC, 0644);
 	if (ofd < 0) {
-		printf("[-] Failed to open %s for writing.\n", argv[4]);
+		printf("[-] Failed to open %s for writing.\n", out_image);
 		return 1;
 	}
 
@@ -197,13 +482,31 @@ int main(int argc, char **argv)
 	}
 
 	target = 0;
+	aboot_base = *(unsigned int *)(aboot + 12) - 0x28;
 
 	for (ptr = aboot; ptr < aboot + st.st_size - 0x1000; ptr++) {
 		if (!memcmp(ptr, PATTERN1, 8) ||
 			!memcmp(ptr, PATTERN2, 8) ||
-			!memcmp(ptr, PATTERN3, 8)) {
-			target = (unsigned long)ptr - (unsigned long)aboot + ABOOT_BASE;
+			!memcmp(ptr, PATTERN3, 8) ||
+			!memcmp(ptr, PATTERN4, 8) ||
+			!memcmp(ptr, PATTERN5, 8)) {
+
+			target = (unsigned long)ptr - (unsigned long)aboot + aboot_base;
 			break;
+		}
+	}
+
+	/* Do a second pass for the second LG pattern. This is necessary because
+	 * apparently some LG models have both LG patterns, which throws off the
+	 * fingerprinting. */
+
+	if (!target) {
+		for (ptr = aboot; ptr < aboot + st.st_size - 0x1000; ptr++) {
+			if (!memcmp(ptr, PATTERN6, 8)) {
+
+				target = (unsigned long)ptr - (unsigned long)aboot + aboot_base;
+				break;
+			}
 		}
 	}
 
@@ -226,12 +529,7 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	printf("[+] Detected target %s build %s\n", tgt->vendor, tgt->build);
-
-	if (patch_shellcode(tgt->hdr) < 0) {
-		printf("[-] Failed to patch shellcode.\n");
-		return 1;
-	}
+	printf("[+] Detected target %s %s build %s\n", tgt->vendor, tgt->device, tgt->build);
 
 	/* Map the original boot/recovery image */
 	if (fstat(ifd, &st)) {
@@ -257,7 +555,7 @@ int main(int argc, char **argv)
 			return 1;
 		}
 
-		printf("[+] Copied Loki image to %s.\n", argv[4]);
+		printf("[+] Copied Loki image to %s.\n", out_image);
 
 		return 0;
 	}
@@ -273,10 +571,18 @@ int main(int argc, char **argv)
 	orig_kernel_size = hdr->kernel_size;
 	orig_ramdisk_size = hdr->ramdisk_size;
 
-	/* Store the original values in uses fields of the header */
-	hdr->dt_size = orig_kernel_size;
-	hdr->unused = orig_ramdisk_size;
-	hdr->second_addr = hdr->kernel_addr + ((hdr->kernel_size + page_mask) & ~page_mask);
+	printf("[+] Original kernel address: %.08x\n", hdr->kernel_addr);
+	printf("[+] Original ramdisk address: %.08x\n", hdr->ramdisk_addr);
+
+	/* Store the original values in unused fields of the header */
+	loki_hdr->orig_kernel_size = orig_kernel_size;
+	loki_hdr->orig_ramdisk_size = orig_ramdisk_size;
+	loki_hdr->ramdisk_addr = hdr->kernel_addr + ((hdr->kernel_size + page_mask) & ~page_mask);
+
+	if (patch_shellcode(tgt->hdr, hdr->ramdisk_addr) < 0) {
+		printf("[-] Failed to patch shellcode.\n");
+		return 1;
+	}
 
 	/* Ramdisk must be aligned to a page boundary */
 	hdr->kernel_size = ((hdr->kernel_size + page_mask) & ~page_mask) + hdr->ramdisk_size;
@@ -285,7 +591,15 @@ int main(int argc, char **argv)
 	offset = tgt->check_sigs & 0xf;
 
 	hdr->ramdisk_addr = tgt->check_sigs - offset;
-	hdr->ramdisk_size = 0;
+
+	if (tgt->lg) {
+		fake_size = page_size;
+		hdr->ramdisk_size = page_size;
+	}
+	else {
+		fake_size = 0x200;
+		hdr->ramdisk_size = 0;
+	}
 
 	/* Write the image header */
 	if (write(ofd, orig, page_size) != page_size) {
@@ -309,23 +623,36 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	/* Write 0x800 bytes of original code to the output */
-	buf = malloc(0x200);
+	/* Write fake_size bytes of original code to the output */
+	buf = malloc(fake_size);
 	if (!buf) {
 		printf("[-] Out of memory.\n");
 		return 1;
 	}
 
-	lseek(aboot_fd, tgt->check_sigs - ABOOT_BASE - offset, SEEK_SET);
-	read(aboot_fd, buf, 0x200);
+	lseek(aboot_fd, tgt->check_sigs - aboot_base - offset, SEEK_SET);
+	read(aboot_fd, buf, fake_size);
 
-	if (write(ofd, buf, 0x200) != 0x200) {
+	if (write(ofd, buf, fake_size) != fake_size) {
 		printf("[-] Failed to write original aboot code to output file.\n");
 		return 1;
 	}
 
+	/* Save this position for later */
 	pos = lseek(ofd, 0, SEEK_CUR);
-	lseek(ofd, pos - (0x200 - offset), SEEK_SET);
+
+	/* Write the device tree if needed */
+	if (hdr->dt_size) {
+
+		printf("[+] Writing device tree.\n");
+
+		if (write(ofd, orig + page_size + page_kernel_size + page_ramdisk_size, hdr->dt_size) != hdr->dt_size) {
+			printf("[-] Failed to write device tree to output file.\n");
+			return 1;
+		}
+	}
+
+	lseek(ofd, pos - (fake_size - offset), SEEK_SET);
 
 	/* Write the patch */
 	if (write(ofd, patch, sizeof(patch)) != sizeof(patch)) {
@@ -337,7 +664,7 @@ int main(int argc, char **argv)
 	close(ofd);
 	close(aboot_fd);
 
-	printf("[+] Output file written to %s\n", argv[4]);
+	printf("[+] Output file written to %s\n", out_image);
 
 	return 0;
 }
