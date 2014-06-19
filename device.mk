@@ -47,8 +47,7 @@ PRODUCT_COPY_FILES += \
 
 # loki
 PRODUCT_PACKAGES += \
-    loki_patch \
-    loki_flash \
+    loki_tool \
     loki.sh \
     loki_bootloaders
 
