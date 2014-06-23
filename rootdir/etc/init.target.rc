@@ -27,6 +27,7 @@
 #
 #
 on early-init
+    write /sys/fs/selinux/enforce 1
     mkdir /firmware 0771 system system
     mkdir /firmware-mdm 0771 system system
     symlink /data/tombstones /tombstones
