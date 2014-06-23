@@ -32,6 +32,7 @@ on early-init
     symlink /data/tombstones /tombstones
     mkdir /efs 0771 system radio
     mount debugfs debugfs /sys/kernel/debug
+    setsebool debugfs 1
 
 on fs
     mount_all fstab.qcom
