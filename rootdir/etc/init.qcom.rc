@@ -186,8 +186,16 @@ on boot
 # import cne init file
 on post-fs
     #export_rc /persist/init.cne.rc
+
+    chown system system /sys/block/mmcblk0/queue/scheduler
+    chmod 0664 /sys/block/mmcblk0/queue/scheduler
+    chown system system /sys/block/mmcblk1/queue/scheduler
+    chmod 0664 /sys/block/mmcblk1/queue/scheduler
+
     # Increase max readahead size to 512 KB
     write /sys/block/mmcblk0/queue/read_ahead_kb 512
+    write /sys/block/mmcblk1/queue/read_ahead_kb 512
+
     # for controlling write performance boosting
     chown system radio /sys/block/mmcblk0/bkops_en
     chmod 0664 /sys/block/mmcblk0/bkops_en
@@ -238,6 +246,9 @@ on post-fs-data
     # For disabling softkeys *FIXME*
     chown root system /sys/class/leds/button-backlight/max_brightness
     chmod 0664 /sys/class/leds/button-backlight/max_brightness
+
+    chown system system /sys/class/sec/sec_touchkey/keypad_enable
+    chmod 0660 /sys/class/sec/sec_touchkey/keypad_enable
 
     chmod 666 /sys/class/leds/torch-sec1/brightness
     chown system camera /sys/class/leds/torch-sec1/brightness
