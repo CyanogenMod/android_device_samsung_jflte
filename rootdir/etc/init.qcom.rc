@@ -601,7 +601,7 @@ on property:persist.ims.regmanager.mode=1
 
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
-    write /proc/sys/net/ipv4/tcp_adv_win_scale  1
+    write /proc/sys/net/ipv4/tcp_adv_win_scale  2
 
 #service time_daemon /system/bin/time_daemon
 #    class late_start
