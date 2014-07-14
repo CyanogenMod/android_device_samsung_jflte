@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -30,16 +30,12 @@
 #ifndef LOC_CFG_H
 #define LOC_CFG_H
 
+#include <stdio.h>
 #include <stdint.h>
 
 #define LOC_MAX_PARAM_NAME                 48
 #define LOC_MAX_PARAM_STRING               80
 #define LOC_MAX_PARAM_LINE                 80
-
-// Don't want to overwrite the pre-def'ed value
-#ifndef GPS_CONF_FILE
-#define GPS_CONF_FILE            "/etc/gps.conf"   //??? platform independent
-#endif
 
 #define UTIL_READ_CONF_DEFAULT(filename) \
     loc_read_conf((filename), NULL, 0);
@@ -80,7 +76,7 @@ extern "C" {
 extern void loc_read_conf(const char* conf_file_name,
                           loc_param_s_type* config_table,
                           uint32_t table_length);
-
+extern int loc_read_conf_r(FILE *conf_fp, loc_param_s_type* config_table, uint32_t table_length);
 #ifdef __cplusplus
 }
 #endif
