@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2013, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -27,8 +27,8 @@
  *
  */
 
-#ifndef LOC_LOG_H
-#define LOC_LOG_H
+#ifndef LOC_CORE_LOG_H
+#define LOC_CORE_LOG_H
 
 #ifdef __cplusplus
 extern "C"
@@ -36,33 +36,23 @@ extern "C"
 #endif
 
 #include <ctype.h>
-#include "loc_target.h"
+#include <gps_extended.h>
 
-typedef struct
-{
-   char                 name[128];
-   long                 val;
-} loc_name_val_s_type;
-
-#define NAME_VAL(x) {"" #x "", x }
-
-#define UNKNOWN_STR "UNKNOWN"
-
-#define CHECK_MASK(type, value, mask_var, mask) \
-   ((mask_var & mask) ? (type) value : (type) (-1))
-
-/* Get names from value */
-const char* loc_get_name_from_mask(loc_name_val_s_type table[], int table_size, long mask);
-const char* loc_get_name_from_val(loc_name_val_s_type table[], int table_size, long value);
-const char* loc_get_msg_q_status(int status);
-const char* loc_get_target_name(unsigned int target);
-
-extern const char* log_succ_fail_string(int is_succ);
-
-extern char *loc_get_time(char *time_string, unsigned long buf_size);
+const char* loc_get_gps_status_name(GpsStatusValue gps_status);
+const char* loc_get_position_mode_name(GpsPositionMode mode);
+const char* loc_get_position_recurrence_name(GpsPositionRecurrence recur);
+const char* loc_get_aiding_data_mask_names(GpsAidingData data);
+const char* loc_get_agps_type_name(AGpsType type);
+const char* loc_get_ni_type_name(GpsNiType type);
+const char* loc_get_ni_response_name(GpsUserResponseType response);
+const char* loc_get_ni_encoding_name(GpsNiEncodingType encoding);
+const char* loc_get_agps_bear_name(AGpsBearerType bear);
+const char* loc_get_server_type_name(LocServerType type);
+const char* loc_get_position_sess_status_name(enum loc_sess_status status);
+const char* loc_get_agps_status_name(AGpsStatusValue status);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* LOC_LOG_H */
+#endif /* LOC_CORE_LOG_H */
