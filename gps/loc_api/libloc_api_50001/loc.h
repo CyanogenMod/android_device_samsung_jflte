@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2013, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -27,42 +27,38 @@
  *
  */
 
-#ifndef LOC_LOG_H
-#define LOC_LOG_H
+#ifndef __LOC_H__
+#define __LOC_H__
 
 #ifdef __cplusplus
-extern "C"
-{
-#endif
+extern "C" {
+#endif /* __cplusplus */
 
 #include <ctype.h>
-#include "loc_target.h"
+#include <cutils/properties.h>
+#include "hardware/gps.h"
+#include <gps_extended.h>
 
-typedef struct
-{
-   char                 name[128];
-   long                 val;
-} loc_name_val_s_type;
+typedef void (*loc_location_cb_ext) (UlpLocation* location, void* locExt);
+typedef void (*loc_sv_status_cb_ext) (GpsSvStatus* sv_status, void* svExt);
+typedef void* (*loc_ext_parser)(void* data);
 
-#define NAME_VAL(x) {"" #x "", x }
-
-#define UNKNOWN_STR "UNKNOWN"
-
-#define CHECK_MASK(type, value, mask_var, mask) \
-   ((mask_var & mask) ? (type) value : (type) (-1))
-
-/* Get names from value */
-const char* loc_get_name_from_mask(loc_name_val_s_type table[], int table_size, long mask);
-const char* loc_get_name_from_val(loc_name_val_s_type table[], int table_size, long value);
-const char* loc_get_msg_q_status(int status);
-const char* loc_get_target_name(unsigned int target);
-
-extern const char* log_succ_fail_string(int is_succ);
-
-extern char *loc_get_time(char *time_string, unsigned long buf_size);
+typedef struct {
+    loc_location_cb_ext location_cb;
+    gps_status_callback status_cb;
+    loc_sv_status_cb_ext sv_status_cb;
+    gps_nmea_callback nmea_cb;
+    gps_set_capabilities set_capabilities_cb;
+    gps_acquire_wakelock acquire_wakelock_cb;
+    gps_release_wakelock release_wakelock_cb;
+    gps_create_thread create_thread_cb;
+    loc_ext_parser location_ext_parser;
+    loc_ext_parser sv_ext_parser;
+    gps_request_utc_time request_utc_time_cb;
+} LocCallbacks;
 
 #ifdef __cplusplus
 }
-#endif
+#endif /* __cplusplus */
 
-#endif /* LOC_LOG_H */
+#endif //__LOC_H__

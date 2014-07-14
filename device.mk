@@ -54,12 +54,16 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    gps.msm8960
+    gps.msm8960 \
+    libgps.utils \
+    libloc_core \
+    libloc_eng
 
-GPS_CONF := device/samsung/jflte/gps/gps.conf
+GPS_CONF := device/samsung/jflte/gps/etc/gps.conf
 
 PRODUCT_COPY_FILES += \
-    $(GPS_CONF):/system/etc/gps.conf
+    $(GPS_CONF):/system/etc/gps.conf \
+    device/samsung/jflte/gps/etc/sap.conf:/system/etc/sap.conf
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
