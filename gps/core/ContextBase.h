@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -26,43 +26,44 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
+#ifndef __LOC_CONTEXT_BASE__
+#define __LOC_CONTEXT_BASE__
 
-#ifndef LOC_LOG_H
-#define LOC_LOG_H
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
+#include <stdbool.h>
 #include <ctype.h>
-#include "loc_target.h"
+#include <MsgTask.h>
+#include <LocApiBase.h>
+#include <LBSProxyBase.h>
 
-typedef struct
-{
-   char                 name[128];
-   long                 val;
-} loc_name_val_s_type;
+namespace loc_core {
 
-#define NAME_VAL(x) {"" #x "", x }
+class LocAdapterBase;
 
-#define UNKNOWN_STR "UNKNOWN"
+class ContextBase {
+    static LBSProxyBase* getLBSProxy(const char* libName);
+    LocApiBase* createLocApi(LOC_API_ADAPTER_EVENT_MASK_T excludedMask);
+protected:
+    const LBSProxyBase* mLBSProxy;
+    const MsgTask* mMsgTask;
+    LocApiBase* mLocApi;
+    LocApiProxyBase *mLocApiProxy;
+public:
+    ContextBase(const MsgTask* msgTask,
+                LOC_API_ADAPTER_EVENT_MASK_T exMask,
+                const char* libName);
+    inline virtual ~ContextBase() { delete mLocApi; delete mLBSProxy; }
 
-#define CHECK_MASK(type, value, mask_var, mask) \
-   ((mask_var & mask) ? (type) value : (type) (-1))
+    inline const MsgTask* getMsgTask() { return mMsgTask; }
+    inline LocApiBase* getLocApi() { return mLocApi; }
+    inline LocApiProxyBase* getLocApiProxy() { return mLocApiProxy; }
+    inline bool hasAgpsExtendedCapabilities() { return mLBSProxy->hasAgpsExtendedCapabilities(); }
+    inline bool hasCPIExtendedCapabilities() { return mLBSProxy->hasCPIExtendedCapabilities(); }
+    inline void requestUlp(LocAdapterBase* adapter,
+                           unsigned long capabilities) {
+        mLBSProxy->requestUlp(adapter, capabilities);
+    }
+};
 
-/* Get names from value */
-const char* loc_get_name_from_mask(loc_name_val_s_type table[], int table_size, long mask);
-const char* loc_get_name_from_val(loc_name_val_s_type table[], int table_size, long value);
-const char* loc_get_msg_q_status(int status);
-const char* loc_get_target_name(unsigned int target);
+} // namespace loc_core
 
-extern const char* log_succ_fail_string(int is_succ);
-
-extern char *loc_get_time(char *time_string, unsigned long buf_size);
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* LOC_LOG_H */
+#endif //__LOC_CONTEXT_BASE__

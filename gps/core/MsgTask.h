@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2013, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -26,43 +26,42 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
+#ifndef __MSG_TASK__
+#define __MSG_TASK__
 
-#ifndef LOC_LOG_H
-#define LOC_LOG_H
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
+#include <stdbool.h>
 #include <ctype.h>
-#include "loc_target.h"
+#include <string.h>
+#include <pthread.h>
 
-typedef struct
-{
-   char                 name[128];
-   long                 val;
-} loc_name_val_s_type;
+namespace loc_core {
 
-#define NAME_VAL(x) {"" #x "", x }
+struct LocMsg {
+    inline LocMsg() {}
+    inline virtual ~LocMsg() {}
+    virtual void proc() const = 0;
+    inline virtual void log() const {}
+};
 
-#define UNKNOWN_STR "UNKNOWN"
+class MsgTask {
+public:
+    typedef void* (*tStart)(void*);
+    typedef pthread_t (*tCreate)(const char* name, tStart start, void* arg);
+    typedef int (*tAssociate)();
+    MsgTask(tCreate tCreator, const char* threadName);
+    MsgTask(tAssociate tAssociator, const char* threadName);
+    ~MsgTask();
+    void sendMsg(const LocMsg* msg) const;
+    void associate(tAssociate tAssociator) const;
 
-#define CHECK_MASK(type, value, mask_var, mask) \
-   ((mask_var & mask) ? (type) value : (type) (-1))
+private:
+    const void* mQ;
+    tAssociate mAssociator;
+    MsgTask(const void* q, tAssociate associator);
+    static void* loopMain(void* copy);
+    void createPThread(const char* name);
+};
 
-/* Get names from value */
-const char* loc_get_name_from_mask(loc_name_val_s_type table[], int table_size, long mask);
-const char* loc_get_name_from_val(loc_name_val_s_type table[], int table_size, long value);
-const char* loc_get_msg_q_status(int status);
-const char* loc_get_target_name(unsigned int target);
+} // namespace loc_core
 
-extern const char* log_succ_fail_string(int is_succ);
-
-extern char *loc_get_time(char *time_string, unsigned long buf_size);
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* LOC_LOG_H */
+#endif //__MSG_TASK__
