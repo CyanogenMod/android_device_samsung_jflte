@@ -75,6 +75,10 @@ BOARD_BLUETOOTH_USES_HCIATTACH_PROPERTY := false
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 HAVE_ADRENO_SOURCE := false
 
+# GPS
+TARGET_PROVIDES_GPS_LOC_API := true
+TARGET_NO_RPC := true
+
 # NFC
 BOARD_NFC_HAL_SUFFIX := msm8960
 
@@ -117,3 +121,4 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/samsung/jflte/releasetools
 
 # cmhw
 BOARD_HARDWARE_CLASS += device/samsung/jflte/cmhw/
+
