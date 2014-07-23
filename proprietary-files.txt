@@ -17,6 +17,7 @@ vendor/firmware/bcm4335_semco.hcd
 # Audio
 lib/libacdbloader.so:vendor/lib/libacdbloader.so
 lib/libaudcal.so:vendor/lib/libaudcal.so
+lib/libcsd-client.so:lib/libcsd-client.so
 lib/libcsd-client.so:vendor/lib/libcsd-client.so
 
 # Postprocessing
@@ -173,7 +174,7 @@ lib/libmmstillomx.so
 lib/liboemcamera.so
 lib/libsecnativefeature.so
 lib/libvdis.so
-
+vendor/lib/lib-imsvt.so
 
 # Wi-Fi
 etc/wifi/bcmdhd_apsta.bin
@@ -186,17 +187,6 @@ etc/wifi/bcmdhd_sta.bin_a0
 etc/wifi/cred.conf
 etc/wifi/nvram_mfg.txt
 etc/wifi/nvram_net.txt
-etc/wifi/nvram_net.txt_a0
-etc/wifi/nvram_net.txt:etc/wifi/nvram_net.txt_murata
-etc/wifi/nvram_net.txt_murata_a0
-etc/wifi/nvram_net.txt_muratafem1
-etc/wifi/nvram_net.txt_muratafem2
-etc/wifi/nvram_net.txt_semco3rd
-etc/wifi/nvram_net.txt_semco3rd_a0
-etc/wifi/nvram_net.txt_semcosh
-
-# Perf
-lib/libqc-opt.so
 
 # DRM
 bin/qseecomd
