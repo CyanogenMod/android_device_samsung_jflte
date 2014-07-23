@@ -160,7 +160,6 @@ void cdma_properties(char cdma_sub[])
 {
     property_set("ro.telephony.default_cdma_sub", cdma_sub);
     property_set("ro.gps.set_privacy", "1");
-    property_set("ro.telephony.ril.v3", "newDriverCallU");
     property_set("telephony.lteOnCdmaDevice", "1");
     property_set("ro.telephony.default_network", "10");
 }
