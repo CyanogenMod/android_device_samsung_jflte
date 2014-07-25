@@ -112,6 +112,14 @@ on post-fs-data
     chown system system /sys/fs/selinux/load
     chown system system /sys/fs/selinux/enforce
 
+    # Permissions for Led
+    chown system system /sys/class/sec/led/led_r
+    chown system system /sys/class/sec/led/led_g
+    chown system system /sys/class/sec/led/led_b
+    chown system system /sys/class/sec/led/led_pattern
+    chown system system /sys/class/sec/led/led_blink
+    chown system system /sys/class/sec/led/led_lowpower
+
 # <Sensors & NFC>
 # Accelerometer_sensor
     chown system radio /sys/class/sensors/accelerometer_sensor/raw_data
