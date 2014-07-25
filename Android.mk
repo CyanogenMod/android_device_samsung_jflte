@@ -22,9 +22,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(BOARD_VENDOR),samsung)
-ifeq ($(TARGET_BOARD_PLATFORM),msm8960)
-ifneq ($(filter jflte,$(TARGET_DEVICE)),)
+ifeq ($(TARGET_DEVICE),jflte)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
@@ -41,7 +39,7 @@ FIRMWARE_MDM_IMAGES := \
     sbl1.mbn \
     sbl2.mbn
 
-FIRMWARE_MDM_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware-msm/,$(notdir $(FIRMWARE_MDM_IMAGES)))
+FIRMWARE_MDM_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(FIRMWARE_MDM_IMAGES)))
 $(FIRMWARE_MDM_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	@echo "Firmware link: $@"
 	@mkdir -p $(dir $@)
@@ -52,7 +50,7 @@ ALL_DEFAULT_INSTALLED_MODULES += $(FIRMWARE_MDM_SYMLINKS)
 
 
 # Create /firmware links
-FIRMWARE_MDM_IMAGES := \
+FIRMWARE_IMAGES := \
     q6.b00 q6.b01 q6.b03 q6.b04 q6.b05 q6.b06 q6.mdt \
     tzapps.b00 tzapps.b01 tzapps.b02 tzapps.b03 tzapps.mdt \
     vidc.b00 vidc.b01 vidc.b02 vidc.b03 vidc.mdt
@@ -66,6 +64,4 @@ $(FIRMWARE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(FIRMWARE_SYMLINKS)
 
-endif
-endif
 endif
