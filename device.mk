@@ -191,6 +191,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril.v3=newDriverCall \
     dalvik.vm.dexopt-data-only=0
 
+# Smart Cover
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.switch_code.sw_lid=0x15 \
+    ro.switch_code.sw_lid_invert=true
+
 # call common msm8960
 $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
 
