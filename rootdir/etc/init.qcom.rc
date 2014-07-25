@@ -296,11 +296,6 @@ on post-fs-data
 # GPIO DVS
     chown radio system /sys/class/secgpio_check/secgpio_check_all/secgpio_ctrl
 
-    write /sys/devices/system/cpu/cpu0/online 1
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu2/online 1
-    write /sys/devices/system/cpu/cpu3/online 1
-
 on property:init.svc.surfaceflinger=stopped
     stop ppd
     stop hdmid
