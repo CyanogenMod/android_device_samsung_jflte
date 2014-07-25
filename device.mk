@@ -183,6 +183,11 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     ueventd.qcom.rc
 
+# Smart cover
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.switch_code.sw_lid=0x15 \
+    ro.switch_code.sw_lid_invert=true
+
 # Thermal
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermald.conf:system/etc/thermald.conf \
@@ -207,3 +212,4 @@ PRODUCT_COPY_FILES += \
 
 # Common Qualcomm
 $(call inherit-product, device/samsung/qcom-common/qcom-common.mk)
+

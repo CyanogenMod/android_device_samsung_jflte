@@ -136,6 +136,9 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
 TARGET_RECOVERY_FSTAB := device/samsung/jflte/rootdir/etc/fstab.qcom
 
+# Smart cover
+BOARD_HAS_EXTENDED_SWITCH := true
+
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
 TARGET_INIT_VENDOR_LIB := libinit_jflte
