@@ -327,9 +327,9 @@ service secril-daemon /system/bin/sec-ril
     user root
     group radio cache inet misc audio sdcard_rw diag log
 
-# SISO-ANDR-PERF :: START Changing scheduler to cfq after boot complete
+# SISO-ANDR-PERF :: START Changing scheduler to row after boot complete
 on property:sys.boot_completed=1
-    write /sys/block/mmcblk0/queue/scheduler cfq
+    write /sys/block/mmcblk0/queue/scheduler row
 
 # insthk
 service insthk /system/bin/insthk
