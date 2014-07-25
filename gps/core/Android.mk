@@ -41,8 +41,7 @@ LOCAL_COPY_HEADERS:= \
     UlpProxyBase.h \
     gps_extended_c.h \
     gps_extended.h \
-    loc_core_log.h \
-    LocAdapterProxyBase.h
+    loc_core_log.h
 
 LOCAL_PRELINK_MODULE := false
 
