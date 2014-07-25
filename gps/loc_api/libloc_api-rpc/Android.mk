@@ -1,3 +1,4 @@
+ifeq ($(BUILD_LIBLOC_API-RPC),true)
 ifneq ($(BUILD_TINY_ANDROID),true)
 
 ifneq ($(BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION),50001)
@@ -57,5 +58,6 @@ LOCAL_MODULE_OWNER := qcom
 
 include $(BUILD_STATIC_LIBRARY)
 
+endif
 endif
 endif
