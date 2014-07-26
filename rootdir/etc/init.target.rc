@@ -1,4 +1,4 @@
-# Copyright (c) 2011, Code Aurora Forum. All rights reserved.
+# Copyright (c) 2012, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -9,7 +9,7 @@
 #       copyright notice, this list of conditions and the following
 #       disclaimer in the documentation and/or other materials provided
 #       with the distribution.
-#     * Neither the name of Code Aurora Forum, Inc. nor the names of its
+#     * Neither the name of The Linux Foundation nor the names of its
 #       contributors may be used to endorse or promote products derived
 #       from this software without specific prior written permission.
 #
@@ -26,6 +26,7 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 #
+
 on early-init
     mkdir /firmware 0771 system system
     mkdir /firmware-mdm 0771 system system
@@ -46,18 +47,24 @@ on fs
     chmod 0775 /dev/block/platform/msm_sdcc.1/by-name
 
 on boot
-    write /sys/devices/i2c-3/3-0024/cyttsp_update_fw 1
-    write /sys/devices/i2c-3/3-005b/update_fw 1
-    start qcamerasvr
+   write /sys/devices/i2c-3/3-0024/cyttsp_update_fw 1
+   write /sys/devices/i2c-3/3-005b/update_fw 1
+   start qcamerasvr
 
 on post-fs-data
-    mkdir /data/tombstones 0771 system system
-    symlink /data/tombstones /tombstones
-    mkdir /tombstones/modem 0771 system system
-    mkdir /tombstones/lpass 0771 system system
-    mkdir /tombstones/wcnss 0771 system system
-    mkdir /tombstones/dsps 0771 system system
-    mkdir /tombstones/mdm 0771 system system
+   mkdir /data/tombstones 0771 system system
+   mkdir /tombstones/modem 0771 system system
+   mkdir /tombstones/lpass 0771 system system
+   mkdir /tombstones/wcnss 0771 system system
+   mkdir /tombstones/dsps 0771 system system
+   mkdir /tombstones/mdm 0771 system system
+   mkdir /tombstones/mdm2 0771 system system
+
+
+#sensors
+   write /sys/class/input/input5/distortion "400 50 15"
+   write /sys/class/input/input6/distortion "400 50 15"
+   write /sys/class/input/input7/distortion "400 50 15"
 
 # MDNIE
     chown system system  /sys/class/mdnie/mdnie/lcdtype
@@ -221,6 +228,9 @@ on post-fs-data
     chown nfc nfc /data/nfc
     chown nfc nfc /data/nfc/param
 
+# Permission for fast dormacy for RIL
+    chown system radio /sys/devices/virtual/sec/bamdmux/waketime
+
 # Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.default 4096,87380,704512,4096,16384,110208
@@ -256,15 +266,9 @@ on post-fs-data
 
 #start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
-    class late_start
-    user media
-    group system camera inet input graphics
-
-#start GNSS/Sensor interface daemon
-service gsiff_daemon /system/bin/gsiff_daemon
-    class late_start
-    user system
-    group gps qcom_oncrpc net_raw
+        class late_start
+        user camera
+        group camera system inet input graphics net_bt_stack
 
 service thermald /system/bin/thermald
    class main
@@ -276,12 +280,12 @@ service thermal-engine /system/bin/thermal-engine
    class main
    user root
    group root
-   disabled 
+   disabled
 
 service mpdecision /system/bin/mpdecision --avg_comp
-    user root
-    group root system
-    disabled
+   user root
+   group root system
+   disabled
 
 service kickstart /system/bin/qcks -i /firmware-mdm/image/
     user root
@@ -295,7 +299,7 @@ service mdm_helper /system/bin/mdm_helper
     disabled
 
 service qseecomd /system/bin/qseecomd
-   class late_start
+   class core
    user system
    group system
 
@@ -321,11 +325,6 @@ service bugreport /system/bin/dumpstate -d -p -B \
     disabled
     oneshot
     keycodes 114 115 116
-
-service secril-daemon /system/bin/sec-ril
-    class main
-    user root
-    group radio cache inet misc audio sdcard_rw diag log
 
 # SISO-ANDR-PERF :: START Changing scheduler to row after boot complete
 on property:sys.boot_completed=1

@@ -1,4 +1,4 @@
-# Copyright (c) 2009-2012, Code Aurora Forum. All rights reserved.
+# Copyright (c) 2009-2013, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -7,7 +7,7 @@
 #     * Redistributions in binary form must reproduce the above copyright
 #       notice, this list of conditions and the following disclaimer in the
 #       documentation and/or other materials provided with the distribution.
-#     * Neither the name of Code Aurora nor
+#     * Neither the name of The Linux Foundation nor
 #       the names of its contributors may be used to endorse or promote
 #       products derived from this software without specific prior written
 #       permission.
@@ -52,7 +52,7 @@ on init
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
 
-    # for backwards compatibility
+    # Support legacy paths
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
@@ -85,21 +85,13 @@ on boot
     chmod 0660 /sys/module/hci_smd/parameters/hcismd_set
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chmod 0660 /proc/bluetooth/sleep/proto
-    chown bluetooth bluetooth /dev/ttyHS0
+    chown bluetooth net_bt_stack /dev/ttyHS0
     chmod 0660 /dev/ttyHS0
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
 
     chmod 0660 /dev/ttyHS2
     chown bluetooth bluetooth /dev/ttyHS2
-
-    # bluetooth LPM
-    chmod 0220 /proc/bluetooth/sleep/lpm
-    chmod 0220 /proc/bluetooth/sleep/btwrite
-    chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
-    chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
-    chmod 0600 /dev/btlock
-    chown bluetooth bluetooth /dev/btlock
 
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
@@ -116,11 +108,12 @@ on boot
     setprop ro.telephony.call_ring.multiple false
 
     #Set SUID bit for usbhub
-    chmod 4755 /system/bin/usbhub
-    chmod 755 /system/bin/usbhub_init
+    #chmod 4755 /system/bin/usbhub
+    #chmod 755 /system/bin/usbhub_init
 
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
+
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
@@ -169,10 +162,7 @@ on boot
     # overhead in the kernel. Turn it off.
     write /sys/block/mmcblk0/queue/add_random 0
 
-# import cne init file
 on post-fs
-    #export_rc /persist/init.cne.rc
-
     chown system system /sys/block/mmcblk0/queue/scheduler
     chmod 0664 /sys/block/mmcblk0/queue/scheduler
     chown system system /sys/block/mmcblk1/queue/scheduler
@@ -188,7 +178,6 @@ on post-fs
 
 # msm specific files that need to be created on /data
 on post-fs-data
-
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
     mkdir /data/media 0775 media_rw media_rw
     chown media_rw media_rw /data/media
@@ -198,19 +187,7 @@ on post-fs-data
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi system
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
-
-    mkdir /system/etc/wifi 0770 wifi wifi
-    chmod 0770 /system/etc/wifi
-    chmod 0660 /system/etc/wifi/wpa_supplicant.conf
-    chown wifi wifi /system/etc/wifi/wpa_supplicant.conf
-    #wpa_supplicant control socket for android wifi.c (android private socket)
-    mkdir /data/misc/wifi 0770 wifi wifi
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
-    chmod 0770 /data/misc/wifi
-    chmod 0660 /data/misc/wifi/wpa_supplicant.conf
-    chown wifi wifi /data/misc/wifi
-    chown wifi wifi /data/misc/wifi/wpa_supplicant.conf
-
+    mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0775 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
 
@@ -218,25 +195,36 @@ on post-fs-data
     mkdir /data/connectivity 0771 system system
     chown system system /data/connectivity
 
+    mkdir /data/connectivity/nsrm 0771 system system
+    chown system system /data/connectivity/nsrm
+
     # for WIFI TRP/TIS
-    write /data/.psm.info 1
     chown system root /data/.psm.info
-    chmod 0660 /data/.psm.info
+    chmod 0664 /data/.psm.info
+
+    # for WIFI Antena Selection
+    chown system root /data/.ant.info
+    chmod 0664 /data/.ant.info
+
+    # for WIFI Version
+	write /data/.wifiver.info 0
+    chown system root /data/.wifiver.info
+    chmod 0666 /data/.wifiver.info
+
+    # for WIFI Cert
+    chmod 0664 /data/.bustxglom.info
+    chmod 0664 /data/.roamoff.info
+    chmod 0664 /data/.frameburst.info
+    chmod 0664 /data/.txbf.info
 
     # for WIFI MAC address
     mkdir /efs/wifi 0775 radio system
     chown system system /efs/wifi/.mac.info
     chmod 0664 /efs/wifi/.mac.info
 
-    setprop wifi.interface wlan0
-
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
 
-    # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
-    # We chown/chmod /persist again so because mount is run as root + defaults
-    #chown system system /persist
-    #chmod 0771 /persist
     chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
@@ -264,7 +252,7 @@ on post-fs-data
     mkdir /data/system 0775 system system
     rm /data/system/wpa_supplicant
 
-    #reate directories for gpsone_daemon services
+    #Create directories for gpsone_daemon services
     mkdir /data/misc/location/gpsone_d 0770 system gps
 
     #Create directories for QuIPS
@@ -301,24 +289,11 @@ on post-fs-data
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
 
-# Export GPIO56 for fusion targets to enable/disable hub
-service usbhub_init /system/bin/usbhub_init
-   class late_start
-   user root
-   disabled
-   oneshot
-
 on property:init.svc.surfaceflinger=stopped
     stop ppd
     stop hdmid
 
-on property:ro.board.platform=msm7630_fusion
-    start usbhub_init
-
 on property:init.svc.wpa_supplicant=stopped
-    stop dhcpcd
-
-on property:init.svc.p2p_supplicant=stopped
     stop dhcpcd
 
 on property:bluetooth.isEnabled=true
@@ -351,11 +326,6 @@ on property:vold.decrypt=trigger_restart_framework
     start qcom-c_main-sh
     start config_ril
     start config_bluetooth
-
-service cnd /system/bin/cnd
-    class late_start
-    socket cnd stream 660 root radio
-    disabled
 
 service irsc_util /system/bin/logwrapper /system/bin/irsc_util "/etc/sec_config"
     class main
@@ -414,19 +384,14 @@ service qmuxd /system/bin/qmuxd
     group radio audio bluetooth gps qcom_diag log
     disabled
 
-service netmgrd /system/bin/netmgrd
-    class main
-    disabled
-
-#service sensors /system/bin/sensors.qcom
-#    class late_start
-#    user root
-#    group root
-#    disabled
-
 on property:ro.use_data_netmgrd=false
-#netmgr not supported on specific target
+    # netmgr not supported on specific target
     stop netmgrd
+
+# Adjust socket buffer to enlarge TCP receive window for high bandwidth
+# but only if ro.data.large_tcp_window_size property is set.
+on property:ro.data.large_tcp_window_size=true
+    write /proc/sys/net/ipv4/tcp_adv_win_scale  2
 
 service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
     class late_start
@@ -436,20 +401,20 @@ service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
     oneshot
 
 service p2p_supplicant /system/bin/wpa_supplicant \
-    -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
-    -I/system/etc/wifi/wpa_supplicant_overlay.conf -O/data/misc/wifi/sockets -N \
-    -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
-    -I/system/etc/wifi/p2p_supplicant_overlay.conf \
-    -puse_p2p_group_interface=1 -puse_multi_chan_concurrent=1 \
-    -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
+	-iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
+	-I/system/etc/wifi/wpa_supplicant_overlay.conf -O/data/misc/wifi/sockets -N \
+	-ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
+	-I/system/etc/wifi/p2p_supplicant_overlay.conf \
+	-puse_p2p_group_interface=1 -puse_multi_chan_concurrent=1 \
+	-e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
 #   we will start as root and wpa_supplicant will switch to user wifi
 #   after setting up the capabilities required for WEXT
 #   user wifi
 #   group wifi inet keystore
-    class main
-    socket wpa_wlan0 dgram 660 wifi wifi
-    disabled
-    oneshot
+	class main
+	socket wpa_wlan0 dgram 660 wifi wifi
+	disabled
+	oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant -g@android:wpa_wlan0 \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -e/data/misc/wifi/entropy.bin
@@ -462,7 +427,7 @@ service wpa_supplicant /system/bin/wpa_supplicant -g@android:wpa_wlan0 \
     disabled
     oneshot
 
-service dhcpcd_wlan0 /system/bin/dhcpcd -ABKLG
+service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
     class late_start
     disabled
     oneshot
@@ -503,10 +468,6 @@ service wlandutservice /system/bin/wlandutservice
     user system
     group wifi net_raw net_admin system inet
     disabled
-    oneshot
-
-service macloader /system/bin/macloader
-    class main
     oneshot
 
 on property:init.svc.macloader=stopped
@@ -559,15 +520,10 @@ service wifi-crda /system/bin/sh /system/etc/init.crda.sh
    disabled
    oneshot
 
+
 on property:sys.boot_completed=1
     start qcom-post-boot
     write /sys/block/mmcblk0/queue/scheduler row
-
-#service atfwd /system/bin/ATFWD-daemon
-#    class late_start
-#    user system
-#    group system radio
-#    onrestart /system/bin/log -t RIL-ATFWD -p w "ATFWD daemon restarted"
 
 service ppd /system/bin/mm-pp-daemon
     class late_start
@@ -591,26 +547,9 @@ service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
 on property:persist.data.ds_fmc_app.mode=1
     start ds_fmc_appd
 
-service ims_regmanager /system/bin/exe-ims-regmanagerprocessnative
-    class late_start
-    user system
-    group qcom_oncrpc net_bt_admin inet radio wifi
-    disabled
-
-on property:persist.ims.regmanager.mode=1
-    start ims_regmanager
-
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale  2
-
-service ril-daemon /system/bin/rild
-    class main
-    socket rild stream 660 root radio
-    socket rild-debug stream 660 radio system
-    socket rild-cas stream 666  casdrm mmb
-    user root
-    group radio cache inet misc audio log qcom_diag sdcard_r shell sdcard_rw
 
 service profiler_daemon /system/bin/profiler_daemon
     class late_start
@@ -645,14 +584,15 @@ on nonencrypted
 on property:vold.decrypt=trigger_restart_framework
     setprop ro.fuse_sdcard ${persist.fuse_sdcard}
 
+service charger /charger
+    class charger
+
 #Disable boot timeout for external modems.
 on property:persist.sys.mdm.timeout_disable=1
     write /sys/module/mdm_common/parameters/disable_boot_timeout 1
-
 # Limit to SoC reset (1) and independent SSR (3)
 on property:persist.sys.ssr.restart_level=1
     write /sys/module/subsystem_restart/parameters/restart_level 1
-
 on property:persist.sys.ssr.restart_level=3
     write /sys/module/subsystem_restart/parameters/restart_level 3
 
@@ -720,7 +660,3 @@ on charger
     write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
-
-service charger /charger
-    class charger
-    critical
