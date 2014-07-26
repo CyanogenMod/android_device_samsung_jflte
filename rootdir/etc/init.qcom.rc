@@ -414,10 +414,6 @@ service qmuxd /system/bin/qmuxd
     group radio audio bluetooth gps qcom_diag log
     disabled
 
-service netmgrd /system/bin/netmgrd
-    class main
-    disabled
-
 #service sensors /system/bin/sensors.qcom
 #    class late_start
 #    user root
@@ -503,10 +499,6 @@ service wlandutservice /system/bin/wlandutservice
     user system
     group wifi net_raw net_admin system inet
     disabled
-    oneshot
-
-service macloader /system/bin/macloader
-    class main
     oneshot
 
 on property:init.svc.macloader=stopped
@@ -603,14 +595,6 @@ on property:persist.ims.regmanager.mode=1
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale  2
-
-service ril-daemon /system/bin/rild
-    class main
-    socket rild stream 660 root radio
-    socket rild-debug stream 660 radio system
-    socket rild-cas stream 666  casdrm mmb
-    user root
-    group radio cache inet misc audio log qcom_diag sdcard_r shell sdcard_rw
 
 service profiler_daemon /system/bin/profiler_daemon
     class late_start
