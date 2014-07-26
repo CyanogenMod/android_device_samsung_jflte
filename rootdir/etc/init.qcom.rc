@@ -1,4 +1,4 @@
-# Copyright (c) 2009-2012, Code Aurora Forum. All rights reserved.
+# Copyright (c) 2009-2013, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -7,7 +7,7 @@
 #     * Redistributions in binary form must reproduce the above copyright
 #       notice, this list of conditions and the following disclaimer in the
 #       documentation and/or other materials provided with the distribution.
-#     * Neither the name of Code Aurora nor
+#     * Neither the name of The Linux Foundation nor
 #       the names of its contributors may be used to endorse or promote
 #       products derived from this software without specific prior written
 #       permission.
@@ -93,14 +93,6 @@ on boot
     chmod 0660 /dev/ttyHS2
     chown bluetooth bluetooth /dev/ttyHS2
 
-    # bluetooth LPM
-    chmod 0220 /proc/bluetooth/sleep/lpm
-    chmod 0220 /proc/bluetooth/sleep/btwrite
-    chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
-    chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
-    chmod 0600 /dev/btlock
-    chown bluetooth bluetooth /dev/btlock
-
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
@@ -116,8 +108,8 @@ on boot
     setprop ro.telephony.call_ring.multiple false
 
     #Set SUID bit for usbhub
-    chmod 4755 /system/bin/usbhub
-    chmod 755 /system/bin/usbhub_init
+    #chmod 4755 /system/bin/usbhub
+    #chmod 755 /system/bin/usbhub_init
 
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
@@ -188,7 +180,6 @@ on post-fs
 
 # msm specific files that need to be created on /data
 on post-fs-data
-
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
     mkdir /data/media 0775 media_rw media_rw
     chown media_rw media_rw /data/media
@@ -218,10 +209,27 @@ on post-fs-data
     mkdir /data/connectivity 0771 system system
     chown system system /data/connectivity
 
+    mkdir /data/connectivity/nsrm 0771 system system
+    chown system system /data/connectivity/nsrm
+
     # for WIFI TRP/TIS
-    write /data/.psm.info 1
     chown system root /data/.psm.info
-    chmod 0660 /data/.psm.info
+    chmod 0664 /data/.psm.info
+
+    # for WIFI Antena Selection
+    chown system root /data/.ant.info
+    chmod 0664 /data/.ant.info
+
+    # for WIFI Version
+	write /data/.wifiver.info 0
+    chown system root /data/.wifiver.info
+    chmod 0666 /data/.wifiver.info
+
+    # for WIFI Cert
+    chmod 0664 /data/.bustxglom.info
+    chmod 0664 /data/.roamoff.info
+    chmod 0664 /data/.frameburst.info
+    chmod 0664 /data/.txbf.info
 
     # for WIFI MAC address
     mkdir /efs/wifi 0775 radio system
@@ -264,7 +272,7 @@ on post-fs-data
     mkdir /data/system 0775 system system
     rm /data/system/wpa_supplicant
 
-    #reate directories for gpsone_daemon services
+    #Create directories for gpsone_daemon services
     mkdir /data/misc/location/gpsone_d 0770 system gps
 
     #Create directories for QuIPS
@@ -414,10 +422,6 @@ service qmuxd /system/bin/qmuxd
     group radio audio bluetooth gps qcom_diag log
     disabled
 
-service netmgrd /system/bin/netmgrd
-    class main
-    disabled
-
 #service sensors /system/bin/sensors.qcom
 #    class late_start
 #    user root
@@ -425,8 +429,13 @@ service netmgrd /system/bin/netmgrd
 #    disabled
 
 on property:ro.use_data_netmgrd=false
-#netmgr not supported on specific target
+    # netmgr not supported on specific target
     stop netmgrd
+
+# Adjust socket buffer to enlarge TCP receive window for high bandwidth
+# but only if ro.data.large_tcp_window_size property is set.
+on property:ro.data.large_tcp_window_size=true
+    write /proc/sys/net/ipv4/tcp_adv_win_scale  2
 
 service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
     class late_start
@@ -503,10 +512,6 @@ service wlandutservice /system/bin/wlandutservice
     user system
     group wifi net_raw net_admin system inet
     disabled
-    oneshot
-
-service macloader /system/bin/macloader
-    class main
     oneshot
 
 on property:init.svc.macloader=stopped
@@ -603,14 +608,6 @@ on property:persist.ims.regmanager.mode=1
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale  2
-
-service ril-daemon /system/bin/rild
-    class main
-    socket rild stream 660 root radio
-    socket rild-debug stream 660 radio system
-    socket rild-cas stream 666  casdrm mmb
-    user root
-    group radio cache inet misc audio log qcom_diag sdcard_r shell sdcard_rw
 
 service profiler_daemon /system/bin/profiler_daemon
     class late_start
