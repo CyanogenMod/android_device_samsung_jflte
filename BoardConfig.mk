@@ -42,6 +42,9 @@ BOARD_USES_QCOM_HARDWARE := true
 TARGET_USES_QCOM_BSP := true
 COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP
 
+# PowerHAL
+TARGET_POWERHAL_VARIANT := qcom
+
 # Adreno configuration
 BOARD_EGL_CFG := device/samsung/jflte/configs/egl.cfg
 
