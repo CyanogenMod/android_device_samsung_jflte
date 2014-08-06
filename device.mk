@@ -106,15 +106,11 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    gps.msm8960 \
-    libgps.utils \
-    libloc_core \
-    libloc_eng
-
+    gps.msm8960
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/gps.conf:/system/etc/gps.conf \
-    device/samsung/jflte/gps/etc/sap.conf:/system/etc/sap.conf
+    $(LOCAL_PATH)/gps/etc/sap.conf:/system/etc/sap.conf
 
 # IR
 PRODUCT_PACKAGES += \
@@ -205,7 +201,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libnetcmdiface \
     macloader
-
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
