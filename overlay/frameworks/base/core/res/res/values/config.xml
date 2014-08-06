@@ -177,7 +177,7 @@
     <!-- Does the battery LED support multiple colors? Used to decide if the user can change the colors -->
     <bool name="config_multiColorBatteryLed">true</bool>
 
-<!-- Vibrator pattern for feedback about a long screen/key press -->
+    <!-- Vibrator pattern for feedback about a long screen/key press -->
     <integer-array name="config_longPressVibePattern">
         <item>0</item>
         <item>1</item>
@@ -250,15 +250,8 @@
     <!-- Panel auto-brightness configuration value -->
     <integer name="config_panelAutoBrightnessValue">1</integer>
 
-    <!-- True if the Irda service should be started at system start. This currently only
-         supports Samsung Galaxy S4. -->
-    <!-- <bool name="config_enableIrdaManagerService">true</bool> -->
-
     <!-- Device supports LED flashlight -->
     <bool name="config_enableTorch">true</bool>
-
-    <!-- Disable lockscreen translucent decor by default -->
-    <bool name="config_enableLockScreenTranslucentDecor">true</bool>
 
     <!-- Performance profiles -->
     <string name="config_perf_profile_prop">sys.perf.profile</string>

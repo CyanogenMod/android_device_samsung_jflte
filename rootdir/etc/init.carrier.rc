@@ -44,8 +44,7 @@ on boot
     chmod 0600 /dev/btlock
     chown bluetooth bluetooth /dev/btlock
 
-
-	chown radio system /sys/class/sec/switch/usb_sel
-	chown radio system /sys/class/sec/switch/usb_state
-	chown radio system /sys/class/sec/switch/uart_sel
-	chown radio system /sys/class/sec/switch/apo_factory
+    chown radio system /sys/class/sec/switch/usb_sel
+    chown radio system /sys/class/sec/switch/usb_state
+    chown radio system /sys/class/sec/switch/uart_sel
+    chown radio system /sys/class/sec/switch/apo_factory
