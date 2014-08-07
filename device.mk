@@ -112,6 +112,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/gps.conf:/system/etc/gps.conf \
     $(LOCAL_PATH)/gps/etc/sap.conf:/system/etc/sap.conf
 
+# Init scripts
+PRODUCT_PACKAGES += \
+    init.qcom.post_boot.sh
+
 # IR
 PRODUCT_PACKAGES += \
     consumerir.msm8960

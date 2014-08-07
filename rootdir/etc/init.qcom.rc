@@ -500,6 +500,12 @@ on property:drmdiag.load=1
 on property:drmdiag.load=0
     stop drmdiag
 
+service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
+    class late_start
+    user root
+    disabled
+    oneshot
+
 service wifi-sdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh
     class late_start
     group wifi inet
@@ -513,6 +519,7 @@ service wifi-crda /system/bin/sh /system/etc/init.crda.sh
    oneshot
 
 on property:sys.boot_completed=1
+    start qcom-post-boot
     write /sys/block/mmcblk0/queue/scheduler row
 
     write /sys/module/rpm_resources/enable_low_power/L2_cache 1
