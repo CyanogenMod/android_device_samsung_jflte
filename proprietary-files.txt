@@ -12,7 +12,7 @@ vendor/firmware/bcm4335_semco.hcd
 # Audio
 lib/libacdbloader.so:vendor/lib/libacdbloader.so
 lib/libaudcal.so:vendor/lib/libaudcal.so
-lib/libcsd-client.so:vendor/lib/libcsd-client.so
+vendor/lib/libcsd-client.so:lib/libcsd-client.so
 
 # Audio firmware (Verizon)
 blobs/vzw/etc/firmware/q6.b00
