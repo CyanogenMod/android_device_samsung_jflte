@@ -112,7 +112,7 @@ on boot
 
     setprop wifi.interface wlan0
 
-    setprop ro.telephony.call_ring.multiple false
+    setprop ro.telephony.call_ring.multiple true
 
     #Set SUID bit for usbhub
     #chmod 4755 /system/bin/usbhub
