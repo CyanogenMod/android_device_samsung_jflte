@@ -25,7 +25,6 @@ persist.radio.use_se_table_only=1
 
 rild.libargs=-d /dev/smd0
 rild.libpath=/system/lib/libsec-ril.so
-ro.telephony.ril.v3=newDriverCallU,newDialCode
 
 # gps
 ro.gps.agps_provider=1
