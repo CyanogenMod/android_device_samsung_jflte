@@ -110,6 +110,12 @@ static char * camera_fixup_getparams(int id, const char * settings)
     /* Enforce video-snapshot-supported to true */
     params.set(android::CameraParameters::KEY_VIDEO_SNAPSHOT_SUPPORTED, "true");
 
+    /* Set supported scene modes */
+    if (params.get(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES)) {
+        params.set(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES,
+                 "auto,asd,action,portrait,landscape,night,night-portrait,theatre,beach,snow,sunset,steadyphoto,fireworks,sports,party,candlelight,back-light,flowers,AR,text,fall-color,dusk-dawn,hdr");
+    }
+
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
 
