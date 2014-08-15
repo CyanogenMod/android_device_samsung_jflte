@@ -110,6 +110,12 @@ static char * camera_fixup_getparams(int id, const char * settings)
     /* Enforce video-snapshot-supported to true */
     params.set(android::CameraParameters::KEY_VIDEO_SNAPSHOT_SUPPORTED, "true");
 
+    /* Set supported scene modes */
+    if (params.get(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES)) {
+        params.set(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES,
+                 "auto,asd,action,portrait,landscape,night,night-portrait,theatre,beach,snow,sunset,steadyphoto,fireworks,sports,party,candlelight,back-light,flowers,AR,text,fall-color,dusk-dawn,hdr");
+    }
+
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
 
@@ -125,7 +131,9 @@ char * camera_fixup_setparams(struct camera_device * device, const char * settin
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
     const char KEY_SAMSUNG_CAMERA_MODE[] = "cam_mode";
+    const char KEY_HDR_MODE[] = "hdr-mode";
     const char* camMode = params.get(KEY_SAMSUNG_CAMERA_MODE);
+    const char* sceneMode = params.get(android::CameraParameters::KEY_SCENE_MODE);
 
     bool enableZSL = !strcmp(params.get(android::CameraParameters::KEY_ZSL), "on");
 
@@ -153,7 +161,19 @@ char * camera_fixup_setparams(struct camera_device * device, const char * settin
             params.set(android::CameraParameters::KEY_ISO_MODE, "50");
     }
 
-    if (id != 1) {
+    if(strcmp(sceneMode, "hdr") == 0) {
+        params.set(android::CameraParameters::KEY_SCENE_MODE, "auto");
+        params.set(android::CameraParameters::KEY_ZSL, "off");
+        params.set(android::CameraParameters::KEY_EXPOSURE_COMPENSATION,
+                   params.get(android::CameraParameters::KEY_MAX_EXPOSURE_COMPENSATION));
+        params.set(KEY_HDR_MODE, "1");
+    } else {
+        params.set(android::CameraParameters::KEY_ZSL, "on");
+        params.set(android::CameraParameters::KEY_EXPOSURE_COMPENSATION, "0");
+        params.set(KEY_HDR_MODE, "0");
+    }
+
+    if (id != 1 && strcmp(sceneMode, "hdr") != 0) {
         params.set(android::CameraParameters::KEY_ZSL, isVideo ? "off" : "on");
         params.set(android::CameraParameters::KEY_CAMERA_MODE, isVideo ? "0" : "1");
 
