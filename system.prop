@@ -50,7 +50,7 @@ persist.rild.nitz_short_ons_3=""
 
 # qualcomm
 persist.timed.enable=true
-ro.vendor.extension_library=/system/lib/libqc-opt.so
+ro.vendor.extension_library=/system/vendor/lib/libqc-opt.so
 
 # recovery
 ro.cwm.enable_key_repeat=true
