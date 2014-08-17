@@ -106,6 +106,7 @@ static char * camera_fixup_getparams(int id, const char * settings)
     // fix params here
     params.set(android::CameraParameters::KEY_SUPPORTED_ISO_MODES, iso_values[id]);
     params.set(android::CameraParameters::KEY_PREFERRED_PREVIEW_SIZE_FOR_VIDEO, "1920x1080");
+    params.set(android::CameraParameters::KEY_ANTIBANDING, "auto");
 
     /* Enforce video-snapshot-supported to true */
     params.set(android::CameraParameters::KEY_VIDEO_SNAPSHOT_SUPPORTED, "true");
@@ -136,6 +137,7 @@ char * camera_fixup_setparams(struct camera_device * device, const char * settin
         isVideo = !strcmp(recordingHint, "true");
 
     // fix params here
+    params.set(android::CameraParameters::KEY_ANTIBANDING, "auto");
     // No need to fix-up ISO_HJR, it is the same for userspace and the camera lib
     if(params.get("iso")) {
         const char* isoMode = params.get(android::CameraParameters::KEY_ISO_MODE);
