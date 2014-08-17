@@ -85,7 +85,7 @@ BOARD_HARDWARE_CLASS += device/samsung/jflte/cmhw
 # Display
 BOARD_EGL_CFG := device/samsung/jflte/configs/egl.cfg
 COMMON_GLOBAL_CFLAGS += -DNEW_ION_API
-OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
+OVERRIDE_RS_DRIVER := libRSDriver.so
 TARGET_DISPLAY_USE_RETIRE_FENCE := true
 TARGET_NO_INITLOGO := true
 TARGET_QCOM_DISPLAY_VARIANT := caf
