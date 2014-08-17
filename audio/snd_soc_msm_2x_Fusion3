@@ -1954,7 +1954,7 @@ SectionDevice
         'RX1 MIX1 INP2':0:RX6
         'EAR PA Gain':0:POS_6_DB
         'DAC1 Switch':1:1
-        'RX1 Digital Volume':2:67.7%
+        'RX1 Digital Volume':2:71%
     EndSequence
 
     DisableSequence
@@ -1979,7 +1979,7 @@ SectionDevice
         'RX1 MIX1 INP2':0:RX6
         'EAR PA Gain':0:POS_6_DB
         'DAC1 Switch':1:1
-        'RX1 Digital Volume':2:67.7%
+        'RX1 Digital Volume':2:71%
         'ES325 RX2 Enable':1:1
     EndSequence
 
@@ -2006,7 +2006,7 @@ SectionDevice
         'RX1 MIX1 INP2':0:RX6
         'EAR PA Gain':0:POS_6_DB
         'DAC1 Switch':1:1
-        'RX1 Digital Volume':2:67.7%
+        'RX1 Digital Volume':2:71%
         'ES325 RX2 Enable':1:1
     EndSequence
 
@@ -2033,7 +2033,7 @@ SectionDevice
         'RX1 MIX1 INP2':0:RX6
         'EAR PA Gain':0:POS_6_DB
         'DAC1 Switch':1:1
-        'RX1 Digital Volume':2:67.7%
+        'RX1 Digital Volume':2:71%
     EndSequence
 
     DisableSequence
@@ -2113,7 +2113,7 @@ SectionDevice
         'RX6 DSM MUX':0:DSM_INV
         'LINEOUT2 Volume':1:83
         'LINEOUT4 Volume':1:83
-        'RX5 Digital Volume':2:63.0%
+        'RX5 Digital Volume':2:66.3%
     EndSequence
 
     DisableSequence
@@ -2172,7 +2172,7 @@ SectionDevice
         'RX4 DSM MUX':0:CIC_OUT
         'LINEOUT2 Volume':1:100
         'LINEOUT4 Volume':1:100
-        'RX5 Digital Volume':2:67.7%
+        'RX5 Digital Volume':2:71%
         'ES325 RX2 Enable':1:1
         'VEQ Enable':1:0
     EndSequence
@@ -2235,7 +2235,7 @@ SectionDevice
         'RX6 DSM MUX':0:DSM_INV
         'LINEOUT2 Volume':1:100
         'LINEOUT4 Volume':1:100
-        'RX5 Digital Volume':2:67.7%
+        'RX5 Digital Volume':2:71%
     EndSequence
 
     DisableSequence
@@ -2364,7 +2364,7 @@ SectionDevice
         'RX6 DSM MUX':0:DSM_INV
         'LINEOUT2 Volume':1:83
         'LINEOUT4 Volume':1:83
-        'RX5 Digital Volume':2:63.0%
+        'RX5 Digital Volume':2:66.3%
         'RX1 MIX1 INP1':0:RX1
         'RX2 MIX1 INP1':0:RX2
         'HPHL DAC Switch':1:1
