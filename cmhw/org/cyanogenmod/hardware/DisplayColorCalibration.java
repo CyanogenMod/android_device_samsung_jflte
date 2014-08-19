@@ -25,12 +25,7 @@ public class DisplayColorCalibration {
 
     public static boolean isSupported() {
         File f = new File(COLOR_FILE);
-
-        if(f.exists()) {
-            return true;
-        } else {
-            return false;
-        }
+        return f.exists();
     }
 
     public static int getMaxValue()  {
