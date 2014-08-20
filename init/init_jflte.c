@@ -105,7 +105,6 @@ void vendor_load_properties()
         property_set("ro.product.device", "jflteusc");
         property_set("ro.cdma.home.operator.alpha", "U.S.Cellular");
         property_set("ro.cdma.home.operator.numeric", "311580");
-        property_set("telephony.sms.pseudo_multipart", "1");
     } else if (strstr(bootloader, "I545")) {
         /* jfltevzw */
         cdma_properties("0");
