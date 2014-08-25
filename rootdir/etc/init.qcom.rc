@@ -574,25 +574,25 @@ on property:sys.boot_completed=1
     write /sys/module/msm_dcvs/cores/cpu0/em_win_size_min_us 100000
     write /sys/module/msm_dcvs/cores/cpu0/em_win_size_max_us 500000
     write /sys/module/msm_dcvs/cores/cpu0/slack_mode_dynamic 0
-    write /sys/module/msm_dcvs/cores/cpu0/disable_pc_threshold 1000000
+    write /sys/module/msm_dcvs/cores/cpu0/disable_pc_threshold 10000000
     write /sys/module/msm_dcvs/cores/cpu1/slack_time_max_us 25000
     write /sys/module/msm_dcvs/cores/cpu1/slack_time_min_us 25000
     write /sys/module/msm_dcvs/cores/cpu1/em_win_size_min_us 100000
     write /sys/module/msm_dcvs/cores/cpu1/em_win_size_max_us 500000
     write /sys/module/msm_dcvs/cores/cpu1/slack_mode_dynamic 0
-    write /sys/module/msm_dcvs/cores/cpu1/disable_pc_threshold 1000000
+    write /sys/module/msm_dcvs/cores/cpu1/disable_pc_threshold 10000000
     write /sys/module/msm_dcvs/cores/cpu2/slack_time_max_us 25000
     write /sys/module/msm_dcvs/cores/cpu2/slack_time_min_us 25000
     write /sys/module/msm_dcvs/cores/cpu2/em_win_size_min_us 100000
     write /sys/module/msm_dcvs/cores/cpu2/em_win_size_max_us 500000
     write /sys/module/msm_dcvs/cores/cpu2/slack_mode_dynamic 0
-    write /sys/module/msm_dcvs/cores/cpu2/disable_pc_threshold 1000000
+    write /sys/module/msm_dcvs/cores/cpu2/disable_pc_threshold 10000000
     write /sys/module/msm_dcvs/cores/cpu3/slack_time_max_us 25000
     write /sys/module/msm_dcvs/cores/cpu3/slack_time_min_us 25000
     write /sys/module/msm_dcvs/cores/cpu3/em_win_size_min_us 100000
     write /sys/module/msm_dcvs/cores/cpu3/em_win_size_max_us 500000
     write /sys/module/msm_dcvs/cores/cpu3/slack_mode_dynamic 0
-    write /sys/module/msm_dcvs/cores/cpu3/disable_pc_threshold 1000000
+    write /sys/module/msm_dcvs/cores/cpu3/disable_pc_threshold 10000000
     # Set DCVS parameters for GPU
     write /sys/module/msm_dcvs/cores/gpu0/slack_time_max_us 20000
     write /sys/module/msm_dcvs/cores/gpu0/slack_time_min_us 20000
