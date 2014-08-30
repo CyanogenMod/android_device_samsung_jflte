@@ -173,6 +173,9 @@ on boot
     write /sys/module/rmnet_usb/parameters/rmnet_data_init 1
     chown radio radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
 
+    # enable pulsing led on boot
+    write /sys/class/sec/led/led_pattern 6
+
 # import cne init file
 on post-fs
     chown system system /sys/block/mmcblk0/queue/scheduler
@@ -695,6 +698,11 @@ on nonencrypted
 
 on property:vold.decrypt=trigger_restart_framework
     setprop ro.fuse_sdcard ${persist.fuse_sdcard}
+
+# boot completed
+on property:dev.bootcomplete=1
+    # disable pulsing led on boot complete
+    exec /system/bin/sh /system/etc/init.led.sh
 
 service charger /charger
     class charger
