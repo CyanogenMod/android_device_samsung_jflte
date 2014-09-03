@@ -21,13 +21,10 @@
      for different hardware and product builds. -->
 <resources>
 
-    <!-- Control whether being in the desk dock should enable accelerometer
-         based screen orientation.  This defaults to true because it is
-         common for desk docks to be sold in a variety of form factors
-         with different orientations.  Since we cannot always tell these docks
-         apart and the docks cannot report their true orientation on their own,
-         we rely on gravity to determine the effective orientation. -->
     <bool name="config_deskDockEnablesAccelerometer">false</bool>
+
+    <!-- Default color for notification LED is white. -->
+    <color name="config_defaultNotificationColor">#ffffffff</color>
 
     <!-- Default value for led color when battery is medium charged -->
     <!-- The green LED is brighter than red, bias closer to yellow. -->
@@ -80,6 +77,38 @@
         <item>1</item>
     </integer-array>
 
+
+    <!-- Minimum screen brightness allowed by the power manager. -->
+    <integer name="config_screenBrightnessDim">10</integer>
+
+    <!-- Default screen brightness setting.
+         Must be in the range specified by minimum and maximum. -->
+    <integer name="config_screenBrightnessSettingDefault">102</integer>
+
+    <!-- Minimum screen brightness setting allowed by the power manager.
+         The user is forbidden from setting the brightness below this level. -->
+    <integer name="config_screenBrightnessSettingMinimum">10</integer>
+
+    <!-- XXXXX NOTE THE FOLLOWING RESOURCES USE THE WRONG NAMING CONVENTION.
+         Please don't copy them, copy anything else. -->
+
+    <!-- An Array of "[Connection name],[ConnectivityManager.TYPE_xxxx],
+         [associated radio-type],[priority],[restoral-timer(ms)],[dependencyMet]  -->
+    <!-- the 5th element "resore-time" indicates the number of milliseconds to delay
+         before automatically restore the default connection.  Set -1 if the connection
+         does not require auto-restore. -->
+    <!-- the 6th element indicates boot-time dependency-met value. -->
+    <string-array translatable="false" name="networkAttributes">
+        <item>"wifi,1,1,1,-1,true"</item>
+        <item>"mobile,0,0,0,-1,true"</item>
+        <item>"mobile_mms,2,0,2,180000,true"</item>
+        <item>"mobile_supl,3,0,2,60000,true"</item>
+        <item>"mobile_dun,4,0,2,60000,true"</item>
+        <item>"mobile_hipri,5,0,3,60000,true"</item>
+        <item>"mobile_bluetooth,7,7,2,-1,true"</item>
+        <item>"wifi_p2p,13,1,0,-1,true"</item>
+    </string-array>
+
     <!-- An Array of "[ConnectivityManager connectionType],
          [# simultaneous connection types]"  -->
     <string-array translatable="false" name="radioAttributes">
@@ -122,6 +151,15 @@
 
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
     <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
+
+    <!-- Boolean indicating whether the wifi chipset has background scan support -->
+    <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
+
+    <!-- WiFi batched scanning -->
+    <bool translatable="false" name="config_wifi_batched_scan_supported">false</bool>
+
+    <!-- Enables or disables fading edges when marquee is enabled in TextView. -->
+    <bool name="config_ui_enableFadingMarquee">false</bool>
 
     <!-- The VoiceMail default value is displayed to my own number if it is true -->
     <bool name="config_telephony_use_own_number_for_voicemail">true</bool>
@@ -218,5 +256,29 @@
     <!-- Performance profiles -->
     <string name="config_perf_profile_prop">sys.perf.profile</string>
     <string name="config_perf_profile_default_entry">1</string>
+
+    <!-- Base "touch slop" value used by ViewConfiguration as a
+         movement threshold where scrolling should begin. -->
+    <dimen name="config_viewConfigurationTouchSlop">4dp</dimen>
+
+    <!-- Indicate whether closing the lid causes the device to go to sleep and opening
+         it causes the device to wake up.
+         The default is false. -->
+    <bool name="config_lidControlsSleep">true</bool>
+
+    <!-- Indicate the device's Smart Cover coordinates.
+         If none are provided, then the feature will be disabled.
+         The array should contain 4 values, in pixels, (sample values provided):
+         Top      0
+         Left     100
+         Bottom   Top + 400
+         Right    Display Width - 100
+    -->
+    <integer-array name="config_smartCoverWindowCoords">
+        <item>30</item>
+        <item>44</item>
+        <item>450</item>
+        <item>1036</item>
+    </integer-array>
 
 </resources>

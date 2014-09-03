@@ -26,12 +26,8 @@
 #
 
 on init
+    write /sys/class/android_usb/android0/iSerial ${ro.serialno}
     write /sys/class/android_usb/android0/f_rndis/wceis 1
-
-service qcom-usb-sh /system/bin/sh /init.qcom.usb.sh
-    class core
-    user root
-    oneshot
 
 # This should only be used during device bringup
 on property:sys.usb.config=mtp,diag,adb
@@ -46,6 +42,25 @@ on property:sys.usb.config=mtp,diag,adb
     setprop sys.usb.state ${sys.usb.config}
 
 # USB Composite for Samsung USB Driver
+on property:sys.usb.config=mtp,conn_gadget
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 04E8
+    write /sys/class/android_usb/android0/idProduct 6860
+    write /sys/class/android_usb/android0/f_acm/instances 1
+    write /sys/class/android_usb/android0/functions mtp,acm,conn_gadget
+    write /sys/class/android_usb/android0/enable 1
+    setprop sys.usb.state ${sys.usb.config}
+
+on property:sys.usb.config=mtp,conn_gadget,adb
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 04E8
+    write /sys/class/android_usb/android0/idProduct 6860
+    write /sys/class/android_usb/android0/f_acm/instances 1
+    write /sys/class/android_usb/android0/functions mtp,acm,conn_gadget,adb
+    write /sys/class/android_usb/android0/enable 1
+    start adbd
+    setprop sys.usb.state ${sys.usb.config}
+
 on property:sys.usb.config=mtp
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 04E8
@@ -80,7 +95,7 @@ on property:sys.usb.config=ptp,adb
     write /sys/class/android_usb/android0/idProduct 6866
     write /sys/class/android_usb/android0/functions ptp,adb
     write /sys/class/android_usb/android0/enable 1
-	start adbd
+    start adbd
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=rndis
@@ -107,6 +122,7 @@ on property:sys.usb.config=rndis,acm,diag
     write /sys/class/android_usb/android0/idProduct 6864
     write /sys/class/android_usb/android0/f_diag/clients diag,diag_mdm
     write /sys/class/android_usb/android0/f_acm/acm_transports hsic
+    write /sys/class/android_usb/android0/f_acm/acm_transport_names serial_hsic
     write /sys/class/android_usb/android0/functions rndis,acm,diag
     write /sys/class/android_usb/android0/enable 1
     setprop sys.usb.state ${sys.usb.config}
@@ -117,7 +133,9 @@ on property:sys.usb.config=rmnet,acm,diag
     write /sys/class/android_usb/android0/idProduct 685D
     write /sys/class/android_usb/android0/f_diag/clients diag,diag_mdm
     write /sys/class/android_usb/android0/f_acm/acm_transports hsic
+    write /sys/class/android_usb/android0/f_acm/acm_transport_names serial_hsic
     write /sys/class/android_usb/android0/f_rmnet/transports hsic,hsic
+    write /sys/class/android_usb/android0/f_rmnet/transport_names rmnet_hsic
     write /sys/class/android_usb/android0/functions diag,acm,rmnet
     write /sys/class/android_usb/android0/enable 1
     setprop sys.usb.state ${sys.usb.config}
@@ -128,6 +146,7 @@ on property:sys.usb.config=diag,acm,adb
     write /sys/class/android_usb/android0/idProduct 685D
     write /sys/class/android_usb/android0/f_diag/clients diag,diag_mdm
     write /sys/class/android_usb/android0/f_acm/acm_transports hsic
+    write /sys/class/android_usb/android0/f_acm/acm_transport_names serial_hsic
     write /sys/class/android_usb/android0/functions diag,acm,adb
     write /sys/class/android_usb/android0/enable 1
     start adbd

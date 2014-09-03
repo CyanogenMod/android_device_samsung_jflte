@@ -1,126 +1,31 @@
 # Bins
 bin/mpdecision
-
-# Thermal
-bin/thermald
 bin/thermal-engine
+lib/libqc-opt.so:vendor/lib/libqc-opt.so
+lib/libthermalclient.so:vendor/lib/libthermalclient.so
 
 # Bluetooth firmware
-vendor/firmware/bcm2079xB4_firmware.ncd
-vendor/firmware/bcm2079xB4_pre_firmware.ncd
 vendor/firmware/bcm4335.hcd
-vendor/firmware/bcm4335_A0.hcd
 vendor/firmware/bcm4335_murata.hcd
 vendor/firmware/bcm4335_semco.hcd
 
 # Audio
-lib/libacdbloader.so
-lib/libaudcal.so
-lib/libcsd-client.so
+lib/libacdbloader.so:vendor/lib/libacdbloader.so
+lib/libaudcal.so:vendor/lib/libaudcal.so
+vendor/lib/libcsd-client.so:lib/libcsd-client.so
 
-# mmparser extended
-lib/libExtendedExtractor.so
-lib/libmmparser.so
-lib/libmmosal.so
-lib/libdivxdrm.so
-
-# Adreno GPU (Available on Nexus 4)
-lib/libadreno_utils.so
-vendor/lib/libCB.so
-
-vendor/lib/egl/eglsubAndroid.so
-vendor/lib/egl/libEGL_adreno.so
-vendor/lib/egl/libGLESv1_CM_adreno.so
-vendor/lib/egl/libGLESv2_adreno.so
-vendor/lib/egl/libGLESv2S3D_adreno.so
-vendor/lib/egl/libplayback_adreno.so
-vendor/lib/egl/libq3dtools_adreno.so
-
-vendor/lib/libC2D2.so
-vendor/lib/libRSDriver_adreno.so
-vendor/lib/libWVStreamControlAPI_L1.so
-vendor/lib/libOpenCL.so
-vendor/lib/libOpenVG.so
-vendor/lib/libadreno_utils.so
-vendor/lib/libc2d30-a3xx.so
-vendor/lib/libc2d30.so
-vendor/lib/libgsl.so
-vendor/lib/libllvm-qcom.so
-vendor/lib/libqc-opt.so
-vendor/lib/librs_adreno.so
-vendor/lib/librs_adreno_sha1.so
-vendor/lib/libsc-a3xx.so
-vendor/lib/libwvm.so
-etc/firmware/a300_pfp.fw
-etc/firmware/a300_pm4.fw
-etc/firmware/vidc_1080p.fw
-
-# Graphics
-lib/libmm-color-convertor.so
-
-# Radio
-bin/ds_fmc_appd
-bin/efsks
-bin/ks
-bin/netmgrd
-bin/sec-ril
-bin/qcks
-bin/qmiproxy
-bin/qmuxd
-bin/rild
-bin/rmt_storage
-lib/libatparser.so
-lib/libcordon.so
-lib/libdiag.so
-lib/libdsutils.so
-lib/libdsi_netctrl.so
-lib/libfactoryutil.so
-lib/libidl.so
-lib/libnetmgr.so
-lib/libomission_avoidance.so
-lib/libqdi.so
-lib/libqdp.so
-lib/libqmi.so
-lib/libqmiservices.so
-lib/libqmi_cci.so
-lib/libqmi_common_so.so
-lib/libqmi_csi.so
-lib/libqmi_encdec.so
-lib/libqcci_legacy.so
-lib/libqmi_client_qmux.so
-lib/libreference-ril.so
-lib/libril-qcril-hook-oem.so
-lib/libsecril-client.so
-blobs/cdma/lib/libril-qc-qmi-1.so
-blobs/cdma/lib/libril.so
-blobs/gsm/lib/libril-qc-qmi-1.so
-blobs/gsm/lib/libril.so
-
-# Time services
-bin/time_daemon
-lib/libtime_genoff.so
-
-
-# GPS
-lib/libgeofence.so
-lib/libloc_api_v02.so
-
-# Sensors
-lib/libsensirion_j1.so
-lib/libsam.so
-lib/hw/sensors.msm8960.so
-lib/hw/sensorhubs.msm8960.so
+# Audio firmware (Verizon)
+blobs/vzw/etc/firmware/q6.b00
+blobs/vzw/etc/firmware/q6.b01
+blobs/vzw/etc/firmware/q6.b03
+blobs/vzw/etc/firmware/q6.b04
+blobs/vzw/etc/firmware/q6.b05
+blobs/vzw/etc/firmware/q6.b06
+blobs/vzw/etc/firmware/q6.mdt
 
 # Camera
 bin/mm-qcamera-daemon
-cameradata/M10MO_SFW.bin
-cameradata/RS_M10MO_OL.bin
-cameradata/RS_M10MO_OS.bin
-cameradata/RS_M10MO_SL.bin
-cameradata/RS_M10MO_SS.bin
-cameradata/datapattern_420sp.yuv
-cameradata/datapattern_front_420sp.yuv
-lib/hw/camera.vendor.msm8960.so
+lib/hw/camera.msm8960.so:lib/hw/camera.vendor.msm8960.so
 lib/libadsprpc.so
 lib/libchromatix_imx074_default_video.so
 lib/libchromatix_imx074_preview.so
@@ -155,8 +60,8 @@ lib/libchromatix_s5k6b2yx_pip.so
 lib/libchromatix_s5k6b2yx_preview.so
 lib/libchromatix_s5k6b2yx_smartstay.so
 lib/libchromatix_s5k6b2yx_video.so
-lib/libchromatix_s5k6b2yx_vt.so
 lib/libchromatix_s5k6b2yx_vt_hd.so
+lib/libchromatix_s5k6b2yx_vt.so
 lib/libgemini.so
 lib/libimage-jpeg-enc-omx-comp.so
 lib/libimage-omx-common.so
@@ -166,66 +71,150 @@ lib/libmmcamera_frameproc.so
 lib/libmmcamera_hdr_lib.so
 lib/libmmcamera_image_stab.so
 lib/libmmcamera_imx091.so
-lib/libmmcamera_interface.so
 lib/libmmcamera_interface2.so
+lib/libmmcamera_interface.so
 lib/libmmcamera_plugin.so
 lib/libmmcamera_statsproc31.so
 lib/libmmcamera_wavelet_lib.so
-lib/libmmjpeg.so
 lib/libmmjpeg_interface.so
+lib/libmmjpeg.so
 lib/libmmmpod.so
 lib/libmmstillomx.so
 lib/liboemcamera.so
 lib/libsecnativefeature.so
 lib/libvdis.so
 
-
-# Wi-Fi
-etc/wifi/bcmdhd_apsta.bin
-etc/wifi/bcmdhd_apsta.bin_a0
-etc/wifi/bcmdhd_mfg.bin
-etc/wifi/bcmdhd_mfg.bin_a0
-etc/wifi/bcmdhd_sta.bin
-etc/wifi/bcmdhd_sta.bin_a0
-etc/wifi/cred.conf
-etc/wifi/nvram_mfg.txt
-etc/wifi/nvram_mfg.txt_a0
-etc/wifi/nvram_mfg.txt:etc/wifi/nvram_mfg.txt_murata
-etc/wifi/nvram_mfg.txt_murata_a0
-etc/wifi/nvram_mfg.txt_muratafem1
-etc/wifi/nvram_mfg.txt_muratafem2
-etc/wifi/nvram_mfg.txt_semco3rd
-etc/wifi/nvram_mfg.txt_semco3rd_a0
-etc/wifi/nvram_mfg.txt_semcosh
-etc/wifi/nvram_net.txt
-etc/wifi/nvram_net.txt_a0
-etc/wifi/nvram_net.txt:etc/wifi/nvram_net.txt_murata
-etc/wifi/nvram_net.txt_murata_a0
-etc/wifi/nvram_net.txt_muratafem1
-etc/wifi/nvram_net.txt_muratafem2
-etc/wifi/nvram_net.txt_semco3rd
-etc/wifi/nvram_net.txt_semco3rd_a0
-etc/wifi/nvram_net.txt_semcosh
-etc/wifi/wpa_supplicant.conf
-
-# Perf
-lib/libqc-opt.so
+# Camera firmware
+cameradata/datapattern_420sp.yuv
+cameradata/datapattern_front_420sp.yuv
+cameradata/M10MO_SFW.bin
+cameradata/RS_M10MO_OL.bin
+cameradata/RS_M10MO_OS.bin
+cameradata/RS_M10MO_SL.bin
+cameradata/RS_M10MO_SS.bin
 
 # DRM
 bin/qseecomd
-lib/libdrmdecrypt.so
-lib/libdrmfs.so
-lib/libdrmtime.so
-lib/libhdcp2.so
-lib/libQSEEComAPI.so
-lib/libWVStreamControlAPI_L1.so
-lib/libwvm.so
+lib/libdrmdecrypt.so:vendor/lib/libdrmdecrypt.so
+lib/libdrmfs.so:vendor/lib/libdrmfs.so
+lib/libdrmtime.so:vendor/lib/libdrmtime.so
+lib/libQSEEComAPI.so:vendor/lib/libQSEEComAPI.so
 
-# Verizon q6 firmware
-blobs/vzw/etc/firmware/q6.b00
-blobs/vzw/etc/firmware/q6.b01
-blobs/vzw/etc/firmware/q6.b03
-blobs/vzw/etc/firmware/q6.b04
-blobs/vzw/etc/firmware/q6.b05
-blobs/vzw/etc/firmware/q6.b06
-blobs/vzw/etc/firmware/q6.mdt
+# GPU
+vendor/lib/egl/eglsubAndroid.so
+vendor/lib/egl/libEGL_adreno.so
+vendor/lib/egl/libGLES_android.so
+vendor/lib/egl/libGLESv1_CM_adreno.so
+vendor/lib/egl/libGLESv2_adreno.so
+vendor/lib/egl/libGLESv2S3D_adreno.so
+vendor/lib/egl/libq3dtools_adreno.so
+vendor/lib/libadreno_utils.so
+vendor/lib/libC2D2.so
+vendor/lib/libc2d30-a3xx.so
+vendor/lib/libc2d30.so
+vendor/lib/libCB.so
+vendor/lib/libgsl.so
+vendor/lib/libllvm-a3xx.so
+vendor/lib/libOpenCL.so
+vendor/lib/libOpenVG.so
+vendor/lib/librs_adreno_sha1.so
+vendor/lib/librs_adreno.so
+vendor/lib/libRSDriver_adreno.so
+vendor/lib/libsc-a3xx.so
+
+# GPU Firmware
+etc/firmware/a300_pfp.fw:vendor/firmware/a300_pfp.fw
+etc/firmware/a300_pm4.fw:vendor/firmware/a300_pm4.fw
+etc/firmware/vidc_1080p.fw:vendor/firmware/vidc_1080p.fw
+
+# GPS
+lib/libloc_api_v02.so
+vendor/lib/libgeofence.so
+vendor/lib/libizat_core.so
+vendor/lib/liblbs_core.so
+vendor/lib/liblocationservice.so
+
+# HDCP
+bin/insthk
+etc/srm.bin
+lib/libhdcp2.so
+
+# IPC router security
+bin/irsc_util
+etc/sec_config
+
+# Media
+lib/libdivxdrm.so:vendor/lib/libdivxdrm.so
+lib/libExtendedExtractor.so:vendor/lib/libExtendedExtractor.so
+lib/libI420colorconvert.so:vendor/lib/libI420colorconvert.so
+lib/libmm-color-convertor.so:vendor/lib/libmm-color-convertor.so
+lib/libmmosal.so:vendor/lib/libmmosal.so
+lib/libmmparser.so:vendor/lib/libmmparser.so
+
+# NFC firmware
+vendor/firmware/bcm2079xB4_firmware.ncd
+vendor/firmware/bcm2079xB4_pre_firmware.ncd
+
+# Postprocessing
+bin/mm-pp-daemon
+lib/libmm-abl.so:vendor/lib/libmm-abl.so
+lib/libmm-abl-oem.so:vendor/lib/libmm-abl-oem.so
+
+# QMI
+vendor/lib/libidl.so
+vendor/lib/libqcci_legacy.so
+vendor/lib/libqmi_cci.so
+vendor/lib/libqmi_client_qmux.so
+vendor/lib/libqmi_common_so.so
+vendor/lib/libqmi_csi.so
+vendor/lib/libqmi_encdec.so
+vendor/lib/libqmiservices.so
+vendor/lib/libqmi.so
+
+# Radio
+bin/ds_fmc_appd
+bin/efsks
+bin/ks
+bin/qcks
+bin/qmuxd
+bin/rild
+bin/rmt_storage
+lib/libatparser.so
+lib/libfactoryutil.so
+lib/libomission_avoidance.so
+lib/libreference-ril.so
+lib/libsecril-client.so
+blobs/cdma/lib/libsec-ril.so
+blobs/cdma/lib/libril.so
+blobs/gsm/lib/libsec-ril.so
+blobs/gsm/lib/libril.so
+vendor/lib/libdiag.so
+vendor/lib/libdsutils.so
+vendor/lib/libnetmgr.so
+vendor/lib/libril-qcril-hook-oem.so
+
+# Sensors
+lib/libsensirion_j1.so
+lib/libsam.so
+lib/hw/sensors.msm8960.so
+lib/hw/sensorhubs.msm8960.so
+
+# Time services
+bin/time_daemon
+-lib/libtime_genoff.so
+
+# Wi-Fi
+etc/wifi/bcmdhd_apsta.bin
+etc/wifi/bcmdhd_ibss.bin
+etc/wifi/bcmdhd_mfg.bin
+etc/wifi/bcmdhd_sta.bin
+etc/wifi/cred.conf
+etc/wifi/nvram_mfg.txt
+etc/wifi/nvram_net.txt
+
+# Widevine
+lib/drm/libdrmwvmplugin.so:vendor/lib/drm/libdrmwvmplugin.so
+lib/libwvdrm_L1.so:vendor/lib/libwvdrm_L1.so
+lib/libwvm.so:vendor/lib/libwvm.so
+lib/libWVStreamControlAPI_L1.so:vendor/lib/libWVStreamControlAPI_L1.so
+vendor/lib/mediadrm/libwvdrmengine.so
