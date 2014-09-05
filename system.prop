@@ -56,5 +56,8 @@ ro.vendor.extension_library=/system/vendor/lib/libqc-opt.so
 ro.cwm.enable_key_repeat=true
 ro.cwm.repeatable_keys=114,115
 
+# ril
+ro.telephony.ril_class=SamsungQualcommRIL
+
 # wifi
 wifi.interface=wlan0
