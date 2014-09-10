@@ -80,7 +80,7 @@ on early-boot
     chmod 0664 /sys/class/graphics/fb1/product_description
     chmod 0664 /sys/class/graphics/fb1/format_3d
     chmod 0664 /sys/class/graphics/fb1/video_mode
-    ln -s /dev/graphics/fb1 /dev/graphics/hdmi
+    symlink /dev/graphics/fb1 /dev/graphics/hdmi
 
 on boot-pause
     exec system/bin/battery_charging
