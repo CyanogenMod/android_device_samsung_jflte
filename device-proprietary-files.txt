@@ -1,0 +1,26 @@
+# jflte camera blobs
+
+# Audio firmware (Verizon)
+blobs/vzw/etc/firmware/q6.b00
+blobs/vzw/etc/firmware/q6.b01
+blobs/vzw/etc/firmware/q6.b03
+blobs/vzw/etc/firmware/q6.b04
+blobs/vzw/etc/firmware/q6.b05
+blobs/vzw/etc/firmware/q6.b06
+blobs/vzw/etc/firmware/q6.mdt
+
+# Camera
+lib/libvdis.so
+
+# Camera firmware
+cameradata/M10MO_SFW.bin
+cameradata/RS_M10MO_OL.bin
+cameradata/RS_M10MO_OS.bin
+cameradata/RS_M10MO_SL.bin
+cameradata/RS_M10MO_SS.bin
+
+#Radio
+blobs/cdma/lib/libsec-ril.so
+blobs/cdma/lib/libril.so
+blobs/gsm/lib/libsec-ril.so
+blobs/gsm/lib/libril.so

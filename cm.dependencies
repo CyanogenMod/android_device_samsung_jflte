@@ -4,7 +4,11 @@
     "target_path": "device/samsung/qcom-common"
   },
   {
+    "repository": "android_device_samsung_jf-common",
+    "target_path": "device/samsung/jflte"
+  },
+  {
     "repository": "android_kernel_samsung_jf",
     "target_path": "kernel/samsung/jf"
-  }
+  },
 ]
