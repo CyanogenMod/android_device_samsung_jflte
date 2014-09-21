@@ -24,6 +24,3 @@ blobs/cdma/lib/libsec-ril.so
 blobs/cdma/lib/libril.so
 blobs/gsm/lib/libsec-ril.so
 blobs/gsm/lib/libril.so
-
-# Sensors
-lib/libsensirion_j1.so
