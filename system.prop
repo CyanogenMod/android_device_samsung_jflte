@@ -3,3 +3,4 @@
 # cannot take spaces
 rild.libargs=-d /dev/smd0
 persist.radio.mode_pref_nv10=1
+ro.telephony.ril_class=jflteRIL
